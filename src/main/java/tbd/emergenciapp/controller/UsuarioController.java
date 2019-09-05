@@ -15,7 +15,7 @@ import java.util.List;
 
 @RestController
 @Validated
-@RequestMapping(path = "/usuarios")
+@RequestMapping(path = "/usuario")
 @CrossOrigin(origins = "*")
 public class UsuarioController implements UsuarioDAO {
     @Autowired
@@ -65,17 +65,16 @@ public class UsuarioController implements UsuarioDAO {
         return new ResponseEntity<>("Un valor no puede ser modificado por un valor nulo.", HttpStatus.BAD_REQUEST);
     }
 
-    @PostMapping(value = "/{id}/delete")
-    public @ResponseBody
-    ResponseEntity deleteUsuario(@PathVariable Integer id){
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity deleteUsuario(@PathVariable Integer id) {
+
         Usuario usuarioToDelete = usuarioRepository.findUsuarioById(id);
-
-        if (usuarioToDelete != null){
+        if(usuarioToDelete != null)
+        {
             usuarioRepository.deleteById(id);
-            return new ResponseEntity<>("Borrado exitosamente",HttpStatus.OK);
+            return new ResponseEntity<>("Se ha borrado el usuario " + id + " exitosamente.", HttpStatus.OK);
         }
-
-        return new ResponseEntity<>("El usuario a borrar no existe.", HttpStatus.BAD_REQUEST);
+        else return new ResponseEntity<>("El usuario " + id + " no se encuentra.",HttpStatus.NOT_FOUND);
     }
 }
 
