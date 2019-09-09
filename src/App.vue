@@ -9,8 +9,6 @@
       <router-link to="/emergencies">Todas las emergencias</router-link>
       <router-link to="/new-dog"> Nuevo perro</router-link>
     </nav>
-    <!--<img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>-->
     <router-view/>
   </div>
 </template>
@@ -92,6 +90,7 @@ export default {
         alert("'About' was selected.");
       }
     }
+
   }
 };
 </script>
