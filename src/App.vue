@@ -1,8 +1,7 @@
 <template>
   <div id="app">
     <nav>
-      <router-link to="/dogs">Perros</router-link> |
-      <router-link to="/new-dog">Perro Nuevo</router-link>
+      <router-link to="/emergencies">Todas las emergencias</router-link>
     </nav>
     <!--<img alt="Vue logo" src="./assets/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js App"/>-->
