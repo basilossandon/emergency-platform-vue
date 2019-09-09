@@ -1,6 +1,6 @@
 package tbd.emergenciapp.dto;
 
-public class UsuarioDTO {
+public class AppUserDTO {
     private String name;
     private String password;
 

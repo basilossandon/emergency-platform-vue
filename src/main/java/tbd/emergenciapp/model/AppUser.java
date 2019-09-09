@@ -3,8 +3,8 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name="usuario")
-public class Usuario implements Serializable {
+@Table(name="app_user")
+public class AppUser implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -14,7 +14,7 @@ public class Usuario implements Serializable {
     @Column(name = "password", nullable = false)
     private String password;
 
-    public Usuario(Integer id,
+    public AppUser(Integer id,
                    String  name ,
                    String  password){
         this.id = id;
@@ -22,7 +22,7 @@ public class Usuario implements Serializable {
         this.name = name;
     }
 
-    public Usuario(){
+    public AppUser(){
     }
     public Integer getId() {
         return this.id;
