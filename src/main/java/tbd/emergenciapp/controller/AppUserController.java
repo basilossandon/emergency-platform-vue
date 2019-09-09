@@ -15,7 +15,7 @@ import java.util.List;
 
 @RestController
 @Validated
-@RequestMapping(path = "/appuser")
+@RequestMapping(path = "/appusers")
 @CrossOrigin(origins = "*")
 public class AppUserController implements AppUserDAO {
     @Autowired

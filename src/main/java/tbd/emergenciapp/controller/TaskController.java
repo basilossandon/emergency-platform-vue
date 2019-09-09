@@ -15,7 +15,7 @@ import java.util.List;
 
 @RestController
 @Validated
-@RequestMapping(path = "/task")
+@RequestMapping(path = "/tasks")
 @CrossOrigin(origins = "*")
 public class TaskController implements TaskDAO {
         @Autowired

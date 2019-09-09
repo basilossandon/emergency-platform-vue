@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @Validated
-@RequestMapping(path = "/emergency")
+@RequestMapping(path = "/emergencies")
 @CrossOrigin(origins = "*")
 public class EmergencyController implements EmergencyDAO {
     @Autowired
