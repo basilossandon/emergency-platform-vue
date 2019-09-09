@@ -27,12 +27,12 @@ export default{
   methods:{
     save:async function(){
       this.message = "";
-      if(this.dog.name==""){
-        this.message = "Debe ingresar un nombre";
+      if(this.dog.name=="" && user.password == ""){
+        this.message = "Debe ingresar un nombre y password";
         return false;
       }
       try {
-          let response = await this.$http.post('/dogs', this.dog);
+          let response = await this.$http.post('/appusers', this.dog);
           this.message = "Se ha agregado existosamente"
       } catch (e) {
         console.log('error',e)

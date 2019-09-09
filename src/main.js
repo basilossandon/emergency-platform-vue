@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import App from './App.vue'
-import store from './store'
 import axios from 'axios';
 import router from './router'
 Vue.config.productionTip = false
@@ -13,12 +12,12 @@ const axiosInstance = axios.create({ //configurar para backend
 
 Vue.prototype.$http = axiosInstance;
 
-//Paginación
-import Pagination from 'vue-pagination-2';
-Vue.component('pagination', Pagination);
+
+import VueNavigationBar from "../src/index.js";
+Vue.component("vue-navigation-bar", VueNavigationBar);
 
 new Vue({
+  el: "#app",
   router,
-  store,
   render: h => h(App)
 }).$mount('#app')
