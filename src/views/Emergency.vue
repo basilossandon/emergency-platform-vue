@@ -2,7 +2,7 @@
   <div>
     <h1>Todas las emergencias</h1>
     <ul class="item-list">
-      <li v-for="emergency in emergencies">
+      <li v-for="emergency in emergencies" :key="emergency.id">
         {{emergency.name}}
       </li>
     </ul>

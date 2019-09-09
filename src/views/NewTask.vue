@@ -1,10 +1,14 @@
 <template>
-  <div class="new-dog">
-    <h1>Nuevo perro</h1>
+  <div class="new-task">
+    <h1>Nueva tarea</h1>
     <form>
       <div class="form-item">
         <label for="name">Nombre</label>
-        <input id="name" type="text" v-model="dog.name" />
+        <input id="name" type="text" v-model="task.name"/>
+        <label for="capacity">Capacidad</label>
+        <input id="capacity" type="number" v-model="task.capacity"/>
+        <label for="status">Estado</label>
+        <input id="status" type="text" v-model="task.status" />
       </div>
       <button type="button" @click="save">Guardar</button>
     </form>
@@ -12,7 +16,7 @@
       {{message}}
     </div>
     <div class="view-model">
-      Nombre: {{dog.name}}
+      Nombre: {{task.name}}
     </div>
   </div>
 </template>
@@ -20,19 +24,27 @@
 export default{
   data:function(){
     return{
-      dog:{},
+      task:{},
       message:""
     }
   },
   methods:{
     save:async function(){
       this.message = "";
-      if(this.dog.name==""){
+      if(this.task.name==""){
         this.message = "Debe ingresar un nombre";
         return false;
       }
+      if(this.task.capacity==""){
+        this.message = "Debe ingresar la capacidad de la tarea";
+        return false;
+      }
+      if(this.task.status==""){
+        this.task.status = "Not assigned";
+      }
       try {
-          let response = await this.$http.post('/dogs', this.dog);
+          console.log(this.task.status);
+          let response = await this.$http.post('/tasks', this.task);
           this.message = "Se ha agregado existosamente"
       } catch (e) {
         console.log('error',e)

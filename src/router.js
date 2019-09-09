@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import NewDog from './views/NewDog.vue'
+import NewTask from './views/NewTask.vue'
+import NewEmergency from './views/NewEmergency.vue'
 import Emergency from './views/Emergency.vue'
 
 
@@ -13,9 +14,14 @@ var router = new Router({
       component: Emergency
     },
     {
-      path:'/new-dog',
-      name:'new-dog',
-      component: NewDog
+      path:'/new-task',
+      name:'new-task',
+      component: NewTask
+    },
+    {
+      path:'/new-emergency',
+      name:'new-emergency',
+      component: NewEmergency
     },
     {
       path:'/emergencies',
