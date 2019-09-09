@@ -3,7 +3,7 @@
     <h1>Todos los perros</h1>
     <ul class="item-list">
       <li v-for="item,i in items">
-        <img :src="'https://loremflickr.com/160/120/dog?lock='+i"/>
+        <img :src="'https://loremflickr.com/160/120/user?lock='+i"/>
         {{item.name}}
       </li>
     </ul>
@@ -39,7 +39,7 @@ export default{
         let offset = this.perPage*(this.page-1);
         let perPage = this.perPage;
         let resource = this.resource;
-        let response = await this.$http.get(`/dogs?offset=${offset}&limit=${perPage}`);
+        let response = await this.$http.get(`/usuarios`);
         this.items  = response.data;
         console.log('headers', response.headers)
         this.totalRecords = +response.headers['pagination-count']
