@@ -16,13 +16,13 @@ public class Volunteer implements Serializable {
     @Column(name = "age", nullable = false)
     private Integer age;
     @Column(name = "sex", nullable = false)
-    private String gender;
+    private String sex;
 
-    public Volunteer(Integer id, String name, Integer age){
+    public Volunteer(Integer id, String name, Integer age,String sex){
         this.id = id;
         this.name= name;
         this.age = age;
-        this.gender = gender;
+        this.sex = sex;
     }
 
     public Volunteer(){
@@ -52,12 +52,12 @@ public class Volunteer implements Serializable {
         this.age = age;
     }
 
-    public  String getGender(){
-        return this.gender;
+    public  String getSex(){
+        return this.sex;
     }
 
-    public void  setGender(String gender){
-        this.gender = gender;
+    public void  setGender(String sex){
+        this.sex = sex;
     }
 
 }

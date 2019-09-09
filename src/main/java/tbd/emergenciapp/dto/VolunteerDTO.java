@@ -3,7 +3,7 @@ package tbd.emergenciapp.dto;
 public class VolunteerDTO {
     private String name;
     private Integer age;
-    private String gender;
+    private String sex;
 
 
     public  String getName(){
@@ -22,11 +22,11 @@ public class VolunteerDTO {
         this.age = age;
     }
 
-    public  String getGender(){
-        return this.gender;
+    public  String getSex(){
+        return this.sex;
     }
 
-    public  void  setGender(String gender){
-        this.gender = gender;
+    public  void  setSex(String sex){
+        this.sex = sex;
     }
 }

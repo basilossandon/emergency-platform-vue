@@ -40,9 +40,9 @@ public class VolunteerController implements VolunteerDAO{
         Volunteer createdVolunteer = new Volunteer();
         createdVolunteer.setName(volunteer.getName());
         createdVolunteer.setAge(volunteer.getAge());
-        createdVolunteer.setGender(volunteer.getGender());
+        createdVolunteer.setGender(volunteer.getSex());
 
-        if(createdVolunteer.getName() != null && createdVolunteer.getAge() !=null && createdVolunteer.getGender()!=null){
+        if(createdVolunteer.getName() != null && createdVolunteer.getAge() !=null && createdVolunteer.getSex()!=null){
             return new ResponseEntity<>(volunteerRepository.save(createdVolunteer), HttpStatus.CREATED);
         }
 
@@ -58,9 +58,9 @@ public class VolunteerController implements VolunteerDAO{
         }
         volunteerUpdate.setName(volunteer.getName());
         volunteerUpdate.setAge(volunteer.getAge());
-        volunteerUpdate.setGender(volunteer.getGender());
+        volunteerUpdate.setGender(volunteer.getSex());
 
-        if(volunteerUpdate.getName() !=null && volunteerUpdate.getAge()!=null && volunteerUpdate.getGender()!=null){
+        if(volunteerUpdate.getName() !=null && volunteerUpdate.getAge()!=null && volunteerUpdate.getSex()!=null){
             return new ResponseEntity<>(volunteerRepository.save(volunteerUpdate), HttpStatus.CREATED);
         }
 
