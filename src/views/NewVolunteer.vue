@@ -1,14 +1,16 @@
 <template>
   <div class="new-task">
-    <h1>Nueva emergencia</h1>
+    <h1>Registro voluntario</h1>
     <form>
       <div class="form-item">
         <label for="name">Nombre</label>
-        <input id="name" type="text" v-model="emergency.name"/>
-        <label for="location">Ubicación</label>
-        <input id="location" type="text" v-model="emergency.location"/>
-        <label for="status">Estado</label>
-        <input id="status" type="text" v-model="emergency.status" />
+        <input id="name" type="text" v-model="volunteer.name"/>
+        <label for="age">Edad</label>
+        <input id="age" type="number" min="1" v-model="volunteer.age"/>
+        <label for="sex">Sexo</label>
+        <input id="sex" type="radio" value="masculino" v-model="volunteer.sex">masculino</input>
+        <input id="sex" type="radio" value="femenino" v-model="volunteer.sex">femenino</input>
+        <input id="sex" type="radio" value="otro" v-model="volunteer.sex">otro</input>
       </div>
       <button type="button" @click="save">Guardar</button>
     </form>
@@ -16,7 +18,7 @@
       {{message}}
     </div>
     <div class="view-model">
-      Nombre: {{emergency.name}}
+      Sexo: {{volunteer.sex}}
     </div>
   </div>
 </template>
@@ -24,27 +26,27 @@
 export default{
   data:function(){
     return{
-      emergency:{},
+      volunteer:{},
       message:""
     }
   },
   methods:{
     save:async function(){
       this.message = "";
-      if(this.emergency.name==""){
+      if(this.volunteer.name==""){
         this.message = "Debe ingresar un nombre";
         return false;
       }
-      if(this.emergency.capacity==""){
+      if(this.volunteer.capacity==""){
         this.message = "Debe ingresar la capacidad de la tarea";
         return false;
       }
-      if(this.emergency.status==""){
-        this.emergency.status = "Not assigned";
-        console.log(this.emergency.status);
+      if(this.volunteer.status==""){
+        this.volunteer.status = "Not assigned";
+        console.log(this.volunteer.status);
       }
       try {
-          let response = await this.$http.post('/emergencies', this.emergency);
+          let response = await this.$http.post('/volunteers', this.volunteer);
           this.message = "Se ha agregado existosamente"
           console.log(response);
       } catch (e) {

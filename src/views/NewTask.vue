@@ -45,6 +45,7 @@ export default{
       try {
           console.log(this.task.status);
           let response = await this.$http.post('/tasks', this.task);
+          console.log(response);
           this.message = "Se ha agregado existosamente"
       } catch (e) {
         console.log('error',e)
