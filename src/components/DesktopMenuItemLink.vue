@@ -302,7 +302,7 @@ export default {
           color: $black;
           text-decoration: none;
           background: lighten($grey, 2%);
-          border-left: 2px solid $blue;
+          border-left: 3px solid $red;
           cursor: pointer;
         }
 

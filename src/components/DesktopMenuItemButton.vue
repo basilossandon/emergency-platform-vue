@@ -69,7 +69,7 @@ export default {
         user-select: none;
         font-size: 0.9rem;
         line-height: 1;
-        border-radius: 0.25rem;
+        border-radius: 0.15rem;
         text-transform: uppercase;
         letter-spacing: 1px;
         padding: 0.5rem 1rem;

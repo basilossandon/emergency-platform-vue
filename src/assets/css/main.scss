@@ -11,12 +11,4 @@ $focus-outline-blue: #6098ee;
 $focus-border: 1px solid $focus-outline-blue;
 $backgroundColor: $grey;
 $box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.1);
-$border-radius: 4px;
-
-.navbar {
-    -webkit-box-shadow: 0 8px 6px -6px #999;
-    -moz-box-shadow: 0 8px 6px -6px #999;
-    box-shadow: 0 8px 6px -6px #999;
-
-    /* the rest of your styling */
-}
+$border-radius: 35px;
