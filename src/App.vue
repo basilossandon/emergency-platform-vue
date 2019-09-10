@@ -6,8 +6,11 @@
           @vnb-item-clicked="vnbItemClicked"
         >
         </vue-navigation-bar>
+      <!-- 
+      Routers viejos
       <router-link to="/emergencies">Todas las emergencias</router-link>
       <router-link to="/new-dog"> Nuevo perro</router-link>
+      -->
     </nav>
     <router-view/>
   </div>
@@ -34,14 +37,14 @@ export default {
           {
             type: "link",
             text: "Emergencias",
-            subMenuOptions: [
+                        subMenuOptions: [
               {
                 isLinkAction: true,
                 type: "link",
                 text: "Emergencies",
                 subText:
                   "See ongoing emergencies!",
-                path: "/emergencies"
+                path: "./emergencies"
               },
               {
                 type: "hr"
@@ -51,6 +54,15 @@ export default {
                 text: "Volunteers",
                 subText: "View listed volunteers!",
                 path: "./volunteers"
+              },   
+                         {
+                type: "hr"
+              },          
+              {
+                type: "link",
+                text: "Nuevo Perro",
+                subText: "Agrega perros a la base de datos!",
+                path: "./new-dog"
               },
               {
                 type: "hr"
