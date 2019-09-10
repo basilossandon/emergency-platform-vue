@@ -95,11 +95,11 @@ export default {
 }
 
 .vnb-button {
-  background: $blue;
+  background: $red;
 
   &:hover {
     color: $white;
-    background: darken($blue, 10%);
+    background: darken($red, 20%);
     text-decoration: none;
   }
 }
