@@ -56,7 +56,7 @@ public class Volunteer implements Serializable {
         return this.sex;
     }
 
-    public void  setGender(String sex){
+    public void  setSex(String sex){
         this.sex = sex;
     }
 
