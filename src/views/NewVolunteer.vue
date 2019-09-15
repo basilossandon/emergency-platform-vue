@@ -6,7 +6,7 @@
         <label for="name">Name</label>
         <input id="name" type="text" v-model="volunteer.name"/>
         <label for="age">Age</label>
-        <input id="age" type="number" min="1" v-model="volunteer.age"/>
+        <input id="age" type="number" min="18" v-model="volunteer.age"/>
         <label for="sex">Sex</label>
         <el-radio-group v-model="volunteer.sex">
           <el-radio v-model="volunteer.sex" label="H">Male</el-radio>
@@ -19,13 +19,9 @@
     <div v-if="message.length>0" class="form-message">
       {{message}}
     </div>
-    <div class="view-model">
-      Name: {{volunteer.name}} <br>
-      Age: {{volunteer.age}} <br>
-      Sex: {{volunteer.sex}}
-    </div>
   </div>
 </template>
+
 <script>
 export default{
   data:function(){

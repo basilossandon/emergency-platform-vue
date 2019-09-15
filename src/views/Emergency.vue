@@ -4,7 +4,7 @@
       <div role="tablist" v-for="emergency in emergencies" :key="emergency.id" v-bind:title="{ 'emergencyName': emergency.active }">
       <el-collapse v-model="activeName" accordion>
       <el-collapse-item v-bind:title="emergency.name" name="emergency.id">
-        <div>Status: {{emergency.status}}</div>
+        <div>Location: {{emergency.location}}  <br> Status: {{emergency.status}} </div>
         <img :src="'https://loremflickr.com/160/120/earthquake?lock='+emergency.id"/>
     </el-collapse-item>
     </el-collapse>

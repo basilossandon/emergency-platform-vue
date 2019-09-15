@@ -19,12 +19,6 @@
     <div v-if="message.length>0" class="form-message">
       {{message}}
     </div>
-    <div class="view-model">
-      Name: {{task.name}} <br>
-      Capacity: {{task.capacity}} <br>
-      Status: {{task.status}}
-
-    </div>
   </div>
 </template>
 <script>
@@ -55,7 +49,7 @@ export default{
           console.log(response);
           this.message = "Se ha agregado existosamente"
       } catch (e) {
-        console.log('error',e)
+        console.log('error', e)
         this.message= "Ha ocurrido un error"
       }
     }

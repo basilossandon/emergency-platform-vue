@@ -18,11 +18,6 @@
     <div v-if="message.length>0" class="form-message">
       {{message}}
     </div>
-    <div class="view-model">
-      Name: {{emergency.name}} <br>
-      Location: {{emergency.location}} <br>
-      Status: {{emergency.status}}
-    </div>
   </div>
 </template>
 <script>
