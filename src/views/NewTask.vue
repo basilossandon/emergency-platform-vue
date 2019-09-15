@@ -1,23 +1,27 @@
 <template>
   <div class="new-task">
-    <h1>Nueva tarea</h1>
+    <h1>New task</h1>
     <form>
       <div class="form-item">
-        <label for="name">Nombre</label>
+        <label for="name">Name</label>
         <input id="name" type="text" v-model="task.name"/>
-        <label for="capacity">Capacidad</label>
+        <label for="capacity">Capacity</label>
         <input id="capacity" type="number" v-model="task.capacity"/>
-        <label for="status">Estado</label>
-        <input id="status" type="text" v-model="task.status" />
+        <label for="status">Status</label>
+        <el-radio-group v-model="task.status">
+          <el-radio v-model="task.status" label="Active">Active</el-radio>
+          <el-radio v-model="task.status" label="Inactive">Inactive</el-radio>
+          <el-radio v-model="task.status" label="Completed">Completed</el-radio>
+        </el-radio-group>
       </div>
-      <button type="button" @click="save">Guardar</button>
+      <button type="button" @click="save">Save</button>
     </form>
     <div v-if="message.length>0" class="form-message">
       {{message}}
     </div>
     <div class="view-model">
       Name: {{task.name}} <br>
-      Capacity: {{task.capacity}}
+      Capacity: {{task.capacity}} <br>
       Status: {{task.status}}
 
     </div>

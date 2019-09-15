@@ -1,20 +1,20 @@
 <template>
   <div class="new-task">
-    <h1>Registro voluntario</h1>
+    <h1>New volunteer</h1>
     <form>
       <div class="form-item">
-        <label for="name">Nombre</label>
+        <label for="name">Name</label>
         <input id="name" type="text" v-model="volunteer.name"/>
-        <label for="age">Edad</label>
+        <label for="age">Age</label>
         <input id="age" type="number" min="1" v-model="volunteer.age"/>
-        <label for="sex">Sexo</label>
+        <label for="sex">Sex</label>
         <el-radio-group v-model="volunteer.sex">
-          <el-radio v-model="volunteer.sex" label="H">Hombre</el-radio>
-          <el-radio v-model="volunteer.sex" label="M">Mujer</el-radio>
-          <el-radio v-model="volunteer.sex" label="Otro" >Otro</el-radio>
+          <el-radio v-model="volunteer.sex" label="H">Male</el-radio>
+          <el-radio v-model="volunteer.sex" label="M">Female</el-radio>
+          <el-radio v-model="volunteer.sex" label="Otro" >Other</el-radio>
         </el-radio-group>
       </div>
-      <button type="button" @click="save">Guardar</button>
+      <button type="button" @click="save">Save</button>
     </form>
     <div v-if="message.length>0" class="form-message">
       {{message}}

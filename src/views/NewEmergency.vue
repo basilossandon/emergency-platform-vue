@@ -1,16 +1,19 @@
 <template>
   <div class="new-task">
-    <h1>Nueva emergencia</h1>
+    <h1>New emergency</h1>
     <form>
       <div class="form-item">
-        <label for="name">Nombre</label>
+        <label for="name">Name</label>
         <input id="name" type="text" v-model="emergency.name"/>
-        <label for="location">Ubicación</label>
+        <label for="location">Location</label>
         <input id="location" type="text" v-model="emergency.location"/>
-        <label for="status">Estado</label>
-        <input id="status" type="text" v-model="emergency.status" />
+        <label for="status">Status</label>
+        <el-radio-group v-model="emergency.status">
+          <el-radio v-model="emergency.status" label="Active">Active</el-radio>
+          <el-radio v-model="emergency.status" label="Inactive">Inactive</el-radio>
+        </el-radio-group>
       </div>
-      <button type="button" @click="save">Guardar</button>
+      <button type="button" @click="save">Save</button>
     </form>
     <div v-if="message.length>0" class="form-message">
       {{message}}
@@ -47,11 +50,11 @@ export default{
       }
       try {
           let response = await this.$http.post('/emergencies', this.emergency);
-          this.message = "Se ha agregado existosamente"
+          this.message = "Emergency saved successfully"
           console.log(response);
       } catch (e) {
         console.log('error',e)
-        this.message= "Ha ocurrido un error"
+        this.message= "An error has occurred"
       }
     }
   }
