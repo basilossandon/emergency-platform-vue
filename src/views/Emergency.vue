@@ -1,25 +1,16 @@
 <template>
-<div class="accordion">
-    <div
-        class="accordion-item"
-        v-for="emergency, i in emergencies"
-        v-bind:class="{ 'accordion-active': emergency.active }"
-    >
-        <div class="accordion-header">
-            <a href="#" v-on:click="expand(event, i)">
-                <div class="accordion-header-div">{{ emergency.name }}</div>
-                <div class="accordion-header-div">
-                    <div class="accordion-caret"></div>
-                </div>
-            </a>
-        </div>
-        <div class="accordion-body" v-bind:ref="'accordion-body-' + i">
-            <div class="accordion-content">{{ emergency.location }}</div>
-        </div>
+  <div>
+    <h1>Todos las emergencias</h1>
+    <ul class="item-list">
+      <li v-for="emergency in emergencies" :key="emergency.id">
+        <img :src="'https://loremflickr.com/160/120/earthquake?lock='+emergency.id"/>
+        {{emergency.name}}
+      </li>
+    </ul>
+    <div v-if="emergencies.length==0" class="empty-list">
+      <em>No se han cargado los datos</em>
     </div>
-</div>
-
-
+  </div>
 </template>
 
 <script>
@@ -39,26 +30,6 @@ export default{
     }
   },
   methods:{
-    	expand: function(e, i) {
-			e.preventDefault();
-			let el = this.$refs['accordion-body-' + i][0];
-			if (this.contents[i].active === false) {
-				this.contents[i].active = true;
-
-				TweenLite.to(el, 1, {
-					height: el.scrollHeight,
-					ease: Elastic.easeOut.config(1, 0.3)
-				});
-			} else {
-				this.contents[i].active = false;
-
-				TweenLite.to(el, 0.5, {
-					height: 0,
-					ease: Bounce.easeOut
-				});
-			}
-    },
-  
     paginate:function(){
         //this.page = val
         this.getData();
@@ -81,8 +52,5 @@ export default{
   created:function(){
     this.getData();
   }
-
-
-
 }
 </script>

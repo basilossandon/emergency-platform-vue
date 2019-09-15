@@ -16,7 +16,10 @@
       {{message}}
     </div>
     <div class="view-model">
-      Nombre: {{task.name}}
+      Name: {{task.name}} <br>
+      Capacity: {{task.capacity}}
+      Status: {{task.status}}
+
     </div>
   </div>
 </template>

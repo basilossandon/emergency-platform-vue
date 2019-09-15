@@ -8,9 +8,11 @@
         <label for="age">Edad</label>
         <input id="age" type="number" min="1" v-model="volunteer.age"/>
         <label for="sex">Sexo</label>
-        <input id="sex" type="radio" value="masculino" v-model="volunteer.sex">masculino</input>
-        <input id="sex" type="radio" value="femenino" v-model="volunteer.sex">femenino</input>
-        <input id="sex" type="radio" value="otro" v-model="volunteer.sex">otro</input>
+        <el-radio-group v-model="volunteer.sex">
+          <el-radio v-model="volunteer.sex" label="H">Hombre</el-radio>
+          <el-radio v-model="volunteer.sex" label="M">Mujer</el-radio>
+          <el-radio v-model="volunteer.sex" label="Otro" >Otro</el-radio>
+        </el-radio-group>
       </div>
       <button type="button" @click="save">Guardar</button>
     </form>
@@ -18,7 +20,9 @@
       {{message}}
     </div>
     <div class="view-model">
-      Sexo: {{volunteer.sex}}
+      Name: {{volunteer.name}} <br>
+      Age: {{volunteer.age}} <br>
+      Sex: {{volunteer.sex}}
     </div>
   </div>
 </template>
@@ -27,7 +31,8 @@ export default{
   data:function(){
     return{
       volunteer:{},
-      message:""
+      message:"",
+      radio: '1'
     }
   },
   methods:{

@@ -1,6 +1,5 @@
 // Import vue component
-import component from "./vue-navigation-bar.vue";
-
+<script src="//unpkg.com/element-ui@2.12.0/lib/index.js"></script>
 // install function executed by Vue.use()
 export function install(Vue) {
   if (install.installed) return;
@@ -30,3 +29,4 @@ export default component;
 // It's possible to expose named exports when writing components that can
 // also be used as directives, etc. - eg. import { RollupDemoDirective } from 'rollup-demo';
 // export const RollupDemoDirective = component;
+

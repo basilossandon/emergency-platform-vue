@@ -10,8 +10,13 @@ Vue.use(Router);
 var router = new Router({
   routes: [
     {
-      path: '/',
-      name: 'home',
+      path:'/',
+      name:'home',
+      component: Emergency
+    },
+    {
+      path:'/emergencies',
+      name:'emergency',
       component: Emergency
     },
     {
@@ -28,12 +33,7 @@ var router = new Router({
       path:'/new-volunteer',
       name:'new-volunteer',
       component: NewVolunteer
-    },
-    {
-      path:'/emergencies',
-      name:'emergency',
-      component: Emergency
-    },
+    }
   ]
 })
 

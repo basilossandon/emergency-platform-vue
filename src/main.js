@@ -1,8 +1,14 @@
 import Vue from 'vue'
 import App from './App.vue'
 import axios from 'axios';
-import router from './router'
+import router from './router';
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
+import locale from 'element-ui/lib/locale/lang/es';
+
 Vue.config.productionTip = false
+Vue.use(ElementUI,{locale});
+
 
 require("./assets/style/style.scss");
 
@@ -11,10 +17,6 @@ const axiosInstance = axios.create({ //configurar para backend
 })
 
 Vue.prototype.$http = axiosInstance;
-
-
-import VueNavigationBar from "../src/index.js";
-Vue.component("vue-navigation-bar", VueNavigationBar);
 
 new Vue({
   el: "#app",

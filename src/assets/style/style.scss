@@ -10,7 +10,6 @@
 }
 
 ul{
-  max-width: 50rem;
   list-style: none;
   padding: 0;
   margin: 0 auto;
@@ -28,11 +27,7 @@ html {
 body {
   background-color: #ffffff;
 }
-.vnb {
-  -webkit-box-shadow: 0 8px 6px -6px #999;
-  -moz-box-shadow: 0 8px 6px -6px #999;
-  box-shadow: 0 8px 6px -6px #999;
-}
+
 
 .item-list{
   li{

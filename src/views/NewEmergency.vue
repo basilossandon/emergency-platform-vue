@@ -16,7 +16,9 @@
       {{message}}
     </div>
     <div class="view-model">
-      Nombre: {{emergency.name}}
+      Name: {{emergency.name}} <br>
+      Location: {{emergency.location}} <br>
+      Status: {{emergency.status}}
     </div>
   </div>
 </template>
