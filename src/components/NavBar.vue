@@ -90,8 +90,9 @@ export default {
 
 <style scoped>
 .right-menu {
-    padding-top:10px;
     float: right;
+  transform: translateY(15%);
+
     height: 100%;
     line-height: 50px;
     margin-right: 5px;
