@@ -18,7 +18,7 @@ export default {
     components: {
         NavBar,
     },
-}
+};
 </script>
 
 <style>
@@ -45,6 +45,6 @@ body {
   border-radius: 15px;
 }
 .content-wrapper{
-    padding:15px;
+    padding:30px;
 }
 </style>

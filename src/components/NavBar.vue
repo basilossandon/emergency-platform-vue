@@ -17,6 +17,34 @@
       <el-menu-item index="/new-volunteer" :route="{ name: 'new-volunteer' }">
         Add volunteer
       </el-menu-item>
+      <div class="right-menu">
+    <el-dropdown class="avatar-container" trigger="click" v-on:command="handleNavDropdownCommand">
+        <div class="avatar-wrapper">
+          <el-avatar icon="el-icon-user-solid"></el-avatar>
+          <i class="el-icon-caret-bottom" />
+        </div>
+        <el-dropdown-menu slot="dropdown" class="user-dropdown">
+          <router-link to="/">
+            <el-dropdown-item>
+              Home
+            </el-dropdown-item>
+          </router-link>
+          <router-link to="/user">
+            <el-dropdown-item>
+              Account
+            </el-dropdown-item>
+          </router-link>
+          <router-link to="/account">
+            <el-dropdown-item>
+              Settings
+            </el-dropdown-item>
+          </router-link>
+            <el-dropdown-item command="logout" divided>
+              Logout
+            </el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
+      </div>
       </el-menu>
     </div>
     <div id="toggle" @click="select()">
@@ -44,14 +72,31 @@ export default {
     },
     select: function() {
       this.isActive = !this.isActive;
+    },
+      handleNavDropdownCommand: function(command) {
+        if (command == 'logout') {
+          this.$confirm('Are you sure you want to logout?', 'Logout', {
+              confirmButtonText: 'Yes',
+              cancelButtonText: 'No',
+              type: 'info'
+          }).then(function() {
+              this.$message('You have succesfully logged out!');
+          }.bind(this));
+        }
+      }
     }
   }
-}
 </script>
 
 <style scoped>
+.right-menu {
+    padding-top:10px;
+    float: right;
+    height: 100%;
+    line-height: 50px;
+    margin-right: 5px;
+}
 #app {
-
   .logo-header {
     padding-left: 15px;
     padding-right: 50px;
