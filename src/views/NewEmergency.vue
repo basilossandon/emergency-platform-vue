@@ -32,11 +32,11 @@ export default{
     save:async function(){
       this.message = "";
       if(this.emergency.name==""){
-        this.message = "Debe ingresar un nombre";
+        this.message = "You must enter an emergency name";
         return false;
       }
       if(this.emergency.capacity==""){
-        this.message = "Debe ingresar la capacidad de la tarea";
+        this.message = "You must enter the capacity of the emergency";
         return false;
       }
       if(this.emergency.status==""){
