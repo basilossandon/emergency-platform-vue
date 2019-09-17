@@ -16,9 +16,6 @@
       </div>
       <button type="button" @click="save">Save</button>
     </form>
-    <div v-if="message.length>0" class="form-message">
-      {{message}}
-    </div>
   </div>
 </template>
 <script>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>All emergencies</h1>
+    <h1><b>All emergencies</b></h1>
       <div role="tablist" v-for="emergency in emergencies" :key="emergency.id" v-bind:title="{ 'emergencyName': emergency.active }">
       <el-collapse v-model="activeName" accordion>
       <el-collapse-item v-bind:title="emergency.name" name="emergency.id">

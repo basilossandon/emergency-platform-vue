@@ -8,11 +8,11 @@
       <el-menu-item index="/emergencies" :route="{ name: 'emergency' }">
         Emergencies
       </el-menu-item>
-      <el-menu-item index="/new-task" :route="{ name: 'new-task' }">
-        Add tasks
-      </el-menu-item>
       <el-menu-item index="/new-emergency" :route="{ name: 'new-emergency' }">
         Add emergency
+      </el-menu-item>
+      <el-menu-item index="/new-task" :route="{ name: 'new-task' }">
+        Add tasks
       </el-menu-item>
       <el-menu-item index="/new-volunteer" :route="{ name: 'new-volunteer' }">
         Add volunteer
