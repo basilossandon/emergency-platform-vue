@@ -32,7 +32,7 @@ export default{
     async function(){
       this.message = "";
       if(this.emergency.name==""){
-        this.message = "Debe ingresar un nombre";
+        this.message = "You must enter an emergency name";
         this.$notify({
           title: 'Warning',
           message: 'Emergency name missing!',
@@ -41,12 +41,13 @@ export default{
         return false;
       }
       if(this.emergency.location==""){
-        this.message = "Debe ingresar la capacidad de la tarea";
+        this.message = "You must enter the capacity of the emergency";
         this.$notify({
           title: 'Warning',
           message: 'Emergency location missing!',
           type: 'warning'
         });
+
         return false;
       }
       if(this.emergency.status==""){

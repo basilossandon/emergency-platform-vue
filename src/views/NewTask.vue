@@ -30,11 +30,11 @@ export default{
     save:async function(){
       this.message = "";
       if(this.task.name==""){
-        this.message = "Debe ingresar un nombre";
+        this.message = "You must enter a capacity name";
         return false;
       }
       if(this.task.capacity==""){
-        this.message = "Debe ingresar la capacidad de la tarea";
+        this.message = "You must enter the task capacity";
         return false;
       }
       if(this.task.status==""){
@@ -44,10 +44,10 @@ export default{
           console.log(this.task.status);
           let response = await this.$http.post('/tasks', this.task);
           console.log(response);
-          this.message = "Se ha agregado existosamente"
+          this.message = "Task saved successfully"
       } catch (e) {
         console.log('error', e)
-        this.message= "Ha ocurrido un error"
+        this.message= "An error has ocurred"
       }
     }
   }
