@@ -92,7 +92,6 @@ export default{
     flex-direction: column;
     left: 0;
     margin: 0 auto;
-    pointer-events: none;
     position: absolute;
     right: 0;
 }
