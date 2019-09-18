@@ -3,6 +3,7 @@ package tbd.emergenciapp.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 @Table(name="volunteer")
@@ -18,11 +19,20 @@ public class Volunteer implements Serializable {
     @Column(name = "sex", nullable = false)
     private String sex;
 
-    public Volunteer(Integer id, String name, Integer age,String sex){
+    @ManyToMany
+    @JoinTable(name = "volunteer_dimensions"
+            ,joinColumns =@JoinColumn(name = "volunteer_id")
+            ,inverseJoinColumns = @JoinColumn(name = "dimension_id")
+    )
+    private Set<Dimension> dimension;
+
+    public Volunteer(Integer id, String name, Integer age,String sex,Set<Dimension> dimension){
+        super();
         this.id = id;
         this.name= name;
         this.age = age;
         this.sex = sex;
+        this.dimension = dimension;
     }
 
     public Volunteer(){
@@ -60,4 +70,11 @@ public class Volunteer implements Serializable {
         this.sex = sex;
     }
 
+    public Set<Dimension> getDimension() {
+        return dimension;
+    }
+
+    public void setDimension(Set<Dimension> dimension) {
+        this.dimension = dimension;
+    }
 }

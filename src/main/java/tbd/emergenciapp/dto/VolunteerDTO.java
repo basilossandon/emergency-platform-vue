@@ -1,9 +1,14 @@
 package tbd.emergenciapp.dto;
 
+import tbd.emergenciapp.model.Dimension;
+
+import java.util.Set;
+
 public class VolunteerDTO {
     private String name;
     private Integer age;
     private String sex;
+    private Set<Dimension> dimension;
 
 
     public  String getName(){
@@ -28,5 +33,13 @@ public class VolunteerDTO {
 
     public  void  setSex(String sex){
         this.sex = sex;
+    }
+
+    public Set<Dimension> getDimension() {
+        return dimension;
+    }
+
+    public void setDimension(Set<Dimension> dimension) {
+        this.dimension = dimension;
     }
 }

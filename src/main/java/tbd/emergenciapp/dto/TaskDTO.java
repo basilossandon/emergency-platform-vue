@@ -1,9 +1,12 @@
 package tbd.emergenciapp.dto;
 
+import tbd.emergenciapp.model.Volunteer;
+
 public class TaskDTO {
     private String name;
     private Integer capacity;
     private String status;
+    private Volunteer volunteer;
 
     public String getName() {
         return name;
@@ -27,5 +30,13 @@ public class TaskDTO {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Volunteer getVolunteer() {
+        return volunteer;
+    }
+
+    public void setVolunteer(Volunteer volunteer) {
+        this.volunteer = volunteer;
     }
 }
