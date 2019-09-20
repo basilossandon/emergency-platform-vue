@@ -23,6 +23,7 @@
 export default{
   data:function(){
     return{
+      radio: "",
       emergency:{},
       message:""
     }
@@ -56,18 +57,18 @@ export default{
           message: 'Emergency status not selected!',
           type: 'warning'
         });
-        return false;        
+        return false;
       }
       try {
           let response = await this.$http.post('/emergencies', this.emergency);
-          this.message = "Emergency saved successfully"
+          this.message = "Emergency saved successfully";
           console.log(response);
           this.$message({
           message: 'Emergency succesfully created.',
           type: 'success'});
       } catch (e) {
-        console.log('error',e)
-        this.message= "An error has occurred"
+        console.log('error',e);
+        this.message= "An error has occurred";
         this.$notify({
           title: 'Warning',
           message: 'Please include name, location and status.',

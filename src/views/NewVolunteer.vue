@@ -1,45 +1,53 @@
 <template>
-  <div class="new-task">
+  <div class="new-volunteer">
     <h1>New volunteer</h1>
     <form>
       <div class="form-item">
-        <label for="name">Name</label>
-        <input id="name" type="text" v-model="volunteer.name"/>
-        <label for="age">Age</label>
-        <input id="age" type="number" min="18" v-model="volunteer.age"/>
-        <label for="sex">Sex</label>
-        <el-radio-group v-model="volunteer.sex">
+        <label class="element-borders" for="name">Volunteer name</label>
+        <el-input class="element-borders" id="name" placeholder="e.g. John Smith" v-model="volunteer.name"></el-input>
+        <label class="element-borders" for="age">Age</label>
+        <el-input class="element-borders" id="age" type="number" min="18" placeholder="e.g 25" v-model="volunteer.age"></el-input>
+        <label for="sex">Gender</label>
+        <el-radio-group style="margin-top:15px;" v-model="volunteer.sex">
           <el-radio v-model="volunteer.sex" label="H">Male</el-radio>
           <el-radio v-model="volunteer.sex" label="M">Female</el-radio>
           <el-radio v-model="volunteer.sex" label="Otro" >Other</el-radio>
         </el-radio-group>
       </div>
-      <button type="button" @click="save">Save</button>
+      <div class="button-volunteer-wrapper">
+      <el-button type="primary" round icon="el-icon-upload" @click="save"> Save </el-button>
+      </div>
     </form>
-    <div v-if="message.length>0" class="form-message">
-      {{message}}
-    </div>
   </div>
 </template>
-
 <script>
 export default{
   data:function(){
     return{
       volunteer:{},
       message:"",
-      radio: '1'
     }
   },
   methods:{
-    save:async function(){
+    save:
+    async function(){
       this.message = "";
       if(this.volunteer.name==""){
         this.message = "You must enter a volunteer name";
+        this.$notify({
+          title: 'Warning',
+          message: 'Volunteer name missing!',
+          type: 'warning'
+        });
         return false;
       }
       if(this.volunteer.capacity==""){
         this.message = "You must enter the volunteer capacity";
+        this.$notify({
+          title: 'Warning',
+          message: 'You must enter the volunteer capacity',
+          type: 'warning'
+        });
         return false;
       }
       if(this.volunteer.status==""){
@@ -50,11 +58,43 @@ export default{
           let response = await this.$http.post('/volunteers', this.volunteer);
           this.message = "Volunteer saved successfully"
           console.log(response);
+          this.$message({
+          message: 'Volunteer succesfully created.',
+          type: 'success'});
       } catch (e) {
         console.log('error',e)
         this.message= "An error has ocurred"
+        this.$notify({
+          title: 'Warning',
+          message: 'Please include name, age and gender.',
+          type: 'warning'
+        });
       }
     }
   }
 }
 </script>
+
+<style scoped>
+.new-volunteer{
+      box-sizing: border-box;
+    padding: 8px 0 15px;
+    position: relative;
+}
+.button-volunteer-wrapper {
+    align-items: center;
+    bottom: calc(-100px/2);
+    display: flex;
+    flex-direction: column;
+    left: 0;
+    margin: 0 auto;
+    position: absolute;
+    right: 0;
+}
+.element-borders{
+  margin-top: 3px;
+  margin-bottom:3px;
+}
+
+
+</style>

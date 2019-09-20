@@ -3,18 +3,20 @@
     <h1>New task</h1>
     <form>
       <div class="form-item">
-        <label for="name">Name</label>
-        <input id="name" type="text" v-model="task.name"/>
-        <label for="capacity">Capacity</label>
-        <input id="capacity" type="number" v-model="task.capacity"/>
+        <label class="element-borders" for="name">Task Name</label>
+        <el-input class="element-borders" id="name" placeholder="e.g. Getting med kits" v-model="task.name"></el-input>
+        <label class="element-borders" for="capacity">Capacity</label>
+        <el-input class="element-borders" id="capacity" type="number" min="0" placeholder="e.g 25" v-model="task.capacity"></el-input>
         <label for="status">Status</label>
-        <el-radio-group v-model="task.status">
+        <el-radio-group style="margin-top:15px;" v-model="task.status">
           <el-radio v-model="task.status" label="Active">Active</el-radio>
           <el-radio v-model="task.status" label="Inactive">Inactive</el-radio>
           <el-radio v-model="task.status" label="Completed">Completed</el-radio>
         </el-radio-group>
       </div>
-      <button type="button" @click="save">Save</button>
+      <div class="button-task-wrapper">
+      <el-button type="primary" round icon="el-icon-upload" @click="save"> Save </el-button>
+      </div>
     </form>
   </div>
 </template>
@@ -23,33 +25,81 @@ export default{
   data:function(){
     return{
       task:{},
-      message:""
+      message:"",
+      radio: ""
     }
   },
   methods:{
-    save:async function(){
+    save:
+    async function(){
       this.message = "";
       if(this.task.name==""){
-        this.message = "You must enter a capacity name";
+      this.$notify({
+        title: 'Warning',
+        message: 'Task name missing!',
+        type: 'warning'
+      });
         return false;
       }
       if(this.task.capacity==""){
-        this.message = "You must enter the task capacity";
+      this.$notify({
+        title: 'Warning',
+        message: 'Task capacity missing!',
+        type: 'warning'
+      });
         return false;
       }
       if(this.task.status==""){
-        this.task.status = "Not assigned";
-      }
+        this.$notify({
+          title: 'Warning',
+          message: 'Task status not selected!',
+          type: 'warning'
+        });
+        return false;
+        }
       try {
           console.log(this.task.status);
           let response = await this.$http.post('/tasks', this.task);
+          this.message = "Task saved successfully";
           console.log(response);
-          this.message = "Task saved successfully"
-      } catch (e) {
-        console.log('error', e)
-        this.message= "An error has ocurred"
+          this.$message({
+          message: 'Task succesfully created.',
+          type: 'success'});
+      }
+      catch (e) {
+        console.log('error', e);
+        this.message= "An error has ocurred";
+        this.$notify({
+          title: 'Warning',
+          message: 'Please include name, capacity and status.',
+          type: 'warning'
+        });
       }
     }
   }
 }
 </script>
+
+<style scoped>
+.new-task{
+      box-sizing: border-box;
+    padding: 8px 0 15px;
+    position: relative;
+}
+.button-task-wrapper {
+    align-items: center;
+    bottom: calc(-100px/2);
+    display: flex;
+    flex-direction: column;
+    left: 0;
+    margin: 0 auto;
+    position: absolute;
+    right: 0;
+}
+.element-borders{
+  margin-top: 3px;
+  margin-bottom:3px;
+}
+
+
+</style>
