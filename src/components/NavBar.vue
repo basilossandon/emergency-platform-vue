@@ -2,49 +2,40 @@
   <div class="navWrapper">
     <div id="menu" :class="{ active: isActive }">
       <el-menu mode="horizontal" @select="handleSelect" :router="true">
-      <el-menu-item id="logo" index="/" :route="{ name: 'emergency'}">
-      <img src="../assets/images/logo.png" height="21px" width="180px"/>
-      </el-menu-item>
-      <el-menu-item index="/emergencies" :route="{ name: 'emergency' }">
-        Emergencies
-      </el-menu-item>
-      <el-menu-item index="/new-emergency" :route="{ name: 'new-emergency' }">
-        Add emergency
-      </el-menu-item>
-      <el-menu-item index="/new-task" :route="{ name: 'new-task' }">
-        Add tasks
-      </el-menu-item>
-      <el-menu-item index="/new-volunteer" :route="{ name: 'new-volunteer' }">
-        Add volunteer
-      </el-menu-item>
-      <div class="right-menu">
-    <el-dropdown class="avatar-container" trigger="click" v-on:command="handleNavDropdownCommand">
-        <div class="avatar-wrapper">
-          <el-avatar icon="el-icon-user-solid"></el-avatar>
-          <i class="el-icon-caret-bottom" />
+        <el-menu-item id="logo" index="/" :route="{ name: 'emergency'}">
+          <img src="../assets/images/logo.png" height="21px" width="180px" />
+        </el-menu-item>
+        <el-menu-item index="/emergencies" :route="{ name: 'emergency' }">Emergencies</el-menu-item>
+        <el-submenu index="2">
+          <template slot="title">Add</template>
+          <el-menu-item index="/new-emergency" :route="{ name: 'new-emergency' }">Add emergency</el-menu-item>
+          <el-menu-item index="/new-task" :route="{ name: 'new-task' }">Add tasks</el-menu-item>
+          <el-menu-item index="/new-volunteer" :route="{ name: 'new-volunteer' }">Add volunteer</el-menu-item>
+        </el-submenu>
+        <div class="right-menu">
+          <el-dropdown
+            class="avatar-container"
+            trigger="click"
+            v-on:command="handleNavDropdownCommand"
+          >
+            <div class="avatar-wrapper">
+              <el-avatar icon="el-icon-user-solid"></el-avatar>
+              <i class="el-icon-caret-bottom" />
+            </div>
+            <el-dropdown-menu slot="dropdown" class="user-dropdown">
+              <router-link to="/">
+                <el-dropdown-item>Home</el-dropdown-item>
+              </router-link>
+              <router-link to="/user">
+                <el-dropdown-item>Account</el-dropdown-item>
+              </router-link>
+              <router-link to="/account">
+                <el-dropdown-item>Settings</el-dropdown-item>
+              </router-link>
+              <el-dropdown-item command="logout" divided>Logout</el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
         </div>
-        <el-dropdown-menu slot="dropdown" class="user-dropdown">
-          <router-link to="/">
-            <el-dropdown-item>
-              Home
-            </el-dropdown-item>
-          </router-link>
-          <router-link to="/user">
-            <el-dropdown-item>
-              Account
-            </el-dropdown-item>
-          </router-link>
-          <router-link to="/account">
-            <el-dropdown-item>
-              Settings
-            </el-dropdown-item>
-          </router-link>
-            <el-dropdown-item command="logout" divided>
-              Logout
-            </el-dropdown-item>
-        </el-dropdown-menu>
-      </el-dropdown>
-      </div>
       </el-menu>
     </div>
     <div id="toggle" @click="select()">
@@ -57,14 +48,12 @@
 
 <script>
 export default {
-  components: {
-    
-  },
+  components: {},
   data() {
     return {
       activeIndex: 1,
       isActive: false
-    }
+    };
   },
   methods: {
     handleSelect(key, keyPath) {
@@ -73,29 +62,31 @@ export default {
     select: function() {
       this.isActive = !this.isActive;
     },
-      handleNavDropdownCommand: function(command) {
-        if (command == 'logout') {
-          this.$confirm('Are you sure you want to logout?', 'Logout', {
-              confirmButtonText: 'Yes',
-              cancelButtonText: 'No',
-              type: 'info'
-          }).then(function() {
-              this.$message('You have succesfully logged out!');
-          }.bind(this));
-        }
+    handleNavDropdownCommand: function(command) {
+      if (command == "logout") {
+        this.$confirm("Are you sure you want to logout?", "Logout", {
+          confirmButtonText: "Yes",
+          cancelButtonText: "No",
+          type: "info"
+        }).then(
+          function() {
+            this.$message("You have succesfully logged out!");
+          }.bind(this)
+        );
       }
     }
   }
+};
 </script>
 
 <style scoped>
 .right-menu {
-    float: right;
+  float: right;
   transform: translateY(15%);
 
-    height: 100%;
-    line-height: 50px;
-    margin-right: 5px;
+  height: 100%;
+  line-height: 50px;
+  margin-right: 5px;
 }
 #app {
   .logo-header {
@@ -123,7 +114,7 @@ export default {
     height: 40px;
     cursor: pointer;
     float: right;
-    transition: all .3s ease-out;
+    transition: all 0.3s ease-out;
     visibility: hidden;
     opacity: 0;
   }
@@ -148,7 +139,6 @@ export default {
   }
 
   @media only screen and (max-width: $screen-md-min) {
-
     .logo-header {
       padding: 0;
     }
@@ -162,7 +152,7 @@ export default {
     #toggle .span {
       height: 4px;
       margin: 5px 0;
-      transition: all .3s ease-out;
+      transition: all 0.3s ease-out;
       backface-visibility: visible;
       visibility: visible;
       opacity: 1;
@@ -176,11 +166,10 @@ export default {
       margin: 70px 0;
       visibility: visible;
       opacity: 0.98;
-      transition: all .5s ease-out;
+      transition: all 0.5s ease-out;
 
       @include sm-menu;
     }
   }
-
 }
 </style>
