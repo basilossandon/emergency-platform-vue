@@ -4,97 +4,107 @@
     <form>
       <div class="form-item">
         <label class="element-borders" for="name">Volunteer name</label>
-        <el-input class="element-borders" id="name" placeholder="e.g. John Smith" v-model="volunteer.name"></el-input>
+        <el-input
+          class="element-borders"
+          id="name"
+          placeholder="e.g. John Smith"
+          v-model="volunteer.name"
+        ></el-input>
         <label class="element-borders" for="age">Age</label>
-        <el-input class="element-borders" id="age" type="number" min="18" placeholder="e.g 25" v-model="volunteer.age"></el-input>
+        <el-input
+          class="element-borders"
+          id="age"
+          type="number"
+          min="18"
+          placeholder="e.g 25"
+          v-model="volunteer.age"
+        ></el-input>
         <label for="sex">Gender</label>
         <el-radio-group style="margin-top:15px;" v-model="volunteer.sex">
           <el-radio v-model="volunteer.sex" label="H">Male</el-radio>
           <el-radio v-model="volunteer.sex" label="M">Female</el-radio>
-          <el-radio v-model="volunteer.sex" label="Otro" >Other</el-radio>
+          <el-radio v-model="volunteer.sex" label="Otro">Other</el-radio>
         </el-radio-group>
       </div>
       <div class="button-volunteer-wrapper">
-      <el-button type="primary" round icon="el-icon-upload" @click="save"> Save </el-button>
+        <el-button type="primary" round icon="el-icon-upload" @click="save">Save</el-button>
       </div>
     </form>
   </div>
 </template>
 <script>
-export default{
-  data:function(){
-    return{
-      volunteer:{},
-      message:"",
-    }
+export default {
+  data: function() {
+    return {
+      volunteer: {},
+      message: ""
+    };
   },
-  methods:{
-    save:
-    async function(){
+  methods: {
+    save: async function() {
       this.message = "";
-      if(this.volunteer.name==""){
+      if (this.volunteer.name == "") {
         this.message = "You must enter a volunteer name";
         this.$notify({
-          title: 'Warning',
-          message: 'Volunteer name missing!',
-          type: 'warning'
+          title: "Warning",
+          message: "Volunteer name missing!",
+          type: "warning"
         });
         return false;
       }
-      if(this.volunteer.capacity==""){
+      if (this.volunteer.capacity == "") {
         this.message = "You must enter the volunteer capacity";
         this.$notify({
-          title: 'Warning',
-          message: 'You must enter the volunteer capacity',
-          type: 'warning'
+          title: "Warning",
+          message: "You must enter the volunteer capacity",
+          type: "warning"
         });
         return false;
       }
-      if(this.volunteer.status==""){
+      if (this.volunteer.status == "") {
         this.volunteer.status = "Not assigned";
         console.log(this.volunteer.status);
       }
       try {
-          let response = await this.$http.post('/volunteers', this.volunteer);
-          this.message = "Volunteer saved successfully"
-          console.log(response);
-          this.$message({
-          message: 'Volunteer succesfully created.',
-          type: 'success'});
+        let response = await this.$http.post("/volunteers", this.volunteer);
+        this.message = "Volunteer saved successfully";
+        console.log(response);
+        this.$message({
+          message: "Volunteer succesfully created.",
+          type: "success"
+        });
       } catch (e) {
-        console.log('error',e)
-        this.message= "An error has ocurred"
+        console.log("error", e);
+        this.message = "An error has ocurred";
         this.$notify({
-          title: 'Warning',
-          message: 'Please include name, age and gender.',
-          type: 'warning'
+          title: "Warning",
+          message: "Please include name, age and gender.",
+          type: "warning"
         });
       }
     }
   }
-}
+};
 </script>
 
 <style scoped>
-.new-volunteer{
-      box-sizing: border-box;
-    padding: 8px 0 15px;
-    position: relative;
+.new-volunteer {
+  box-sizing: border-box;
+  padding: 8px 0 15px;
+  position: relative;
 }
 .button-volunteer-wrapper {
-    align-items: center;
-    bottom: calc(-100px/2);
-    display: flex;
-    flex-direction: column;
-    left: 0;
-    margin: 0 auto;
-    position: absolute;
-    right: 0;
+  align-items: center;
+  bottom: calc(-100px / 2);
+  display: flex;
+  flex-direction: column;
+  left: 0;
+  margin: 0 auto;
+  position: absolute;
+  right: 0;
 }
-.element-borders{
+.element-borders {
   margin-top: 3px;
-  margin-bottom:3px;
+  margin-bottom: 3px;
 }
-
-
 </style>
