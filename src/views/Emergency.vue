@@ -3,45 +3,41 @@
     <h1>
       <b>All emergencies</b>
     </h1>
-    <div
-      role="tablist"
+    <el-collapse
       v-for="emergency in emergencies"
       :key="emergency.id"
-      v-bind:title="{ 'emergencyName': emergency.active }"
+      :value="emergency.id"
+      v-model="activeName"
+      accordion
     >
-      <el-collapse v-model="activeName" accordion>
-        <el-collapse-item v-bind:title="emergency.name" name="emergency.id">
-          <el-row>
-            <el-col :span="4">
-              <div class="grid-content-image">
-                <img
-                  class="grid-content"
-                  style="border-radius:5px;   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);"
-                  :src="'https://loremflickr.com/160/120/earthquake?lock='+emergency.id"
-                />
-              </div>
-            </el-col>
-            <el-col :span="8">
-              <div class="grid-content-text">
-                Location:{{emergency.location}}
-                <br />
-                Status: {{emergency.status}}
-              </div>
-            </el-col>
-            <el-col :span="4">
-              <div class="grid-content bottom">
-                <el-button type="success" icon="el-icon-check" circle></el-button>
-                <el-button type="primary" icon="el-icon-edit" circle></el-button>
-                <el-button type="danger" icon="el-icon-delete" circle></el-button>
-              </div>
-            </el-col>
-          </el-row>
-        </el-collapse-item>
-      </el-collapse>
-    </div>
-    <div v-if="emergencies.length==0" class="empty-list">
-      <em>No emergencies found</em>
-    </div>
+      <el-collapse-item v-bind:title="emergency.name">
+        <el-row>
+          <el-col :span="4">
+            <div class="grid-content-image">
+              <img
+                class="grid-content"
+                style="border-radius:5px;   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);"
+                :src="'https://loremflickr.com/160/120/earthquake?lock='+emergency.id"
+              />
+            </div>
+          </el-col>
+          <el-col :span="8">
+            <div class="grid-content-text">
+              Location:{{emergency.location}}
+              <br />
+              Status: {{emergency.status}}
+            </div>
+          </el-col>
+          <el-col :span="4">
+            <div class="grid-content bottom">
+              <el-button type="success" icon="el-icon-check" circle></el-button>
+              <el-button type="primary" icon="el-icon-edit" circle></el-button>
+              <el-button type="danger" icon="el-icon-delete" circle></el-button>
+            </div>
+          </el-col>
+        </el-row>
+      </el-collapse-item>
+    </el-collapse>
   </div>
 </template>
 
@@ -49,6 +45,7 @@
 export default {
   data() {
     return {
+      activeName: "1",
       emergencies: [],
       /*page:1,
       perPage: 10,*/
@@ -61,11 +58,6 @@ export default {
     };
   },
   methods: {
-    paginate: function() {
-      //this.page = val
-      this.getData();
-    },
-
     getData: async function() {
       try {
         /*let offset = this.perPage*(this.page-1);

@@ -7,7 +7,7 @@ import 'element-ui/lib/theme-chalk/index.css';
 import locale from 'element-ui/lib/locale/lang/es';
 
 Vue.config.productionTip = false
-Vue.use(ElementUI,{locale});
+Vue.use(ElementUI, { locale });
 
 
 require("./assets/style/style.scss");
@@ -17,9 +17,7 @@ const axiosInstance = axios.create({ //configurar para backend
 })
 
 Vue.prototype.$http = axiosInstance;
-
 new Vue({
-  el: "#app",
   router,
   render: h => h(App)
 }).$mount('#app')
