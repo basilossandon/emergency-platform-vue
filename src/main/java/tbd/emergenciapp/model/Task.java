@@ -17,22 +17,16 @@ public class Task implements Serializable {
     @Column(name = "status", nullable = false)
     private String status;
 
-    @JoinColumn(name = "volunteer_id",unique = true)
-    @OneToOne(cascade = CascadeType.ALL)
-    private Volunteer volunteer;
 
     public Task(Integer id,
                 String name,
                 Integer capacity,
-                String status,
-                Volunteer volunteer)
+                String status)
     {
-        super();
         this.id = id;
         this.name = name;
         this.capacity = capacity;
         this.status = status;
-        this.volunteer = volunteer;
     }
 
     public Task(){
@@ -73,8 +67,14 @@ public class Task implements Serializable {
     public Volunteer getVolunteer() {
         return volunteer;
     }
+    public Emergency getEmergency() {
+        return emergency;
+    }
 
     public void setVolunteer(Volunteer volunteer) {
         this.volunteer = volunteer;
+    }
+    public void setEmergency(Emergency emergency) {
+        this.emergency = emergency;
     }
 }

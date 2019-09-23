@@ -1,6 +1,4 @@
 package tbd.emergenciapp.dao;
-
-import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import tbd.emergenciapp.dto.VolunteerDTO;
 import tbd.emergenciapp.model.Volunteer;

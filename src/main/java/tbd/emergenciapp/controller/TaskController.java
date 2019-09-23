@@ -40,7 +40,6 @@ public class TaskController implements TaskDAO {
             createdTask.setName(task.getName());
             createdTask.setCapacity(task.getCapacity());
             createdTask.setStatus(task.getStatus());
-            createdTask.setVolunteer(task.getVolunteer());
 
             if (createdTask.getName() != null && createdTask.getCapacity() != null && createdTask.getStatus() != null){
 
@@ -60,7 +59,6 @@ public class TaskController implements TaskDAO {
             taskToUpdate.setName(task.getName());
             taskToUpdate.setCapacity(task.getCapacity());
             taskToUpdate.setStatus(task.getStatus());
-            taskToUpdate.setVolunteer(task.getVolunteer());
 
             if (taskToUpdate.getName() != null && taskToUpdate.getCapacity() != null && taskToUpdate.getStatus() != null){
                 return new ResponseEntity<>(taskRepository.save(taskToUpdate),HttpStatus.CREATED);
