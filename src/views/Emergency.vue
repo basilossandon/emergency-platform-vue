@@ -33,12 +33,17 @@
               <el-button
                 type="success"
                 icon="el-icon-check"
-                v-on:click="completeEmergency(emergency.id, emergency.name, emergency.location, 'Complete')"
+                v-on:click="completeEmergency(emergency.id, emergency.name, emergency.location)"
                 circle
                 style="margin-right:3px;"
               ></el-button>
               <el-popover trigger="click" ref="popover" placement="top" width="160">
-                <el-button type="primary" icon="el-icon-edit" circle slot="reference"></el-button>
+                <el-button
+                  type="primary"
+                  icon="el-icon-edit"
+                  circle
+                  slot="reference"
+                ></el-button>
                 <form>
                   <div class="form-item">
                     <label class="element-borders" for="name">Emergency name</label>
@@ -56,11 +61,9 @@
                       v-model="emergency.location"
                     ></el-input>
                     <label for="status">Status</label>
-                    <el-switch
-                      v-model="emergency.status"
-                      active-value="Active"
-                      inactive-value="Inactive"
-                    ></el-switch>
+                      <el-radio v-model="emergency.status" label="Active">Active</el-radio>
+                      <el-radio v-model="emergency.status" label="Inactive">Inactive</el-radio>
+                      <el-radio v-model="emergency.status" label="Complete">Complete</el-radio>
                   </div>
                   <div class="button-emergency-wrapper"></div>
                 </form>
@@ -97,7 +100,7 @@ export default {
       visible: false,
       activeName: "1",
       emergencies: [],
-      emergencyID: ""
+      emergencyID: "",
     };
   },
   methods: {
@@ -183,8 +186,7 @@ export default {
     completeEmergency(
       emergencyID,
       emergencyName,
-      emergencyLocation,
-      emergencyStatus
+      emergencyLocation
     ) {
       axios({
         method: "put",
@@ -193,7 +195,7 @@ export default {
         data: {
           name: emergencyName,
           location: emergencyLocation,
-          status: emergencyStatus
+          status: "Complete"
         },
         headers: { "Content-Type": "application/json" }
       })
