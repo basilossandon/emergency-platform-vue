@@ -18,10 +18,7 @@
           v-model="emergency.location"
         ></el-input>
         <label for="status">Status</label>
-        <el-radio-group style="margin-top:15px;" v-model="emergency.status">
-          <el-radio v-model="emergency.status" label="Active">Active</el-radio>
-          <el-radio v-model="emergency.status" label="Inactive">Inactive</el-radio>
-        </el-radio-group>
+        <el-switch v-model="emergency.status" active-value="Active" inactive-value="Inactive" style="margin-top:5px;"></el-switch>
       </div>
       <div class="button-emergency-wrapper">
         <el-button type="primary" round icon="el-icon-upload" @click="save">Save</el-button>
@@ -33,6 +30,7 @@
 export default {
   data: function() {
     return {
+      value: "Active",
       radio: "",
       emergency: {},
       message: ""

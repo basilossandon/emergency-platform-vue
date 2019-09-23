@@ -101,15 +101,6 @@ export default {
           type: "warning"
         });
       }
-    },
-    getData: async function() {
-      try {
-        let response = await this.$http.get(`/emergencies`);
-        this.emergencies = response.data;
-        console.log("headers", response.headers);
-      } catch (e) {
-        console.log("error", e);
-      }
     }
   },
   created: function() {
