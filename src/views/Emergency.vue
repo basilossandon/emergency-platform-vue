@@ -38,12 +38,7 @@
                 style="margin-right:3px;"
               ></el-button>
               <el-popover trigger="click" ref="popover" placement="top" width="160">
-                <el-button
-                  type="primary"
-                  icon="el-icon-edit"
-                  circle
-                  slot="reference"
-                ></el-button>
+                <el-button type="primary" icon="el-icon-edit" circle slot="reference"></el-button>
                 <form>
                   <div class="form-item">
                     <label class="element-borders" for="name">Emergency name</label>
@@ -61,9 +56,9 @@
                       v-model="emergency.location"
                     ></el-input>
                     <label for="status">Status</label>
-                      <el-radio v-model="emergency.status" label="Active">Active</el-radio>
-                      <el-radio v-model="emergency.status" label="Inactive">Inactive</el-radio>
-                      <el-radio v-model="emergency.status" label="Complete">Complete</el-radio>
+                    <el-radio v-model="emergency.status" label="Active">Active</el-radio>
+                    <el-radio v-model="emergency.status" label="Inactive">Inactive</el-radio>
+                    <el-radio v-model="emergency.status" label="Complete">Complete</el-radio>
                   </div>
                   <div class="button-emergency-wrapper"></div>
                 </form>
@@ -88,6 +83,7 @@
         </el-row>
       </el-collapse-item>
     </el-collapse>
+    <el-pagination style="margin-top:5px;" layout="prev, pager, next" :total="1"></el-pagination>
   </div>
 </template>
 
@@ -100,7 +96,7 @@ export default {
       visible: false,
       activeName: "1",
       emergencies: [],
-      emergencyID: "",
+      emergencyID: ""
     };
   },
   methods: {
@@ -183,11 +179,7 @@ export default {
           });
         });
     },
-    completeEmergency(
-      emergencyID,
-      emergencyName,
-      emergencyLocation
-    ) {
+    completeEmergency(emergencyID, emergencyName, emergencyLocation) {
       axios({
         method: "put",
         url: "http://localhost:4567/emergencies/" + emergencyID,

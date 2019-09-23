@@ -6,7 +6,7 @@ import NewVolunteer from './views/NewVolunteer.vue'
 import Emergency from './views/Emergency.vue'
 import Task from './views/Task.vue'
 import Volunteer from './views/Volunteer.vue'
-
+import home from './views/home.vue'
 
 Vue.use(Router);
 var router = new Router({
@@ -14,7 +14,7 @@ var router = new Router({
     {
       path:'/',
       name:'home',
-      component: Emergency
+      component: home
     },
     {
       path:'/emergencies',

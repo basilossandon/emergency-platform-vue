@@ -17,7 +17,7 @@
               <img
                 class="grid-content"
                 style="border-radius:5px;   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);"
-                :src="'https://loremflickr.com/160/120/earthquake?lock='+volunteer.id"
+                :src="'https://loremflickr.com/160/120/cat?lock='+volunteer.id"
               />
             </div>
           </el-col>
@@ -69,7 +69,7 @@
               </el-popover>
 
 
-              <el-button type="danger" icon="el-icon-delete" circle
+              <el-button style="margin-left: 5px;"type="danger" icon="el-icon-delete" circle
                 v-on:click="deleteVolunteer(volunteer.id)"
               ></el-button>
             </div>
@@ -77,6 +77,11 @@
         </el-row>
       </el-collapse-item>
     </el-collapse>
+        <el-pagination
+    style="margin-top:5px;"
+  layout="prev, pager, next"
+  :total="1">
+</el-pagination>
   </div>
 </template>
 

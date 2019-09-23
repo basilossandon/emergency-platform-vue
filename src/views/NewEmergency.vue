@@ -15,7 +15,16 @@
           class="element-borders"
           id="location"
           placeholder="e.g Thailand"
+          prefix-icon="el-icon-location"
           v-model="emergency.location"
+        ></el-input>
+        <label class="element-borders" for="location">Description</label>
+        <el-input
+          type="textarea"
+          class="element-borders"
+          id="location"
+          placeholder="e.g A tsunami has striked Thailand alongside a typhoon leaving many people stranded and homeless."
+          v-model="emergency.description"
         ></el-input>
         <label for="status">Status</label>
         <el-radio v-model="emergency.status" label="Active">Active</el-radio>
@@ -35,7 +44,8 @@ export default {
       value: "Active",
       radio: "",
       emergency: {},
-      message: ""
+      message: "",
+      textarea: ""
     };
   },
   methods: {
