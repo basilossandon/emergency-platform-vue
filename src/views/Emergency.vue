@@ -30,6 +30,13 @@
           </el-col>
           <el-col :span="4">
             <div class="grid-content bottom">
+              <el-button
+                type="success"
+                icon="el-icon-check"
+                v-on:click="completeEmergency(emergency.id, emergency.name, emergency.location, 'Complete')"
+                circle
+                style="margin-right:3px;"
+              ></el-button>
               <el-popover trigger="click" ref="popover" placement="top" width="160">
                 <el-button type="primary" icon="el-icon-edit" circle slot="reference"></el-button>
                 <form>
@@ -161,6 +168,44 @@ export default {
               this.$notify({
                 title: "Emergency updated",
                 message: "Emergency updated succesfully.",
+                type: "success"
+              });
+            });
+        })
+        .catch(error => {
+          this.$notify.error({
+            title: "Error",
+            message:
+              "Sorry, we can't process your request now: " + error.message
+          });
+        });
+    },
+    completeEmergency(
+      emergencyID,
+      emergencyName,
+      emergencyLocation,
+      emergencyStatus
+    ) {
+      axios({
+        method: "put",
+        url: "http://localhost:4567/emergencies/" + emergencyID,
+        emergencyID: emergencyID,
+        data: {
+          name: emergencyName,
+          location: emergencyLocation,
+          status: emergencyStatus
+        },
+        headers: { "Content-Type": "application/json" }
+      })
+        .then(() => {
+          // when put is finished, the fire get
+          return axios
+            .get(`http://localhost:4567/emergencies`)
+            .then(response => {
+              this.emergencies = response.data;
+              this.$notify({
+                title: "Emergency completed",
+                message: "Emergency completed succesfully.",
                 type: "success"
               });
             });
