@@ -4,6 +4,8 @@ import NewTask from './views/NewTask.vue'
 import NewEmergency from './views/NewEmergency.vue'
 import NewVolunteer from './views/NewVolunteer.vue'
 import Emergency from './views/Emergency.vue'
+import Task from './views/Task.vue'
+import Volunteer from './views/Volunteer.vue'
 
 
 Vue.use(Router);
@@ -33,6 +35,16 @@ var router = new Router({
       path:'/new-volunteer',
       name:'new-volunteer',
       component: NewVolunteer
+    },
+    {
+      path:'/tasks',
+      name:'task',
+      component: Task
+    },
+    {
+      path:'/volunteers',
+      name:'volunteer',
+      component: Volunteer
     }
   ]
 })
