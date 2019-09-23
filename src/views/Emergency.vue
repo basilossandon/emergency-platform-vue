@@ -63,12 +63,14 @@
       </div>
     </form>
             <div style="text-align: right; margin: 0">
-              <el-button type="primary"
+              <el-button
+                type="primary"
                 icon="el-icon-upload"
-                circle @click="update"></el-button>
+                circle
+                v-on:click="updateEmergency(emergency.id, emergency.name, emergency.location, emergency.status)"
+              ></el-button>
             </div>
           </el-popover>
-              
               <el-button
                 type="danger"
                 icon="el-icon-delete"
@@ -124,53 +126,39 @@ export default {
           });
         });
     },
-    update: async function() {
-      this.message = "";
-      if (this.emergency.name == "") {
-        this.message = "You must enter an emergency name";
-        this.$notify({
-          title: "Warning",
-          message: "Emergency name missing!",
-          type: "warning"
+    updateEmergency(emergencyID, emergencyName, emergencyLocation, emergencyStatus) {
+      axios({
+        method: "put",
+        url: "http://localhost:4567/emergencies/" + emergencyID,
+        emergencyID: emergencyID,
+        data: {
+          name: emergencyName,
+          location: emergencyLocation,
+          status: emergencyStatus,
+        },
+        headers: { "Content-Type": "application/json" }
+      })
+        .then(() => {
+          // when put is finished, the fire get
+          return axios
+            .get(`http://localhost:4567/emergencies`)
+            .then(response => {
+              this.emergencies = response.data;
+              this.$notify({
+                title: "Emergency updated",
+                message: "Emergency updated succesfully.",
+                type: "success"
+              });
+            });
+        })
+        .catch(error => {
+          this.$notify.error({
+            title: "Error",
+            message:
+              "Sorry, we can't process your request now: " + error.message
+          });
         });
-        return false;
-      }
-      if (this.emergency.location == "") {
-        this.message = "You must enter the capacity of the emergency";
-        this.$notify({
-          title: "Warning",
-          message: "Emergency location missing!",
-          type: "warning"
-        });
-
-        return false;
-      }
-      if (this.emergency.status == "") {
-        this.$notify({
-          title: "Warning",
-          message: "Emergency status not selected!",
-          type: "warning"
-        });
-        return false;
-      }
-      try {
-        let response = await this.$http.update("/emergencies", this.emergency);
-        this.message = "Emergency updated successfully";
-        console.log(response);
-        this.$message({
-          message: "Emergency succesfully updated.",
-          type: "success"
-        });
-      } catch (e) {
-        console.log("error", e);
-        this.message = "An error has occurred";
-        this.$notify({
-          title: "Warning",
-          message: "Please include name, location and status.",
-          type: "warning"
-        });
-      }
-    }
+    },
   },
   created: function() {
     axios.get(`http://localhost:4567/emergencies`).then(response => {
