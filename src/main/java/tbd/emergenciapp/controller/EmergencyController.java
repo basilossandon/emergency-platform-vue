@@ -7,8 +7,10 @@ import org.springframework.web.bind.annotation.*;
 import tbd.emergenciapp.dao.EmergencyDAO;
 import tbd.emergenciapp.dto.EmergencyDTO;
 import tbd.emergenciapp.model.Emergency;
+import tbd.emergenciapp.exception.NotFoundException;
 import tbd.emergenciapp.repository.EmergencyRepository;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "/emergencies")
@@ -26,7 +28,12 @@ public class EmergencyController implements EmergencyDAO {
     @GetMapping(value = "/{id}")
     @ResponseBody
     public Emergency getEmergencyById(@PathVariable Integer id) {
-        return emergencyRepository.findEmergencyById(id);
+        Optional<Emergency> optEmergency = Optional.ofNullable(emergencyRepository.findEmergencyById(id));
+        if(optEmergency.isPresent()) {
+            return optEmergency.get();
+        }else {
+            throw new NotFoundException("Student not found with id " + id);
+        }
     }
 
     @PostMapping(value = "")
@@ -37,7 +44,9 @@ public class EmergencyController implements EmergencyDAO {
         createdEmergency.setLocation(emergency.getLocation());
         createdEmergency.setStatus(emergency.getStatus());
 
-        if (createdEmergency.getName() != null && createdEmergency.getLocation() != null && createdEmergency.getStatus() != null){
+        if (createdEmergency.getName() != null &&
+            createdEmergency.getLocation() != null &&
+            createdEmergency.getStatus() != null){
 
             return new ResponseEntity<>(emergencyRepository.save(createdEmergency), HttpStatus.CREATED);
         }
@@ -75,6 +84,5 @@ public class EmergencyController implements EmergencyDAO {
         }
         else return new ResponseEntity<>("El emergencia " + id + " no se encuentra.",HttpStatus.NOT_FOUND);
     }
-
 
 }
