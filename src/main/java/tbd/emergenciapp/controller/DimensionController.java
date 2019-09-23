@@ -37,6 +37,7 @@ public class DimensionController implements DimensionDAO {
     ResponseEntity createDimension(@RequestBody DimensionDTO dimension){
         Dimension createdDimension = new Dimension();
         createdDimension.setName(dimension.getName());
+        createdDimension.setVolunteerDimensions(dimension.getVolunteerDimensions());
 
         if(createdDimension.getName() != null){
             return new ResponseEntity<>(dimensionRepository.save(createdDimension), HttpStatus.CREATED);
@@ -54,6 +55,7 @@ public class DimensionController implements DimensionDAO {
         }
 
         dimensionUpdate.setName(dimension.getName());
+        dimensionUpdate.setVolunteerDimensions(dimension.getVolunteerDimensions());
 
         if(dimensionUpdate.getName()!=null){
             return new ResponseEntity<>(dimensionRepository.save(dimensionUpdate),HttpStatus.CREATED);
@@ -74,7 +76,6 @@ public class DimensionController implements DimensionDAO {
 
         return new ResponseEntity("La dimension a borrar no existe. ", HttpStatus.BAD_REQUEST);
     }
-
 
 
 }

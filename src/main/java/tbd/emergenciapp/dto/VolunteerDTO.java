@@ -1,6 +1,7 @@
 package tbd.emergenciapp.dto;
 
 import tbd.emergenciapp.model.Dimension;
+import tbd.emergenciapp.model.VolunteerDimension;
 
 import java.util.Set;
 
@@ -8,7 +9,7 @@ public class VolunteerDTO {
     private String name;
     private Integer age;
     private String sex;
-    private Set<Dimension> dimension;
+    private Set<VolunteerDimension> volunteerDimensions;
 
 
     public  String getName(){
@@ -35,11 +36,12 @@ public class VolunteerDTO {
         this.sex = sex;
     }
 
-    public Set<Dimension> getDimension() {
-        return dimension;
+
+    public Set<VolunteerDimension> getVolunteerDimensions() {
+        return volunteerDimensions;
     }
 
-    public void setDimension(Set<Dimension> dimension) {
-        this.dimension = dimension;
+    public void setVolunteerDimensions(Set<VolunteerDimension> volunteerDimensions) {
+        this.volunteerDimensions = volunteerDimensions;
     }
 }
