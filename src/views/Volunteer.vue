@@ -30,7 +30,45 @@
           </el-col>
           <el-col :span="4">
             <div class="grid-content bottom">
-              <el-button type="primary" icon="el-icon-edit" circle></el-button>
+
+              <el-popover trigger="click" ref="popover" placement="top" width="160">
+                <el-button type="primary" icon="el-icon-edit" circle slot="reference"></el-button>
+                <form>
+                  <div class="form-item">
+                    <label class="element-borders" for="name">Volunteer name</label>
+                    <el-input
+                      class="element-borders"
+                      id="name"
+                      placeholder="e.g. Amelia Pond"
+                      v-model="volunteer.name"
+                    ></el-input>
+                    <label class="element-borders" for="age">Age</label>
+                    <el-input
+                      class="element-borders"
+                      id="age"
+                      placeholder="e.g 22"
+                      v-model="volunteer.age"
+                    ></el-input>
+                    <label for="sex">Gender</label>
+                    <el-radio-group style="margin-top:15px;" v-model="volunteer.sex">
+                      <el-radio v-model="volunteer.sex" label="H">Male</el-radio>
+                      <el-radio v-model="volunteer.sex" label="M">Female</el-radio>
+                      <el-radio v-model="volunteer.sex" label="Otro">Other</el-radio>
+                    </el-radio-group>
+                  </div>
+                  <div class="button-emergency-wrapper"></div>
+                </form>
+                <div style="text-align: right; margin: 0">
+                  <el-button
+                    type="primary"
+                    icon="el-icon-upload"
+                    circle
+                    v-on:click="updateVolunteer(volunteer.id, volunteer.name, volunteer.age, volunteer.sex)"
+                  ></el-button>
+                </div>
+              </el-popover>
+
+
               <el-button type="danger" icon="el-icon-delete" circle
                 v-on:click="deleteVolunteer(volunteer.id)"
               ></el-button>
@@ -72,6 +110,44 @@ export default {
               this.$notify({
                 title: "Volunteer removed",
                 message: "Volunteer removed succesfully.",
+                type: "success"
+              });
+            });
+        })
+        .catch(error => {
+          this.$notify.error({
+            title: "Error",
+            message:
+              "Sorry, we can't process your request now: " + error.message
+          });
+        });
+    },
+    updateVolunteer(
+      volunteerID,
+      volunteerName,
+      volunteerAge,
+      volunteerSex
+    ) {
+      axios({
+        method: "put",
+        url: "http://localhost:4567/volunteers/" + volunteerID,
+        volunteerID: volunteerID,
+        data: {
+          name: volunteerName,
+          age: volunteerAge,
+          sex: volunteerSex
+        },
+        headers: { "Content-Type": "application/json" }
+      })
+        .then(() => {
+          // when put is finished, the fire get
+          return axios
+            .get(`http://localhost:4567/volunteers`)
+            .then(response => {
+              this.volunteers = response.data;
+              this.$notify({
+                title: "Volunteer updated",
+                message: "Volunteer updated succesfully.",
                 type: "success"
               });
             });
