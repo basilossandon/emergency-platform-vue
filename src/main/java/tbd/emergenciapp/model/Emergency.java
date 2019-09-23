@@ -1,5 +1,7 @@
 package tbd.emergenciapp.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.*;
@@ -18,7 +20,8 @@ public class Emergency implements Serializable{
     @Column(name = "status", nullable = false)
     private String status;
 
-    @OneToMany(mappedBy = "emergency", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonBackReference
+    @OneToMany(mappedBy = "emergency", cascade = CascadeType.ALL)
     private Set<Task> tasks;
 
     public Emergency(Integer id,
