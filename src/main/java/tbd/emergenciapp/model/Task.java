@@ -1,5 +1,6 @@
 package tbd.emergenciapp.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -19,9 +20,8 @@ public class Task implements Serializable {
     @Column(name = "status", nullable = false)
     private String status;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "emergency_id", nullable = false)
-    @JsonIgnore
     private Emergency emergency;
 
 
