@@ -1,5 +1,7 @@
 package tbd.emergenciapp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -16,6 +18,11 @@ public class Task implements Serializable {
     private Integer capacity;
     @Column(name = "status", nullable = false)
     private String status;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "emergency_id", nullable = false)
+    @JsonIgnore
+    private Emergency emergency;
 
 
     public Task(Integer id,
@@ -62,5 +69,13 @@ public class Task implements Serializable {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Emergency getEmergency() {
+        return emergency;
+    }
+
+    public void setEmergency(Emergency emergency) {
+        this.emergency = emergency;
     }
 }

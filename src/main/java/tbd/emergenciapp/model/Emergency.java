@@ -1,6 +1,7 @@
 package tbd.emergenciapp.model;
 
 import java.io.Serializable;
+import java.util.Set;
 import javax.persistence.*;
 
 @Entity
@@ -16,6 +17,9 @@ public class Emergency implements Serializable{
     private String location;
     @Column(name = "status", nullable = false)
     private String status;
+
+    @OneToMany(mappedBy = "emergency", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Task> tasks;
 
     public Emergency(Integer id,
                      String name,
@@ -60,5 +64,13 @@ public class Emergency implements Serializable{
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Set<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(Set<Task> tasks) {
+        this.tasks = tasks;
     }
 }
