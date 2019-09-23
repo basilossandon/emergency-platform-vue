@@ -1,4 +1,4 @@
-<template>
+        <template>
   <div class="new-task">
     <h1>New task</h1>
     <form>
@@ -19,11 +19,10 @@
           placeholder="e.g 25"
           v-model="task.capacity"
         ></el-input>
-
         <label class="element-borders" for="capacity">Assign to emergency:</label>
         <el-select
           class="select-size"
-          v-model="taskassignations.emergency"
+          v-model="task.emergency_id"
           placeholder="e.g Thailand Tsunami"
         >
           <el-option
@@ -35,11 +34,7 @@
         </el-select>
         <label class="element-borders" for="capacity">Volunteer in charge:</label>
 
-        <el-select
-          class="select-size"
-          v-model="taskassignations.volunteer"
-          placeholder="e.g Max Steel"
-        >
+        <el-select class="select-size" v-model="task.volunteer_id" placeholder="e.g Max Steel">
           <el-option
             v-for="volunteer in volunteers"
             :key="volunteer.id"
@@ -73,19 +68,54 @@ export default {
   data: function() {
     return {
       task: {},
+<<<<<<< HEAD
       value: "",
       taskassignations: {},
       volunteers: [],
+=======
+>>>>>>> master
       message: "",
       radio: "",
-      emergencies: []
+      emergencies: [],
+      assignEmergencyToTask: "",
+      assignVolunteerToTask: ""
     };
   },
   methods: {
     save: async function() {
+      this.message = "";
+      if (this.task.name == "") {
+        this.$notify({
+          title: "Warning",
+          message: "Task name missing!",
+          type: "warning"
+        });
+        return false;
+      }
+      if (this.task.capacity == "") {
+        this.$notify({
+          title: "Warning",
+          message: "Task capacity missing!",
+          type: "warning"
+        });
+        return false;
+      }
+      if (this.task.status == "") {
+        this.$notify({
+          title: "Warning",
+          message: "Task status not selected!",
+          type: "warning"
+        });
+        return false;
+      }
       try {
+<<<<<<< HEAD
         console.log(this.task);
         let response = await this.$http.post("tasks/emergencies/"+this.taskassignations.emergency, this.task);
+=======
+        console.log(this.task.status);
+        let response = await this.$http.post("/tasks", this.task);
+>>>>>>> master
         this.message = "Task saved successfully";
         console.log(response);
         this.$message({
@@ -95,7 +125,6 @@ export default {
       } catch (e) {
         console.log("error", e);
         this.message = "An error has ocurred";
-        console.log(this.task);
         this.$notify({
           title: "Warning",
           message: "Please include name, capacity and status.",
