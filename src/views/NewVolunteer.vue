@@ -25,19 +25,21 @@
           <el-radio v-model="volunteer.sex" label="Female">Female</el-radio>
           <el-radio v-model="volunteer.sex" label="Other">Other</el-radio>
         </el-radio-group>
-        <br />
-
-        <span style="margin-top:20px;" class="demonstration">Motivation</span>
-        <el-rate style="margin:2px;" v-model="value1"></el-rate>
-        <span style="margin:2px;" class="demonstration">Strength</span>
-        <el-rate style="margin:2px;" v-model="value2"></el-rate>
-        <span style="margin:2px;" class="demonstration">Dextery</span>
-        <el-rate style="margin:2px;" v-model="value3"></el-rate>
-        <span style="margin:2px;" class="demonstration">Leadership</span>
-        <el-rate style="margin:2px;" v-model="value4"></el-rate>
-        <span style="margin:2px;" class="demonstration">Knowledge</span>
-        <el-rate style="margin:2px;" v-model="value5"></el-rate>
+        <el-table :data="tableData" style="width: 100%">
+          <el-table-column label="Dimension" width="180">
+            <template slot-scope="scope">
+              <i class="el-icon-star"></i>
+              <span style="margin-left: 10px">{{ scope.dimension }}</span>
+            </template>
+          </el-table-column>
+          <el-table-column label="Score">
+            <template slot-scope="scope">
+              <el-rate style="margin:2px;" v-model="scope.id"></el-rate>
+            </template>
+          </el-table-column>
+        </el-table>
       </div>
+
       <div class="button-volunteer-wrapper">
         <el-button type="primary" round icon="el-icon-upload" @click="save">Save</el-button>
       </div>
@@ -55,8 +57,20 @@ export default {
       value3: null,
       value4: null,
       value5: null,
-
-      colors: ["#99A9BF", "#F7BA2A", "#FF9900"] // same as { 2: '#99A9BF', 4: { value: '#F7BA2A', excluded: true }, 5: '#FF9900' }
+      tableData: [
+        {
+          dimension: "Strength"
+        },
+        {
+          dimension: "Dextery"
+        },
+        {
+          dimension: "Knowledge"
+        },
+        {
+          dimension: "2016-05-03"
+        }
+      ]
     };
   },
   methods: {
