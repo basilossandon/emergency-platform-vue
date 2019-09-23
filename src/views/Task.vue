@@ -26,13 +26,48 @@
               Capacity: {{task.capacity}}
               <br />
               Status: {{task.status}}
-              Emergency: 
+              Emergency:
             </div>
           </el-col>
           <el-col :span="4">
+
             <div class="grid-content bottom">
-              <el-button type="success" icon="el-icon-check" circle></el-button>
-              <el-button type="primary" icon="el-icon-edit" circle></el-button>
+            <el-popover trigger="click" ref="popover" placement="top" width="160">
+              <el-button type="primary" icon="el-icon-edit" circle slot="reference"></el-button>
+              <form>
+                <div class="form-item">
+                  <label class="element-borders" for="name">Task name</label>
+                  <el-input
+                    class="element-borders"
+                    id="name"
+                    placeholder="e.g. Getting Supplies"
+                    v-model="task.name"
+                  ></el-input>
+                  <label class="element-borders" for="capacity">Capacity</label>
+                  <el-input
+                    class="element-borders"
+                    id="capacity"
+                    placeholder="e.g 10"
+                    v-model="task.capacity"
+                  ></el-input>
+                  <label for="status">Status</label>
+                  <el-radio-group style="margin-top:15px;" v-model="task.status">
+                    <el-radio v-model="task.status" label="Active">Active</el-radio>
+                    <el-radio v-model="task.status" label="Inactive">Inactive</el-radio>
+                  </el-radio-group>
+                </div>
+                <div class="button-emergency-wrapper"></div>
+              </form>
+              <div style="text-align: right; margin: 0">
+                <el-button
+                  type="primary"
+                  icon="el-icon-upload"
+                  circle
+                  v-on:click="updateTask(task.id, task.name, task.capacity, task.status)"
+                ></el-button>
+              </div>
+            </el-popover>
+
               <el-button type="danger" icon="el-icon-delete" circle
                 v-on:click="deleteTask(task.id)"
               ></el-button>
@@ -75,6 +110,44 @@ export default {
               this.$notify({
                 title: "Task removed",
                 message: "Task removed succesfully.",
+                type: "success"
+              });
+            });
+        })
+        .catch(error => {
+          this.$notify.error({
+            title: "Error",
+            message:
+              "Sorry, we can't process your request now: " + error.message
+          });
+        });
+    },
+    updateTask(
+      taskID,
+      taskName,
+      taskCapacity,
+      taskStatus
+    ) {
+      axios({
+        method: "put",
+        url: "http://localhost:4567/tasks/" + taskID,
+        taskID: taskID,
+        data: {
+          name: taskName,
+          capacity: taskCapacity,
+          status: taskStatus
+        },
+        headers: { "Content-Type": "application/json" }
+      })
+        .then(() => {
+          // when put is finished, the fire get
+          return axios
+            .get(`http://localhost:4567/tasks`)
+            .then(response => {
+              this.tasks = response.data;
+              this.$notify({
+                title: "Task updated",
+                message: "Task updated succesfully.",
                 type: "success"
               });
             });
