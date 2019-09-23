@@ -21,9 +21,9 @@
         ></el-input>
         <label for="sex">Gender</label>
         <el-radio-group style="margin-top:15px;" v-model="volunteer.sex">
-          <el-radio v-model="volunteer.sex" label="H">Male</el-radio>
-          <el-radio v-model="volunteer.sex" label="M">Female</el-radio>
-          <el-radio v-model="volunteer.sex" label="Otro">Other</el-radio>
+          <el-radio v-model="volunteer.sex" label="Male">Male</el-radio>
+          <el-radio v-model="volunteer.sex" label="Female">Female</el-radio>
+          <el-radio v-model="volunteer.sex" label="Other">Other</el-radio>
         </el-radio-group>
       </div>
       <div class="button-volunteer-wrapper">
