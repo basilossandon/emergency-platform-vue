@@ -59,7 +59,6 @@ public class TaskController implements TaskDAO {
             taskToUpdate.setName(task.getName());
             taskToUpdate.setCapacity(task.getCapacity());
             taskToUpdate.setStatus(task.getStatus());
-
             if (taskToUpdate.getName() != null && taskToUpdate.getCapacity() != null && taskToUpdate.getStatus() != null){
                 return new ResponseEntity<>(taskRepository.save(taskToUpdate),HttpStatus.CREATED);
             }
