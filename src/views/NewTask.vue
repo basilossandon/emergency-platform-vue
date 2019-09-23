@@ -22,7 +22,7 @@
         <label class="element-borders" for="capacity">Assign to emergency:</label>
         <el-select
           class="select-size"
-          v-model="task.emergency_id"
+          v-model="taskassignations.emergency"
           placeholder="e.g Thailand Tsunami"
         >
           <el-option
@@ -68,12 +68,9 @@ export default {
   data: function() {
     return {
       task: {},
-<<<<<<< HEAD
       value: "",
       taskassignations: {},
       volunteers: [],
-=======
->>>>>>> master
       message: "",
       radio: "",
       emergencies: [],
@@ -109,13 +106,8 @@ export default {
         return false;
       }
       try {
-<<<<<<< HEAD
         console.log(this.task);
         let response = await this.$http.post("tasks/emergencies/"+this.taskassignations.emergency, this.task);
-=======
-        console.log(this.task.status);
-        let response = await this.$http.post("/tasks", this.task);
->>>>>>> master
         this.message = "Task saved successfully";
         console.log(response);
         this.$message({
