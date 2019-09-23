@@ -3,7 +3,6 @@ package tbd.emergenciapp.dao;
 import org.springframework.http.ResponseEntity;
 import tbd.emergenciapp.dto.TaskDTO;
 import tbd.emergenciapp.model.Task;
-
 import java.util.List;
 
 public interface TaskDAO {

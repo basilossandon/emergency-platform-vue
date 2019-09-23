@@ -63,18 +63,4 @@ public class Task implements Serializable {
     public void setStatus(String status) {
         this.status = status;
     }
-
-    public Volunteer getVolunteer() {
-        return volunteer;
-    }
-    public Emergency getEmergency() {
-        return emergency;
-    }
-
-    public void setVolunteer(Volunteer volunteer) {
-        this.volunteer = volunteer;
-    }
-    public void setEmergency(Emergency emergency) {
-        this.emergency = emergency;
-    }
 }
