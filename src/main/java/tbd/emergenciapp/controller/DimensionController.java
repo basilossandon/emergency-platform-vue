@@ -62,7 +62,7 @@ public class DimensionController implements DimensionDAO {
         return  new ResponseEntity<>("La dimension no puede ser modificado por un valor nulo.", HttpStatus.BAD_REQUEST);
     }
 
-    @PostMapping(value = "/{id}/delete")
+    @DeleteMapping(value = "/{id}")
     public  @ResponseBody
     ResponseEntity deleteDimension(@PathVariable Integer id){
         Dimension dimensionDelete = dimensionRepository.findDimensionById(id);

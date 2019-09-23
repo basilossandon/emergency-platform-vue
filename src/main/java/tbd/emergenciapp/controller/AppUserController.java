@@ -65,7 +65,7 @@ public class AppUserController implements AppUserDAO {
         return new ResponseEntity<>("Un valor no puede ser modificado por un valor nulo.", HttpStatus.BAD_REQUEST);
     }
 
-    @PostMapping(value = "/{id}/delete")
+    @DeleteMapping(value = "/{id}")
     public @ResponseBody
     ResponseEntity deleteAppUser(@PathVariable Integer id){
         AppUser appUserToDelete = appUserRepository.findAppUserById(id);

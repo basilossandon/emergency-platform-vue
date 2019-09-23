@@ -69,7 +69,7 @@ public class VolunteerController implements VolunteerDAO{
         return  new ResponseEntity<>("Un valor no puede ser modificado por un valor nulo.", HttpStatus.BAD_REQUEST);
     }
 
-    @PostMapping(value = "/{id}/delete")
+    @DeleteMapping(value = "/{id}")
     public @ResponseBody
     ResponseEntity deleteVolunteer(@PathVariable Integer id){
         Volunteer volunteerDelete = volunteerRepository.findVolunteerById(id);
