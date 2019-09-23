@@ -32,7 +32,12 @@
             <div class="grid-content bottom">
               <el-button type="success" icon="el-icon-check" circle></el-button>
               <el-button type="primary" icon="el-icon-edit" circle></el-button>
-              <el-button type="danger" icon="el-icon-delete" circle></el-button>
+              <el-button
+                type="danger"
+                icon="el-icon-delete"
+                circle
+                v-on:click="deleteEmergency(emergency.id)"
+              ></el-button>
             </div>
           </el-col>
         </el-row>
@@ -42,38 +47,52 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   data() {
     return {
       activeName: "1",
       emergencies: [],
-      /*page:1,
-      perPage: 10,*/
-      totalRecords: 0,
-      pageOptions: {
-        texts: {
-          count: ""
-        }
+      emergencyID: "",
+      axios: {
+        credentials: false
       }
     };
   },
   methods: {
-    getData: async function() {
-      try {
-        /*let offset = this.perPage*(this.page-1);
-        let perPage = this.perPage;
-        let resource = this.resource;*/
-        let response = await this.$http.get(`/emergencies`);
-        this.emergencies = response.data;
-        console.log("headers", response.headers);
-        this.totalRecords = +response.headers["pagination-count"];
-      } catch (e) {
-        console.log("error", e);
-      }
+    deleteEmergency(emergencyID) {
+      axios({
+        method: "delete",
+        url: "http://localhost:4567/emergencies/" + emergencyID,
+        emergencyID: emergencyID,
+        headers: { "Content-Type": "application/json" }
+      })
+        .then(() => {
+          // when put is finished, the fire get
+          return axios
+            .get(`http://localhost:4567/emergencies`)
+            .then(response => {
+              this.emergencies = response.data;
+              this.$notify({
+                title: "Emergency removed",
+                message: "Emergency removed succesfully.",
+                type: "success"
+              });
+            });
+        })
+        .catch(error => {
+          this.$notify.error({
+            title: "Error",
+            message:
+              "Sorry, we can't process your request now: " + error.message
+          });
+        });
     }
   },
   created: function() {
-    this.getData();
+    axios.get(`http://localhost:4567/emergencies`).then(response => {
+      this.emergencies = response.data;
+    });
   }
 };
 </script>
