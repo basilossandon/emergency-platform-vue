@@ -59,6 +59,13 @@
         <el-button type="primary" round icon="el-icon-upload" @click="save">Save</el-button>
       </div>
     </form>
+
+    <div class="view-model">
+      Name: {{task.name}}<br/>
+      Capacity: {{task.capacity}}<br/>
+      Status: {{task.status}}<br/>
+      taskassignations emergency: {{taskassignations.emergency}}<br/>
+    </div>
   </div>
 </template>
 <script>
@@ -66,6 +73,7 @@ export default {
   data: function() {
     return {
       task: {},
+      value: "",
       taskassignations: {},
       volunteers: [],
       message: "",
@@ -77,7 +85,7 @@ export default {
     save: async function() {
       try {
         console.log(this.task);
-        let response = await this.$http.post("/tasks", this.task);
+        let response = await this.$http.post("tasks/emergencies/"+this.taskassignations.emergency, this.task);
         this.message = "Task saved successfully";
         console.log(response);
         this.$message({

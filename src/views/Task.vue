@@ -23,9 +23,10 @@
           </el-col>
           <el-col :span="8">
             <div class="grid-content-text">
-              Capacity:{{task.capacity}}
+              Capacity: {{task.capacity}}
               <br />
               Status: {{task.status}}
+              Emergency: 
             </div>
           </el-col>
           <el-col :span="4">
@@ -53,7 +54,8 @@ export default {
       taskID: "",
       axios: {
         credentials: false
-      }
+      },
+      emergencies: []
     };
   },
   methods: {
@@ -89,6 +91,10 @@ export default {
   created: function() {
     axios.get(`http://localhost:4567/tasks`).then(response => {
       this.tasks = response.data;
+    });
+
+    axios.get(`http://localhost:4567/emergencies`).then(response => {
+      this.emergencies = response.data;
     });
   }
 };
