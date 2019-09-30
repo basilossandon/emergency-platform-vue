@@ -8,10 +8,7 @@ import locale from 'element-ui/lib/locale/lang/es';
 
 Vue.config.productionTip = false
 Vue.use(ElementUI, { locale });
-
-
 require("./assets/style/style.scss");
-
 const axiosInstance = axios.create({ //configurar para backend
   baseURL: 'http://localhost:4567'
 })
