@@ -26,6 +26,15 @@
           icon="el-icon-unlock"
         >Login</el-button>
       </div>
+            <div>
+        
+        <router-link to="/register" >
+        <el-button
+          type="default"
+          style="width: 100%; margin-top: 15px;"
+          icon="el-icon-user"
+        >Register</el-button></router-link>
+      </div>
     </form>
   </div>
 </template>

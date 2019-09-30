@@ -9,6 +9,7 @@
           id="email"
           placeholder="e.g. Pablo Chille"
           prefix-icon="el-icon-user"
+          v-model="name"
         ></el-input>
       </div>
 
@@ -19,28 +20,27 @@
           id="email"
           placeholder="e.g. pablo.chille@usach.cl"
           prefix-icon="el-icon-message"
+          v-model="email"
         ></el-input>
       </div>
 
       <h1>Password</h1>
       <div>
         <el-input
-          class="element-borders"
-          id="password"
-          type="password"
-          placeholder="**********"
+          placeholder="Please input password"
+          v-model="password"
           prefix-icon="el-icon-lock"
+          show-password
         ></el-input>
       </div>
 
       <h1>Confirm Password</h1>
       <div>
         <el-input
-          class="element-borders"
-          id="password"
-          type="password"
-          placeholder="**********"
+          placeholder="Please input password"
           prefix-icon="el-icon-lock"
+          show-password
+          v-model="pw_confirmation"
         ></el-input>
       </div>
 
@@ -65,7 +65,7 @@ export default {
       name: "",
       email: "",
       password: "",
-      password_confirmation: "",
+      pw_confirmation: "",
       is_admin: null
     };
   },
@@ -74,7 +74,7 @@ export default {
       e.preventDefault();
 
       if (
-        this.password === this.password_confirmation &&
+        this.password === this.pw_confirmation &&
         this.password.length > 0
       ) {
         let url = "http://localhost:4567/register";
@@ -106,7 +106,6 @@ export default {
       } else {
         this.password = "";
         this.passwordConfirm = "";
-
         return alert("Passwords do not match");
       }
     }
