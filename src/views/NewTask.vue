@@ -33,7 +33,10 @@
           ></el-option>
         </el-select>
         <label class="element-borders" for="capacity">Volunteer in charge:</label>
-
+    <span>Rain</span>
+    <el-divider direction="vertical"></el-divider>
+    <span>Home</span>
+    <el-divider direction="vertical"></el-divider>
         <el-select class="select-size" v-model="task.volunteer_id" placeholder="e.g Max Steel">
           <el-option
             v-for="volunteer in volunteers"

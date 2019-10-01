@@ -2,7 +2,7 @@
   <div class="navWrapper">
     <div id="menu" :class="{ active: isActive }">
       <el-menu mode="horizontal" @select="handleSelect" :router="true">
-        <el-menu-item id="logo" index="/" :route="{ name: 'emergency'}">
+        <el-menu-item id="logo" index="/home" :route="{ name: 'emergency'}">
           <img src="../assets/images/logo.png" height="21px" width="180px" />
         </el-menu-item>
         <el-menu-item index="/emergencies" :route="{ name: 'emergency' }">Emergencies</el-menu-item>

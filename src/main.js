@@ -12,7 +12,6 @@ Vue.use(ElementUI, { locale });
 Vue.use(VueCsvImportPlugin);
 
 require("./assets/style/style.scss");
-
 const axiosInstance = axios.create({ //configurar para backend
   baseURL: 'http://localhost:4567'
 })
