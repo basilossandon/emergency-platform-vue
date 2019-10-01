@@ -35,16 +35,13 @@ var router = new Router({
       path: '/',
       name: 'home',
       component: home,
-      meta: {
-        guest: true
-      }
     },
     {
       path: '/emergencies',
       name: 'emergency',
       component: Emergency,
       meta: {
-        guest: true
+        requiresAuth:true
       }
     },
     {
@@ -86,7 +83,11 @@ var router = new Router({
     {
       path:'/import',
       name:'import',
-      component: Import
+      component: Import,
+      meta: {
+        requiresAuth: true,
+        is_admin: true
+      }
     }
   ]
 })
@@ -99,13 +100,13 @@ router.beforeEach((to, from, next) => {
         params: { nextUrl: to.fullPath }
       })
     } else {
-      let user = JSON.parse(localStorage.getItem('user'))
+      let user = localStorage.getItem('user')
       if (to.matched.some(record => record.meta.is_admin)) {
-        if (user.is_admin == 1) {
+        if (user.role == "coordinator") {
           next()
         }
         else {
-          next({ name: 'userboard' })
+          next({ name: 'emergency' })
         }
       } else {
         next()
@@ -116,7 +117,7 @@ router.beforeEach((to, from, next) => {
       next()
     }
     else {
-      next({ name: 'userboard' })
+      next({ name: 'emergency' })
     }
   } else {
     next()

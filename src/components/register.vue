@@ -9,7 +9,7 @@
           id="email"
           placeholder="e.g. Pablo Chille"
           prefix-icon="el-icon-user"
-          v-model="name"
+          v-model="appuser.name"
         ></el-input>
       </div>
 
@@ -20,7 +20,8 @@
           id="email"
           placeholder="e.g. pablo.chille@usach.cl"
           prefix-icon="el-icon-message"
-          v-model="email"
+          v-model="appuser.email"
+          type="email"
         ></el-input>
       </div>
 
@@ -28,7 +29,7 @@
       <div>
         <el-input
           placeholder="Please input password"
-          v-model="password"
+          v-model="appuser.password"
           prefix-icon="el-icon-lock"
           show-password
         ></el-input>
@@ -40,16 +41,22 @@
           placeholder="Please input password"
           prefix-icon="el-icon-lock"
           show-password
-          v-model="pw_confirmation"
+          v-model="passwordConfirm"
         ></el-input>
       </div>
+      <el-switch
+        style="display: block; margin-top: 15px;"
+        v-model="appuser.role"
+        active-color="#13ce66"
+        inactive-color="#409EFF"
+        active-text="Coordinator"
+        inactive-text="Volunteer"
+        active-value="coordinator"
+        inactive-value="volunteer"
+      ></el-switch>
 
       <div>
-        <el-button
-          style="margin-top:15px; width: 100%;"
-          type="primary"
-          @click="handleSubmit"
-        >Register</el-button>
+        <el-button style="margin-top:15px; width: 100%;" type="primary" @click="save">Register</el-button>
       </div>
     </form>
   </div>
@@ -65,50 +72,53 @@ export default {
       name: "",
       email: "",
       password: "",
-      pw_confirmation: "",
-      is_admin: null
+      passwordConfirm: "",
+      appuser: {},
     };
   },
   methods: {
-    handleSubmit(e) {
-      e.preventDefault();
-
-      if (
-        this.password === this.pw_confirmation &&
-        this.password.length > 0
-      ) {
-        let url = "http://localhost:4567/register";
-        if (this.is_admin != null || this.is_admin == 1)
-          url = "http://localhost:4567/register-admin";
-        this.$http
-          .post(url, {
-            name: this.name,
-            email: this.email,
-            password: this.password,
-            is_admin: this.is_admin
-          })
-          .then(response => {
-            localStorage.setItem("user", JSON.stringify(response.data.user));
-            localStorage.setItem("jwt", response.data.token);
-
-            if (localStorage.getItem("jwt") != null) {
-              this.$emit("loggedIn");
-              if (this.$route.params.nextUrl != null) {
-                this.$router.push(this.$route.params.nextUrl);
-              } else {
-                this.$router.push("/");
-              }
-            }
-          })
-          .catch(error => {
-            console.error(error);
+    save: async function() {
+      try {
+        if (
+          this.appuser.password != this.passwordConfirm &&
+          this.appuser.password.length > 0
+        ) {
+          this.$message({
+            message: "Password do not match.",
+            type: "warning"
           });
-      } else {
-        this.password = "";
-        this.passwordConfirm = "";
-        return alert("Passwords do not match");
+          this.appuser.password = "";
+          this.passwordConfirm = "";
+          return;
+        }
+        console.log(this.appuser);
+        let response = await this.$http.post(
+          "/appusers/register",
+          this.appuser
+        );
+        localStorage.setItem("user", response.data.user);
+        localStorage.setItem("jwt", response.data.token);
+        if (localStorage.getItem("jwt") != null) {
+          this.$emit("loggedIn");
+          if (this.$route.params.nextUrl != null) {
+            this.$router.push(this.$route.params.nextUrl);
+          } else {
+            this.$router.push("/");
+          }
+        }
+      } catch (e) {
+        console.log("error", e);
+        this.message = "An error has occurred";
+        this.$notify({
+          title: "Warning",
+          message: "Could not create user.",
+          type: "warning"
+        });
       }
     }
   }
 };
 </script>
+
+<style scoped>
+</style>

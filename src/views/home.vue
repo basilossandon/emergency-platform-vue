@@ -11,9 +11,9 @@
       <p>Be a volunteer and change the world.</p>
       <div class="home-actions">
         <a
-          :route="{ name: 'emergency' }"
+          :route="{ name: 'register' }"
         >
-          <router-link to="/emergencies">
+          <router-link to="/register">
             <el-button type="primary" round>Begin</el-button>
           </router-link>
         </a>
@@ -28,19 +28,11 @@ import axios from "axios";
 export default {
   data() {
     return {
-      value: "Active",
-      visible: false,
-      activeName: "1",
-      emergencies: [],
-      emergencyID: ""
+
     };
   },
   methods: {},
-  created: function() {
-    axios.get(`http://localhost:4567/emergencies`).then(response => {
-      this.emergencies = response.data;
-    });
-  }
+
 };
 </script>
 
