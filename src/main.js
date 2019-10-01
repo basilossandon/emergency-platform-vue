@@ -5,10 +5,11 @@ import router from './router';
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import locale from 'element-ui/lib/locale/lang/es';
+import { VueCsvImportPlugin } from "vue-csv-import";
 
 Vue.config.productionTip = false
 Vue.use(ElementUI, { locale });
-
+Vue.use(VueCsvImportPlugin);
 
 require("./assets/style/style.scss");
 

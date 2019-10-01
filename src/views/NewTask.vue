@@ -1,4 +1,4 @@
-        <template>
+<template>
   <div class="new-task">
     <h1>New task</h1>
     <form>

@@ -7,7 +7,7 @@ import Emergency from './views/Emergency.vue'
 import Task from './views/Task.vue'
 import Volunteer from './views/Volunteer.vue'
 import home from './views/home.vue'
-
+import Import from './views/Import.vue'
 Vue.use(Router);
 var router = new Router({
   routes: [
@@ -45,7 +45,12 @@ var router = new Router({
       path:'/volunteers',
       name:'volunteer',
       component: Volunteer
-    }
+    },
+    {
+      path:'/import',
+      name:'import',
+      component: Import
+    },
   ]
 })
 
