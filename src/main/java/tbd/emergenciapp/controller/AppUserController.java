@@ -20,7 +20,7 @@ import java.util.List;
 public class AppUserController implements AppUserDAO {
     @Autowired
     private AppUserRepository appUserRepository;
-
+    
     @GetMapping("")
     @ResponseBody
     public List<AppUser> getAllAppUsers() {
@@ -33,18 +33,23 @@ public class AppUserController implements AppUserDAO {
         return appUserRepository.findAppUserById(id);
     }
 
-    @PostMapping(value = "")
+    @GetMapping(value = "/email/{email}")
+    @ResponseBody
+    public AppUser getAppUserByEmail(@PathVariable String email) {
+        return appUserRepository.findAppUserByEmail(email);
+    }
+
+    @PostMapping(value = "/register")
     public @ResponseBody
     ResponseEntity createAppUser(@RequestBody AppUserDTO app_user){
         AppUser createdAppUser = new AppUser();
         createdAppUser.setName(app_user.getName());
         createdAppUser.setPassword(app_user.getPassword());
-
-        if (createdAppUser.getName() != null && createdAppUser.getPassword() != null){
-
+        createdAppUser.setEmail(app_user.getEmail());
+        createdAppUser.setRole(app_user.getRole());
+        if (createdAppUser.getName() != null && createdAppUser.getPassword() != null && createdAppUser.getEmail() != null && createdAppUser.getRole() != null){
             return new ResponseEntity<>(appUserRepository.save(createdAppUser),HttpStatus.CREATED);
         }
-
         return new ResponseEntity<>("El usuario a crear no puede contener valores nulos.", HttpStatus.BAD_REQUEST);
     }
 

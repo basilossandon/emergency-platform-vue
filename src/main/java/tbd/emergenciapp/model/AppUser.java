@@ -13,13 +13,20 @@ public class AppUser implements Serializable {
     private String name;
     @Column(name = "password", nullable = false)
     private String password;
-
+    @Column(name = "email")
+    private String email;
+    @Column(name = "role")
+    private String role;
     public AppUser(Integer id,
                    String  name ,
-                   String  password){
+                   String  password,
+                   String  role,
+                   String email){
         this.id = id;
         this.password = password;
         this.name = name;
+        this.role = role;
+        this.email= email;
     }
 
     public AppUser(){
@@ -44,7 +51,21 @@ public class AppUser implements Serializable {
         return this.name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String name) { this.name = name;}
+
+    public String getEmail() {
+        return this.email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public String getRole() {
+        return this.role;
     }
 }
