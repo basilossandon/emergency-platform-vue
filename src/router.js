@@ -82,6 +82,11 @@ var router = new Router({
       path:'/volunteers',
       name:'volunteer',
       component: Volunteer
+    },
+    {
+      path:'/import',
+      name:'import',
+      component: Import
     }
   ]
 })
