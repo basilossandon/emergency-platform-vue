@@ -11,14 +11,19 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
+import java.emergenciapp.utilities.CsvUtils;
 
 @RestController
 @Validated
 @RequestMapping(path = "/volunteers")
 @CrossOrigin(origins = "*")
 public class VolunteerController implements VolunteerDAO{
+
+    public VolunteerController(VolunteerRepository repository) {
+      this.repository = repository;
+    }
+
     @Autowired
     private VolunteerRepository volunteerRepository;
 
@@ -49,6 +54,15 @@ public class VolunteerController implements VolunteerDAO{
 
         return new ResponseEntity<>("EL usuario a crear no puede contener valores nulos.", HttpStatus.BAD_REQUEST);
     }
+    @PostMapping(value = "/upload", consumes = "text/csv")
+    public void uploadSimple(@RequestBody InputStream body) {
+        repository.saveAll(CsvUtils.read(User.class, body);
+    }
+    @PostMapping(value = "/upload", consumes = "multipart/form-data")
+    public void uploadMultipart(@RequestParam("file") MultipartFile file) {
+        repository.saveAll(CsvUtils.read(Volunteer.class, file.getInputStream());
+    }
+
 
     @PutMapping(value = "/{id}")
     public @ResponseBody
