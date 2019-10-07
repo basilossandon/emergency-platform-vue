@@ -67,8 +67,6 @@
                   ></el-button>
                 </div>
               </el-popover>
-
-
               <el-button style="margin-left: 5px;"type="danger" icon="el-icon-delete" circle
                 v-on:click="deleteVolunteer(volunteer.id)"
               ></el-button>

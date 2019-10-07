@@ -2,12 +2,13 @@
   <div class="navWrapper">
     <div id="menu" :class="{ active: isActive }">
       <el-menu mode="horizontal" @select="handleSelect" :router="true">
-        <el-menu-item id="logo" index="/" :route="{ name: 'emergency'}">
+        <el-menu-item id="logo" index="/" :route="{ name: 'home'}">
           <img src="../assets/images/logo.png" height="21px" width="180px" />
         </el-menu-item>
         <el-menu-item index="/emergencies" :route="{ name: 'emergency' }">Emergencies</el-menu-item>
         <el-menu-item index="/tasks" :route="{ name: 'task' }">Tasks</el-menu-item>
         <el-menu-item index="/volunteers" :route="{ name: 'volunteer' }">Volunteers</el-menu-item>
+        <el-menu-item index="/import" :route="{ name: 'import' }">Import</el-menu-item>
         <el-submenu index="2">
           <template slot="title">Add</template>
           <el-menu-item index="/new-emergency" :route="{ name: 'new-emergency' }">Add emergency</el-menu-item>

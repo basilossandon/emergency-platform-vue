@@ -13,6 +13,7 @@
 import NavBar from "@/components/NavBar.vue";
 import "element-ui/lib/theme-chalk/reset.css";
 
+
 export default {
   name: "app",
   components: {
