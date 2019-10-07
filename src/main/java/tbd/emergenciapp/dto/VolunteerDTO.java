@@ -10,7 +10,14 @@ public class VolunteerDTO {
     private Integer age;
     private String sex;
     private Set<VolunteerDimension> volunteerDimensions;
+    private String lastname;
+    private String latitude;
+    private String longitude;
+    private String email;
+    private String rut;
 
+    public VolunteerDTO() {
+    }
 
     public  String getName(){
         return this.name;
@@ -43,5 +50,50 @@ public class VolunteerDTO {
 
     public void setVolunteerDimensions(Set<VolunteerDimension> volunteerDimensions) {
         this.volunteerDimensions = volunteerDimensions;
+    }
+
+    public String getLastName() {
+        return this.lastname;
+    }
+
+    public String getLastname() {
+        return this.lastname;
+    }
+
+    public String getLatitude() {
+        return this.latitude;
+
+    }
+
+    public String getLongitude() {
+        return this.longitude;
+    }
+
+    public String getEmail() {
+        return this.email;
+    }
+
+    public String getRut() {
+        return rut;
+    }
+
+    public void setRut(String rut) {
+        this.rut = rut;
+    }
+
+    public void setLastname(String lastname){
+        this.lastname = lastname;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

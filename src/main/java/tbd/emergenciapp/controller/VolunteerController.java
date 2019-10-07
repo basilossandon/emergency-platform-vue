@@ -55,11 +55,14 @@ public class VolunteerController implements VolunteerDAO{
     ResponseEntity createVolunteer(@RequestBody VolunteerDTO volunteer){
         Volunteer createdVolunteer = new Volunteer();
         createdVolunteer.setName(volunteer.getName());
-        createdVolunteer.setAge(volunteer.getAge());
         createdVolunteer.setSex(volunteer.getSex());
-        createdVolunteer.setVolunteerDimensions(volunteer.getVolunteerDimensions());
+        createdVolunteer.setLastname(volunteer.getLastname());
+        createdVolunteer.setEmail(volunteer.getEmail());
+        createdVolunteer.setLatitude(volunteer.getLatitude());
+        createdVolunteer.setLongitude(volunteer.getLongitude());
 
-        if(createdVolunteer.getName() != null && createdVolunteer.getAge() !=null && createdVolunteer.getSex()!=null){
+
+        if(createdVolunteer.getName() != null && createdVolunteer.getSex()!=null){
             return new ResponseEntity<>(volunteerRepository.save(createdVolunteer), HttpStatus.CREATED);
         }
 
@@ -75,11 +78,10 @@ public class VolunteerController implements VolunteerDAO{
             return new ResponseEntity<>("El voluntario a editar no se ha podido encontrar. ", HttpStatus.BAD_REQUEST);
         }
         volunteerUpdate.setName(volunteer.getName());
-        volunteerUpdate.setAge(volunteer.getAge());
         volunteerUpdate.setSex(volunteer.getSex());
         volunteerUpdate.setVolunteerDimensions(volunteer.getVolunteerDimensions());
 
-        if(volunteerUpdate.getName() !=null && volunteerUpdate.getAge()!=null && volunteerUpdate.getSex()!=null){
+        if(volunteerUpdate.getName() !=null && volunteerUpdate.getSex()!=null){
             return new ResponseEntity<>(volunteerRepository.save(volunteerUpdate), HttpStatus.CREATED);
         }
 
