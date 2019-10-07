@@ -93,7 +93,7 @@ export default {
         }
         console.log(this.appuser);
         let response = await this.$http.post(
-          "/appusers/register",
+          "/users/sign-up",
           this.appuser
         );
         localStorage.setItem("user", response.data.user);

@@ -85,8 +85,8 @@ var router = new Router({
       name:'import',
       component: Import,
       meta: {
-        requiresAuth: true,
-        is_admin: true
+        requiresAuth: false,
+        is_admin: false
       }
     }
   ]
