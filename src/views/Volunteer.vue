@@ -106,9 +106,12 @@
     <div class="block">
       <span class="demonstration"></span>
       <el-pagination
+        @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
         :current-page.sync="currentPage"
-        layout="prev, pager, next"
+        :page-sizes="[10, 20, 30, 40]"
+        :page-size.sync="pageSize"
+        layout="sizes, prev, pager, next"
         :total="700"
       ></el-pagination>
     </div>
@@ -131,8 +134,14 @@ export default {
     };
   },
   methods: {
+    handleSizeChange(val) {
+          axios.get(`http://localhost:4567/volunteers/pages?page=` + this.currentPage + '&size=' + this.pageSize).then(response => {
+      this.volunteers = response.data;
+    });
+      console.log(`${val} items per page`);
+    },
     handleCurrentChange(val) {
-    axios.get(`http://localhost:4567/volunteers/pages?page=` + this.currentPage + '?size=' + this.pageSize).then(response => {
+    axios.get(`http://localhost:4567/volunteers/pages?page=` + this.currentPage + '&size=' + this.pageSize).then(response => {
       this.volunteers = response.data;
     });
       console.log(`current page: ${val}`);
