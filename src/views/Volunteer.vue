@@ -30,7 +30,6 @@
           </el-col>
           <el-col :span="4">
             <div class="grid-content bottom">
-
               <el-popover trigger="click" ref="popover" placement="top" width="160">
                 <el-button type="primary" icon="el-icon-edit" circle slot="reference"></el-button>
                 <form>
@@ -67,7 +66,11 @@
                   ></el-button>
                 </div>
               </el-popover>
-              <el-button style="margin-left: 5px;"type="danger" icon="el-icon-delete" circle
+              <el-button
+                style="margin-left: 5px;"
+                type="danger"
+                icon="el-icon-delete"
+                circle
                 v-on:click="deleteVolunteer(volunteer.id)"
               ></el-button>
             </div>
@@ -75,11 +78,19 @@
         </el-row>
       </el-collapse-item>
     </el-collapse>
-        <el-pagination
-    style="margin-top:5px;"
-  layout="prev, pager, next"
-  :total="1">
-</el-pagination>
+    <div class="block">
+      <span class="demonstration"></span>
+    <el-pagination
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+      :current-page.sync="currentPage"
+      :page-sizes="[10, 20, 30, 40]"
+      :page-size="70"
+      layout="sizes, prev, pager, next"
+      :total="700">
+    </el-pagination>
+
+    </div>
   </div>
 </template>
 
@@ -93,10 +104,17 @@ export default {
       volunteerID: "",
       axios: {
         credentials: false
-      }
+      },
+      currentPage: 0
     };
   },
   methods: {
+      handleSizeChange(val) {
+        console.log(`${val} items per page`);
+      },
+      handleCurrentChange(val) {
+        console.log(`current page: ${val}`);
+      },
     deleteVolunteer(volunteerID) {
       axios({
         method: "delete",
@@ -125,12 +143,7 @@ export default {
           });
         });
     },
-    updateVolunteer(
-      volunteerID,
-      volunteerName,
-      volunteerAge,
-      volunteerSex
-    ) {
+    updateVolunteer(volunteerID, volunteerName, volunteerAge, volunteerSex) {
       axios({
         method: "put",
         url: "http://localhost:4567/volunteers/" + volunteerID,
@@ -145,7 +158,7 @@ export default {
         .then(() => {
           // when put is finished, the fire get
           return axios
-            .get(`http://localhost:4567/volunteers`)
+            .get(`http://localhost:4567/volunteers/`)
             .then(response => {
               this.volunteers = response.data;
               this.$notify({
@@ -165,7 +178,7 @@ export default {
     }
   },
   created: function() {
-    axios.get(`http://localhost:4567/volunteers`).then(response => {
+    axios.get(`http://localhost:4567/volunteers/pages`).then(response => {
       this.volunteers = response.data;
     });
   }
