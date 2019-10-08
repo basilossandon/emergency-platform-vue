@@ -1,6 +1,8 @@
 package tbd.emergenciapp.controller;
 
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.multipart.MultipartFile;
 import tbd.emergenciapp.dao.VolunteerDAO;
 import tbd.emergenciapp.dto.VolunteerDTO;
@@ -12,7 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.data.domain.Pageable;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
@@ -50,6 +52,13 @@ public class VolunteerController implements VolunteerDAO{
         return volunteerRepository.findVolunteerById(id);
     }
 
+    @ResponseBody
+    @RequestMapping("/pages")
+    public List<Volunteer> getAllVolunteersPageable(@PageableDefault(value=10, page=1)   Pageable pageable) {
+        Page<Volunteer> page = volunteerRepository.findAll(pageable);
+        return page.getContent();
+    }
+
     @PostMapping(value = "")
     public @ResponseBody
     ResponseEntity createVolunteer(@RequestBody VolunteerDTO volunteer){
@@ -62,7 +71,7 @@ public class VolunteerController implements VolunteerDAO{
         createdVolunteer.setLongitude(volunteer.getLongitude());
 
 
-        if(createdVolunteer.getName() != null && createdVolunteer.getSex()!=null){
+        if(createdVolunteer.getName() != null && createdVolunteer.getEmail()!=null){
             return new ResponseEntity<>(volunteerRepository.save(createdVolunteer), HttpStatus.CREATED);
         }
 

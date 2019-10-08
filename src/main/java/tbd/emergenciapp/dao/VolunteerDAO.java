@@ -1,11 +1,14 @@
 package tbd.emergenciapp.dao;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import tbd.emergenciapp.dto.VolunteerDTO;
 import tbd.emergenciapp.model.Volunteer;
 
+import java.awt.print.Pageable;
 import java.util.List;
 
 public interface VolunteerDAO {
+
     List<Volunteer> getAllVolunteers();
     Volunteer getVolunteerById(Integer id);
     ResponseEntity createVolunteer(VolunteerDTO volunteer);
