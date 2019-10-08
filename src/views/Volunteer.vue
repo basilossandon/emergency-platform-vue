@@ -23,9 +23,34 @@
           </el-col>
           <el-col :span="8">
             <div class="grid-content-text">
-              Age:{{volunteer.age}}
-              <br />
-              Sex: {{volunteer.sex}}
+              <table style="width: 207.017px;">
+                <tbody>
+                  <tr style="height: 23px;">
+                    <td
+                      style="height: 23px; width: 92px;"
+                    >&nbsp; Name:</td>
+                    <td style="height: 23px; width: 113.017px;">{{volunteer.name}}</td>
+                  </tr>
+                  <tr style="height: 23px;">
+                    <td style="height: 23px; width: 92px;">&nbsp;RUT:</td>
+                    <td style="height: 23px; width: 113.017px;">{{volunteer.rut}}</td>
+                  </tr>
+                  <tr style="height: 23px;">
+                    <td style="height: 23px; width: 92px;">&nbsp;Sex:</td>
+                    <td style="height: 23px; width: 113.017px;">{{volunteer.sex}}</td>
+                  </tr>
+                  <tr style="height: 23px;">
+                    <td style="height: 23px; width: 92px;">&nbsp;Email:</td>
+                    <td style="height: 23px; width: 113.017px;">{{volunteer.email}}</td>
+                  </tr>
+                  <tr style="height: 23px;">
+                    <td style="height: 23px; width: 92px;">&nbsp;Position:</td>
+                    <td
+                      style="height: 23px; width: 113.017px;"
+                    >{{volunteer.latitude}},{{volunteer.longitude}}</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </el-col>
           <el-col :span="4">
@@ -80,16 +105,12 @@
     </el-collapse>
     <div class="block">
       <span class="demonstration"></span>
-    <el-pagination
-      @size-change="handleSizeChange"
-      @current-change="handleCurrentChange"
-      :current-page.sync="currentPage"
-      :page-sizes="[10, 20, 30, 40]"
-      :page-size="70"
-      layout="sizes, prev, pager, next"
-      :total="700">
-    </el-pagination>
-
+      <el-pagination
+        @current-change="handleCurrentChange"
+        :current-page.sync="currentPage"
+        layout="prev, pager, next"
+        :total="700"
+      ></el-pagination>
     </div>
   </div>
 </template>
@@ -105,16 +126,17 @@ export default {
       axios: {
         credentials: false
       },
-      currentPage: 0
+      currentPage: 0,
+      pageSize: 10
     };
   },
   methods: {
-      handleSizeChange(val) {
-        console.log(`${val} items per page`);
-      },
-      handleCurrentChange(val) {
-        console.log(`current page: ${val}`);
-      },
+    handleCurrentChange(val) {
+    axios.get(`http://localhost:4567/volunteers/pages?page=` + this.currentPage + '?size=' + this.pageSize).then(response => {
+      this.volunteers = response.data;
+    });
+      console.log(`current page: ${val}`);
+    },
     deleteVolunteer(volunteerID) {
       axios({
         method: "delete",
