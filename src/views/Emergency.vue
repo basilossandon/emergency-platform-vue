@@ -3,6 +3,19 @@
     <h1>
       <b>All emergencies</b>
     </h1>
+
+      <l-map style="height: 350px; width: 100%" :zoom="zoom" :center="center">
+        <l-tile-layer :url="url"></l-tile-layer>
+
+        <l-marker v-for="emergency in emergencies" :key="emergency.id" :lat-lng="[emergency.latitude, emergency.longitude]">
+  </l-marker>
+
+
+      </l-map>
+
+
+
+
     <el-collapse
       v-for="emergency in emergencies"
       :key="emergency.id"
@@ -88,15 +101,25 @@
 </template>
 
 <script>
+import { LMap, LTileLayer, LMarker } from "vue2-leaflet";
 import axios from "axios";
 export default {
+  components: { LMap, LTileLayer, LMarker },
+
   data() {
     return {
       value: "Active",
       visible: false,
       activeName: "1",
       emergencies: [],
-      emergencyID: ""
+      emergencyID: "",
+      url: "http://{s}.tile.osm.org/{z}/{x}/{y}.png",
+
+      zoom: 8,
+      center: [-33.4489, -70.6693],
+      marker: {
+        position: { lat: -33.4489, lng: -70.6693 }
+      }
     };
   },
   methods: {
@@ -242,5 +265,9 @@ export default {
 }
 .grid-content-crud {
   width: 15%;
+}
+.map {
+  height: 600px;
+  width: 100%;
 }
 </style>
