@@ -3,17 +3,14 @@
     <h1>
       <b>All volunteers</b>
     </h1>
-
-
-      <l-map style="height: 350px; width: 100%" :zoom="zoom" :center="center">
-        <l-tile-layer :url="url"></l-tile-layer>
-
-        <l-marker v-for="volunteer in volunteers" :key="volunteer.id" :lat-lng="[volunteer.latitude, volunteer.longitude]">
-  </l-marker>
-
-
-      </l-map>
-
+    <l-map style="height: 350px; width: 100%" :zoom="zoom" :center="center">
+      <l-tile-layer :url="url"></l-tile-layer>
+      <l-marker
+        v-for="volunteer in volunteers"
+        :key="volunteer.id"
+        :lat-lng="[volunteer.latitude, volunteer.longitude]"
+      ></l-marker>
+    </l-map>
     <el-collapse
       v-for="volunteer in volunteers"
       :key="volunteer.id"
@@ -37,9 +34,7 @@
               <table style="width: 207.017px;">
                 <tbody>
                   <tr style="height: 23px;">
-                    <td
-                      style="height: 23px; width: 92px;"
-                    >&nbsp; Name:</td>
+                    <td style="height: 23px; width: 92px;">&nbsp; Name:</td>
                     <td style="height: 23px; width: 113.017px;">{{volunteer.name}}</td>
                   </tr>
                   <tr style="height: 23px;">
@@ -134,7 +129,7 @@ import axios from "axios";
 import { LMap, LTileLayer, LMarker } from "vue2-leaflet";
 
 export default {
-    components: { LMap, LTileLayer, LMarker },
+  components: { LMap, LTileLayer, LMarker },
 
   data() {
     return {
@@ -146,7 +141,7 @@ export default {
       },
       currentPage: 0,
       pageSize: 10,
-            url: "http://{s}.tile.osm.org/{z}/{x}/{y}.png",
+      url: "http://{s}.tile.osm.org/{z}/{x}/{y}.png",
 
       zoom: 3,
       center: [-33.4489, -70.6693],
@@ -157,15 +152,29 @@ export default {
   },
   methods: {
     handleSizeChange(val) {
-          axios.get(`http://localhost:4567/volunteers/pages?page=` + this.currentPage + '&size=' + this.pageSize).then(response => {
-      this.volunteers = response.data;
-    });
+      axios
+        .get(
+          `http://localhost:4567/volunteers/pages?page=` +
+            this.currentPage +
+            "&size=" +
+            this.pageSize
+        )
+        .then(response => {
+          this.volunteers = response.data;
+        });
       console.log(`${val} items per page`);
     },
     handleCurrentChange(val) {
-    axios.get(`http://localhost:4567/volunteers/pages?page=` + this.currentPage + '&size=' + this.pageSize).then(response => {
-      this.volunteers = response.data;
-    });
+      axios
+        .get(
+          `http://localhost:4567/volunteers/pages?page=` +
+            this.currentPage +
+            "&size=" +
+            this.pageSize
+        )
+        .then(response => {
+          this.volunteers = response.data;
+        });
       console.log(`current page: ${val}`);
     },
     deleteVolunteer(volunteerID) {

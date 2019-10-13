@@ -3,19 +3,15 @@
     <h1>
       <b>All emergencies</b>
     </h1>
-
-      <l-map style="height: 350px; width: 100%" :zoom="zoom" :center="center">
-        <l-tile-layer :url="url"></l-tile-layer>
-
-        <l-marker v-for="emergency in emergencies" :key="emergency.id" :lat-lng="[emergency.latitude, emergency.longitude]">
-  </l-marker>
-
-
-      </l-map>
-
-
-
-
+    <l-map style="height: 350px; width: 100%" :zoom="zoom" :center="center">
+      <l-tile-layer :url="url"></l-tile-layer>
+      <l-marker
+        :icon="icon"
+        v-for="emergency in emergencies"
+        :key="emergency.id"
+        :lat-lng="[emergency.latitude, emergency.longitude]"
+      ></l-marker>
+    </l-map>
     <el-collapse
       v-for="emergency in emergencies"
       :key="emergency.id"
@@ -116,9 +112,11 @@ export default {
 
       zoom: 6,
       center: [-33.4489, -70.6693],
-      marker: {
-        position: { lat: -33.4489, lng: -70.6693 }
-      }
+      icon: L.icon({
+        iconUrl: "https://i.imgur.com/fmK9aII.png",
+        iconSize: [32, 37],
+        iconAnchor: [16, 37]
+      })
     };
   },
   methods: {
