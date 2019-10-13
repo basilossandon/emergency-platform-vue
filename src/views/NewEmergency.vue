@@ -1,3 +1,4 @@
+
 <template>
   <div class="new-emergency">
     <h1>New emergency</h1>
@@ -26,10 +27,28 @@
           placeholder="e.g A tsunami has striked Thailand alongside a typhoon leaving many people stranded and homeless."
           v-model="emergency.description"
         ></el-input>
-        <label for="status">Status</label>
-        <el-radio v-model="emergency.status" label="Active">Active</el-radio>
-        <el-radio v-model="emergency.status" label="Inactive">Inactive</el-radio>
-        <el-radio v-model="emergency.status" label="Complete">Complete</el-radio>
+
+        <div class="map-container">
+          <l-map style="height: 350px; width: 100%" :zoom="zoom" :center="center">
+            <l-tile-layer :url="url"></l-tile-layer>
+            <l-marker :lat-lng.sync="marker.position" :draggable="true" @move="setPos"></l-marker>
+          </l-map>
+        </div>
+
+        <el-input
+          style="margin-top: 5px"
+          id="Latitude"
+          placeholder="Latitude"
+          name="marker.lat"
+          v-model="marker.position.lat"
+        />
+        <el-input
+          style="margin-top: 5px"
+          id="Longitude"
+          placeholder="Longitude"
+          name="marker.lat"
+          v-model="marker.position.lng"
+        />
       </div>
       <div class="button-emergency-wrapper">
         <el-button type="primary" round icon="el-icon-upload" @click="save">Save</el-button>
@@ -37,18 +56,37 @@
     </form>
   </div>
 </template>
+
 <script>
+import { LMap, LTileLayer, LMarker } from "vue2-leaflet";
+
 export default {
+  components: { LMap, LTileLayer, LMarker },
+
   data: function() {
     return {
       value: "Active",
       radio: "",
-      emergency: {},
+      emergency: {
+      },
       message: "",
-      textarea: ""
+      textarea: "",
+      url: "http://{s}.tile.osm.org/{z}/{x}/{y}.png",
+      zoom: 8,
+      center: [-33.4489, -70.6693],
+      marker: {
+        position: { lat: -33.4489, lng: -70.6693 }
+      }
     };
   },
+
   methods: {
+    setPos: function(){
+      this.emergency.latitude = this.marker.position.lat;
+      this.emergency.longitude = this.marker.position.lng;
+      this.emergency.status = "Active";
+    },
+
     save: async function() {
       this.message = "";
       if (this.emergency.name == "") {
@@ -79,6 +117,7 @@ export default {
         return false;
       }
       try {
+        console.log(this.emergency);
         let response = await this.$http.post("/emergencies", this.emergency);
         this.message = "Emergency saved successfully";
         console.log(response);
@@ -91,7 +130,7 @@ export default {
         this.message = "An error has occurred";
         this.$notify({
           title: "Warning",
-          message: "Please include name, location and status.",
+          message: "Please include all fields and update the location.",
           type: "warning"
         });
       }
@@ -119,5 +158,10 @@ export default {
 .element-borders {
   margin-top: 3px;
   margin-bottom: 3px;
+}
+
+.map {
+  height: 600px;
+  width: 100%;
 }
 </style>

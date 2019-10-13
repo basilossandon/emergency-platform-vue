@@ -57,10 +57,6 @@ var router = new Router({
       path: '/new-emergency',
       name: 'new-emergency',
       component: NewEmergency,
-      meta: {
-        requiresAuth: true,
-        is_admin: true
-      }
     },
     {
       path: '/new-volunteer',

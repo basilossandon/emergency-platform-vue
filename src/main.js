@@ -5,12 +5,18 @@ import router from './router';
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import locale from 'element-ui/lib/locale/lang/es';
-import { VueCsvImportPlugin } from "vue-csv-import";
+import { Icon }  from 'leaflet';
+import 'leaflet/dist/leaflet.css';
+delete Icon.Default.prototype._getIconUrl;
+
+Icon.Default.mergeOptions({
+  iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
+  iconUrl: require('leaflet/dist/images/marker-icon.png'),
+  shadowUrl: require('leaflet/dist/images/marker-shadow.png')
+});
 
 Vue.config.productionTip = false
 Vue.use(ElementUI, { locale });
-Vue.use(VueCsvImportPlugin);
-
 require("./assets/style/style.scss");
 const axiosInstance = axios.create({ //configurar para backend
   baseURL: 'http://localhost:4567'
