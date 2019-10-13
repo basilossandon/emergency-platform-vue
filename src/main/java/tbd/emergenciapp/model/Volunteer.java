@@ -21,9 +21,9 @@ public class Volunteer implements Serializable {
     @Column(name = "lastname")
     private String lastname;
     @Column(name = "latitude")
-    private String latitude;
+    private Float latitude;
     @Column(name = "longitude")
-    private String longitude;
+    private Float longitude;
     @Column(name = "rut")
     private String rut;
 
@@ -33,7 +33,7 @@ public class Volunteer implements Serializable {
     private Set<VolunteerDimension> volunteerDimensions;
 
 
-    public Volunteer(Integer id, String name, String sex, String email, String lastname, String latitude, String longitude,String rut) {
+    public Volunteer(Integer id, String name, String sex, String email, String lastname, Float latitude, Float longitude,String rut) {
         this.id = id;
         this.name = name;
         this.sex = sex;
@@ -64,19 +64,19 @@ public class Volunteer implements Serializable {
         this.lastname = lastname;
     }
 
-    public String getLatitude() {
+    public Float getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(String latitude) {
+    public void setLatitude(Float latitude) {
         this.latitude = latitude;
     }
 
-    public String getLongitude() {
+    public Float getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(String longitude) {
+    public void setLongitude(Float longitude) {
         this.longitude = longitude;
     }
 

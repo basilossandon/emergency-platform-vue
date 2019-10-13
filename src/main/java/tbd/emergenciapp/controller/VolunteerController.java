@@ -69,6 +69,7 @@ public class VolunteerController implements VolunteerDAO{
         createdVolunteer.setEmail(volunteer.getEmail());
         createdVolunteer.setLatitude(volunteer.getLatitude());
         createdVolunteer.setLongitude(volunteer.getLongitude());
+        createdVolunteer.setRut(volunteer.getRut());
 
 
         if(createdVolunteer.getName() != null && createdVolunteer.getEmail()!=null){

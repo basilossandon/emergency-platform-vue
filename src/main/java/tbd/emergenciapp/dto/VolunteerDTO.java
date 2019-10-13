@@ -11,8 +11,8 @@ public class VolunteerDTO {
     private String sex;
     private Set<VolunteerDimension> volunteerDimensions;
     private String lastname;
-    private String latitude;
-    private String longitude;
+    private Float latitude;
+    private Float longitude;
     private String email;
     private String rut;
 
@@ -60,12 +60,12 @@ public class VolunteerDTO {
         return this.lastname;
     }
 
-    public String getLatitude() {
+    public Float getLatitude() {
         return this.latitude;
 
     }
 
-    public String getLongitude() {
+    public Float getLongitude() {
         return this.longitude;
     }
 
@@ -85,11 +85,11 @@ public class VolunteerDTO {
         this.lastname = lastname;
     }
 
-    public void setLatitude(String latitude) {
+    public void setLatitude(Float latitude) {
         this.latitude = latitude;
     }
 
-    public void setLongitude(String longitude) {
+    public void setLongitude(Float longitude) {
         this.longitude = longitude;
     }
 
