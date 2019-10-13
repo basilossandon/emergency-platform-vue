@@ -19,7 +19,10 @@ public class Emergency implements Serializable{
     private String location;
     @Column(name = "status", nullable = false)
     private String status;
-
+    @Column(name = "longitude", nullable = false)
+    private Float longitude;
+    @Column(name = "latitude", nullable = false)
+    private Float latitude;
     @JsonBackReference
     @OneToMany(mappedBy = "emergency", cascade = CascadeType.ALL)
     private Set<Task> tasks;
@@ -27,15 +30,27 @@ public class Emergency implements Serializable{
     public Emergency(Integer id,
                      String name,
                      String location,
-                     String status)
+                     String status,
+                     Float latitude,
+                     Float longitude)
     {
         this.id = id;
         this.name = name;
         this.location = location;
         this.status = status;
+        this.longitude = longitude;
+        this.latitude = latitude;
     }
 
     public Emergency(){}
+
+    public Float getLongitude() {        return longitude;    }
+
+    public void setLongitude(Float longitude) {        this.longitude = longitude;    }
+
+    public Float getLatitude() {        return latitude;    }
+
+    public void setLatitude(Float latitude) {      this.latitude = latitude;    }
 
     public Integer getId() {
         return id;
@@ -76,4 +91,5 @@ public class Emergency implements Serializable{
     public void setTasks(Set<Task> tasks) {
         this.tasks = tasks;
     }
+
 }
