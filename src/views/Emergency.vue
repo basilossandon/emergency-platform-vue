@@ -105,7 +105,6 @@ import { LMap, LTileLayer, LMarker } from "vue2-leaflet";
 import axios from "axios";
 export default {
   components: { LMap, LTileLayer, LMarker },
-
   data() {
     return {
       value: "Active",
@@ -115,7 +114,7 @@ export default {
       emergencyID: "",
       url: "http://{s}.tile.osm.org/{z}/{x}/{y}.png",
 
-      zoom: 8,
+      zoom: 6,
       center: [-33.4489, -70.6693],
       marker: {
         position: { lat: -33.4489, lng: -70.6693 }
