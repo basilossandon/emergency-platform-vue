@@ -3,6 +3,17 @@
     <h1>
       <b>All volunteers</b>
     </h1>
+
+
+      <l-map style="height: 350px; width: 100%" :zoom="zoom" :center="center">
+        <l-tile-layer :url="url"></l-tile-layer>
+
+        <l-marker v-for="volunteer in volunteers" :key="volunteer.id" :lat-lng="[volunteer.latitude, volunteer.longitude]">
+  </l-marker>
+
+
+      </l-map>
+
     <el-collapse
       v-for="volunteer in volunteers"
       :key="volunteer.id"
@@ -109,7 +120,7 @@
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
         :current-page.sync="currentPage"
-        :page-sizes="[10, 20, 30, 40]"
+        :page-sizes="[10, 20, 30, 100,200,400,700]"
         :page-size.sync="pageSize"
         layout="sizes, prev, pager, next"
         :total="700"
@@ -120,7 +131,11 @@
 
 <script>
 import axios from "axios";
+import { LMap, LTileLayer, LMarker } from "vue2-leaflet";
+
 export default {
+    components: { LMap, LTileLayer, LMarker },
+
   data() {
     return {
       activeName: "1",
@@ -130,7 +145,14 @@ export default {
         credentials: false
       },
       currentPage: 0,
-      pageSize: 10
+      pageSize: 10,
+            url: "http://{s}.tile.osm.org/{z}/{x}/{y}.png",
+
+      zoom: 3,
+      center: [-33.4489, -70.6693],
+      marker: {
+        position: { lat: -33.4489, lng: -70.6693 }
+      }
     };
   },
   methods: {
