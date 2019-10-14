@@ -124,9 +124,9 @@
           </el-col>
           <el-col :span="8">
             <div class="grid-content-text">
-              Location:{{emergency.location}}
+              Location: {{emergency.location}}
               <br />
-              Status: {{emergency.status}}
+              Status:   {{emergency.status}}
             </div>
           </el-col>
           <el-col :span="4">
