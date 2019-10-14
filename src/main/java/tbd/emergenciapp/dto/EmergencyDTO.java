@@ -4,6 +4,7 @@ public class EmergencyDTO {
     private String name;
     private String location;
     private String status;
+    private String description;
     private Float latitude;
     private Float longitude;
 
@@ -40,5 +41,13 @@ public class EmergencyDTO {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

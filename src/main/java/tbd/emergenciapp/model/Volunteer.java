@@ -23,8 +23,6 @@ public class Volunteer implements Serializable {
     private String email;
     @Column(name = "sex")
     private String sex;
-    @Column(name = "longitude")
-    private String longitude;
     @Column(name = "latitude")
     private Float latitude;
     @Column(name = "longitude")
@@ -46,11 +44,11 @@ public class Volunteer implements Serializable {
     private Point location;
 
 
-    @OneToMany(mappedBy = "volunteer")
-    private Set<VolunteerDimension> volunteerDimensions;
+//    @OneToMany(mappedBy = "volunteer")
+//    private Set<VolunteerDimension> volunteerDimensions;
 
 
-    public Volunteer(Integer id, String name, String sex, String email, String lastname, String latitude, String longitude,String rut) {
+    public Volunteer(Integer id, String name, String sex, String email, String lastname, Float latitude, Float longitude, String rut) {
         this.id = id;
         this.name = name;
         this.lastname = lastname;
@@ -58,7 +56,6 @@ public class Volunteer implements Serializable {
         this.email = email;
         this.longitude = longitude;
         this.latitude = latitude;
-        this.longitude = longitude;
         this.lastname = lastname;
         this.rut = rut;
 
@@ -93,28 +90,36 @@ public class Volunteer implements Serializable {
         this.lastname = lastname;
     }
 
-    public String getLatitude() {
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public Float getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(String latitude) {
+    public void setLatitude(Float latitude) {
         this.latitude = latitude;
     }
 
-    public String getLongitude() {
+    public Float getLongitude() {
         return longitude;
     }
 
     public void setLongitude(Float longitude) {
         this.longitude = longitude;
-    }
-
-    public String getLatitude() {
-        return latitude;
-    }
-
-    public void setLatitude(String latitude) {
-        this.latitude = latitude;
     }
 
     public String getRut() {
@@ -123,6 +128,46 @@ public class Volunteer implements Serializable {
 
     public void setRut(String rut) {
         this.rut = rut;
+    }
+
+    public Integer getStrength() {
+        return strength;
+    }
+
+    public void setStrength(Integer strength) {
+        this.strength = strength;
+    }
+
+    public Integer getDextery() {
+        return dextery;
+    }
+
+    public void setDextery(Integer dextery) {
+        this.dextery = dextery;
+    }
+
+    public Integer getKnowledge() {
+        return knowledge;
+    }
+
+    public void setKnowledge(Integer knowledge) {
+        this.knowledge = knowledge;
+    }
+
+    public Integer getMotivation() {
+        return motivation;
+    }
+
+    public void setMotivation(Integer motivation) {
+        this.motivation = motivation;
+    }
+
+    public Integer getLeadership() {
+        return leadership;
+    }
+
+    public void setLeadership(Integer leadership) {
+        this.leadership = leadership;
     }
 
     public Point getLocation() {
@@ -131,19 +176,6 @@ public class Volunteer implements Serializable {
 
     public void setLocation(Point location) {
         this.location = location;
-    }
-
-
-    public void setVolunteerDimensions(Set<VolunteerDimension> volunteerDimensions) {
-        this.volunteerDimensions = volunteerDimensions;
-    }
-
-    public String getRut() {
-        return rut;
-    }
-
-    public void setRut(String rut) {
-        this.rut = rut;
     }
 }
 

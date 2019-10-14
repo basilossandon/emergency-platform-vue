@@ -45,6 +45,7 @@ public class EmergencyController implements EmergencyDAO {
         createdEmergency.setStatus(emergency.getStatus());
         createdEmergency.setLatitude(emergency.getLatitude());
         createdEmergency.setLongitude(emergency.getLongitude());
+        createdEmergency.setDescription(emergency.getDescription());
 
         if (createdEmergency.getName() != null &&
             createdEmergency.getLocation() != null &&

@@ -15,6 +15,8 @@ public class Emergency implements Serializable{
     private Integer id;
     @Column(name = "name", nullable = false)
     private String name;
+    @Column(name = "description", nullable = false)
+    private String description;
     @Column(name = "location", nullable = false)
     private String location;
     @Column(name = "status", nullable = false)
@@ -82,6 +84,14 @@ public class Emergency implements Serializable{
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Set<Task> getTasks() {

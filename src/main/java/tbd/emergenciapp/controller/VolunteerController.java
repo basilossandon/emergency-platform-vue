@@ -25,7 +25,6 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 public class VolunteerController implements VolunteerDAO{
 
-
     @PostMapping(value = "/upload", consumes = "text/csv")
     public void uploadSimple(@RequestBody InputStream body) throws IOException {
         volunteerRepository.saveAll(CsvUtils.read(Volunteer.class, body));
@@ -34,8 +33,6 @@ public class VolunteerController implements VolunteerDAO{
     public void uploadMultipart(@RequestParam("file") MultipartFile file) throws IOException {
         volunteerRepository.saveAll(CsvUtils.read(Volunteer.class, file.getInputStream()));
     }
-
-
 
     @Autowired
     private VolunteerRepository volunteerRepository;
