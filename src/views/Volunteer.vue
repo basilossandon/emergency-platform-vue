@@ -3,6 +3,14 @@
     <h1>
       <b>All volunteers</b>
     </h1>
+    <l-map style="height: 350px; width: 100%" :zoom="zoom" :center="center">
+      <l-tile-layer :url="url"></l-tile-layer>
+      <l-marker
+        v-for="volunteer in volunteers"
+        :key="volunteer.id"
+        :lat-lng="[volunteer.latitude, volunteer.longitude]"
+      ></l-marker>
+    </l-map>
     <el-collapse
       v-for="volunteer in volunteers"
       :key="volunteer.id"
@@ -23,14 +31,36 @@
           </el-col>
           <el-col :span="8">
             <div class="grid-content-text">
-              Age:{{volunteer.age}}
-              <br />
-              Sex: {{volunteer.sex}}
+              <table style="width: 207.017px;">
+                <tbody>
+                  <tr style="height: 23px;">
+                    <td style="height: 23px; width: 92px;">&nbsp; Name:</td>
+                    <td style="height: 23px; width: 113.017px;">{{volunteer.name}}</td>
+                  </tr>
+                  <tr style="height: 23px;">
+                    <td style="height: 23px; width: 92px;">&nbsp;RUT:</td>
+                    <td style="height: 23px; width: 113.017px;">{{volunteer.rut}}</td>
+                  </tr>
+                  <tr style="height: 23px;">
+                    <td style="height: 23px; width: 92px;">&nbsp;Sex:</td>
+                    <td style="height: 23px; width: 113.017px;">{{volunteer.sex}}</td>
+                  </tr>
+                  <tr style="height: 23px;">
+                    <td style="height: 23px; width: 92px;">&nbsp;Email:</td>
+                    <td style="height: 23px; width: 113.017px;">{{volunteer.email}}</td>
+                  </tr>
+                  <tr style="height: 23px;">
+                    <td style="height: 23px; width: 92px;">&nbsp;Position:</td>
+                    <td
+                      style="height: 23px; width: 113.017px;"
+                    >{{volunteer.latitude}},{{volunteer.longitude}}</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </el-col>
           <el-col :span="4">
             <div class="grid-content bottom">
-
               <el-popover trigger="click" ref="popover" placement="top" width="160">
                 <el-button type="primary" icon="el-icon-edit" circle slot="reference"></el-button>
                 <form>
@@ -67,7 +97,11 @@
                   ></el-button>
                 </div>
               </el-popover>
-              <el-button style="margin-left: 5px;"type="danger" icon="el-icon-delete" circle
+              <el-button
+                style="margin-left: 5px;"
+                type="danger"
+                icon="el-icon-delete"
+                circle
                 v-on:click="deleteVolunteer(volunteer.id)"
               ></el-button>
             </div>
@@ -75,17 +109,28 @@
         </el-row>
       </el-collapse-item>
     </el-collapse>
-        <el-pagination
-    style="margin-top:5px;"
-  layout="prev, pager, next"
-  :total="1">
-</el-pagination>
+    <div class="block">
+      <span class="demonstration"></span>
+      <el-pagination
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page.sync="currentPage"
+        :page-sizes="[10, 20, 30, 100,200,400,700]"
+        :page-size.sync="pageSize"
+        layout="sizes, prev, pager, next"
+        :total="700"
+      ></el-pagination>
+    </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import { LMap, LTileLayer, LMarker } from "vue2-leaflet";
+
 export default {
+  components: { LMap, LTileLayer, LMarker },
+
   data() {
     return {
       activeName: "1",
@@ -93,10 +138,45 @@ export default {
       volunteerID: "",
       axios: {
         credentials: false
+      },
+      currentPage: 0,
+      pageSize: 10,
+      url: "http://{s}.tile.osm.org/{z}/{x}/{y}.png",
+
+      zoom: 3,
+      center: [-33.4489, -70.6693],
+      marker: {
+        position: { lat: -33.4489, lng: -70.6693 }
       }
     };
   },
   methods: {
+    handleSizeChange(val) {
+      axios
+        .get(
+          `http://localhost:4567/volunteers/pages?page=` +
+            this.currentPage +
+            "&size=" +
+            this.pageSize
+        )
+        .then(response => {
+          this.volunteers = response.data;
+        });
+      console.log(`${val} items per page`);
+    },
+    handleCurrentChange(val) {
+      axios
+        .get(
+          `http://localhost:4567/volunteers/pages?page=` +
+            this.currentPage +
+            "&size=" +
+            this.pageSize
+        )
+        .then(response => {
+          this.volunteers = response.data;
+        });
+      console.log(`current page: ${val}`);
+    },
     deleteVolunteer(volunteerID) {
       axios({
         method: "delete",
@@ -125,12 +205,7 @@ export default {
           });
         });
     },
-    updateVolunteer(
-      volunteerID,
-      volunteerName,
-      volunteerAge,
-      volunteerSex
-    ) {
+    updateVolunteer(volunteerID, volunteerName, volunteerAge, volunteerSex) {
       axios({
         method: "put",
         url: "http://localhost:4567/volunteers/" + volunteerID,
@@ -145,7 +220,7 @@ export default {
         .then(() => {
           // when put is finished, the fire get
           return axios
-            .get(`http://localhost:4567/volunteers`)
+            .get(`http://localhost:4567/volunteers/`)
             .then(response => {
               this.volunteers = response.data;
               this.$notify({
@@ -165,7 +240,7 @@ export default {
     }
   },
   created: function() {
-    axios.get(`http://localhost:4567/volunteers`).then(response => {
+    axios.get(`http://localhost:4567/volunteers/pages`).then(response => {
       this.volunteers = response.data;
     });
   }

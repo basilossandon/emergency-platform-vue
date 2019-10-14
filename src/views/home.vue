@@ -9,12 +9,29 @@
       <br />
       <h1 class="home-name"></h1>
       <p>Be a volunteer and change the world.</p>
-      <div class="home-actions">
-        <a
-          :route="{ name: 'register' }"
+
+      <l-map style="height: 350px; width: 100%:" :zoom="zoom" :center="center">
+        <l-tile-layer :url="url"></l-tile-layer>
+        <l-marker
+          v-for="emergency in emergencies"
+          :key="emergency.id"
+          :lat-lng="[emergency.latitude, emergency.longitude]"
+           :icon="icon"
+        ></l-marker>
+
+        <l-marker
+          v-for="volunteer in volunteers"
+          :key="volunteer.id"
+          :lat-lng="[volunteer.latitude, volunteer.longitude]"
         >
+        </l-marker>
+
+      </l-map>
+
+      <div class="home-actions">
+        <a :route="{ name: 'register' }">
           <router-link to="/register">
-            <el-button type="primary" round>Begin</el-button>
+            <el-button style="margin-top:10px;" type="primary" round>Begin</el-button>
           </router-link>
         </a>
       </div>
@@ -24,15 +41,33 @@
 
 <script>
 import axios from "axios";
+import { LMap, LTileLayer, LMarker } from "vue2-leaflet";
 
 export default {
+  components: { LMap, LTileLayer, LMarker },
   data() {
     return {
-
+      url: "http://{s}.tile.osm.org/{z}/{x}/{y}.png",
+      zoom: 8,
+      center: [-33.4489, -70.6693],
+      emergencies: [],
+      volunteers: [],
+      icon: icon({
+        iconUrl: 'https://i.imgur.com/fmK9aII.png',
+        iconSize: [32, 37],
+        iconAnchor: [16, 37]
+      }),
     };
   },
-  methods: {},
-
+  mounted() {
+    axios.get(`http://localhost:4567/emergencies`).then(response => {
+      this.emergencies = response.data;
+    });
+     axios.get(`http://localhost:4567/volunteers`).then(response => {
+      this.volunteers = response.data;
+    });
+  
+  }
 };
 </script>
 
