@@ -40,6 +40,7 @@ public class VolunteerController implements VolunteerDAO{
     @Autowired
     private VolunteerRepository volunteerRepository;
 
+
     @GetMapping("")
     @ResponseBody
     public List<Volunteer> getAllVolunteers(){
@@ -103,6 +104,11 @@ public class VolunteerController implements VolunteerDAO{
 
         return  new ResponseEntity<>("Un valor no puede ser modificado por un valor nulo.", HttpStatus.BAD_REQUEST);
     }
+
+    //Prueba de postgis
+
+
+    //      //      //
 
     @DeleteMapping(value = "/{id}")
     public @ResponseBody

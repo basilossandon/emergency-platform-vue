@@ -6,6 +6,8 @@ import tbd.emergenciapp.model.Volunteer;
 
 
 
+import javax.persistence.PersistenceContext;
+
 @Repository
 public interface VolunteerRepository extends JpaRepository<Volunteer, Integer> {
     Volunteer findVolunteerById(Integer id);
