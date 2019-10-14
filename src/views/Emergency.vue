@@ -8,6 +8,11 @@
       <div class="row">
         <l-map style="height: 450px; margin-top:20px" :zoom="zoom" :center="center">
           <l-tile-layer :url="url"></l-tile-layer>
+          <l-circle-marker
+      :lat-lng="circle.center"
+      :radius="circle.radius"
+      :color="circle.color"
+    />
           <l-marker
             :icon="icon"
             v-for="emergency in emergencies"
@@ -15,7 +20,11 @@
             :lat-lng="[emergency.latitude, emergency.longitude]"
             @click="loadEmergency(emergency)"
           >
-            <l-popup>{{emergency.name}}<br>
+          
+
+            <l-popup>
+              {{emergency.name}}
+              <br />
             </l-popup>
           </l-marker>
         </l-map>
@@ -24,8 +33,8 @@
         <el-divider content-position="left">
           <h2>{{loadedEmergency.name}}</h2>
         </el-divider>
-        <el-row>
-          <el-col :span="4">
+        <el-row :span="4">
+          <el-col :span="8">
             <div class="grid-content-image">
               <img
                 class="grid-content"
@@ -34,166 +43,114 @@
               />
             </div>
           </el-col>
-          <el-col :span="4"></el-col>
-
-          
-          <div class="grid-content bottom">
-            <el-button
-              type="success"
-              icon="el-icon-check"
-              v-on:click="completethis.loadedEmergency(this.loadedEmergency.id, this.loadedEmergency.name, this.loadedEmergency.location)"
-              circle
-              style="margin-right:3px;"
-            ></el-button>
-            <el-popover trigger="click" ref="popover" placement="top" width="160">
-              <el-button type="primary" icon="el-icon-edit" circle slot="reference"></el-button>
-              <form>
-                <div class="form-item">
-                  <label class="element-borders" for="name">{{loadedEmergency.name}}</label>
-                  <el-input
-                    class="element-borders"
-                    id="name"
-                    placeholder="e.g. Thailand Tsunami"
-                    v-model="loadedEmergency.name"
-                  ></el-input>
-                  <label class="element-borders" for="location">Location</label>
-                  <el-input
-                    class="element-borders"
-                    id="location"
-                    placeholder="e.g Thailand"
-                    v-model="this.loadedEmergency.location"
-                  ></el-input>
-                  <label for="status">Status</label>
-                  <el-radio v-model="this.loadedEmergency.status" label="Active">Active</el-radio>
-                  <el-radio v-model="this.loadedEmergency.status" label="Inactive">Inactive</el-radio>
-                  <el-radio v-model="this.loadedEmergency.status" label="Complete">Complete</el-radio>
-                </div>
-                <div class="button-this.Emergency-wrapper"></div>
-              </form>
-              <div style="text-align: right; margin: 0">
-                <el-button
-                  type="primary"
-                  icon="el-icon-upload"
-                  circle
-                  v-on:click="updateEmergency(loadedEmergency.id, loadedEmergency.name, loadedEmergency.location, loadedEmergency.status)"
-                ></el-button>
-              </div>
-            </el-popover>
-            <el-button
-              type="danger"
-              icon="el-icon-delete"
-              circle
-              v-on:click="deleteEmergency(loadedEmergency.id)"
-              style="margin-left:3px;"
-            ></el-button>
-          </div>
-        </el-row>
-      </div>
-    </div>
-
-    <!--
-    <l-map style="height: 450px; width: 60%" :zoom="zoom" :center="center">
-      <l-tile-layer :url="url"></l-tile-layer>
-      <l-marker
-        :icon="icon"
-        v-for="emergency in emergencies"
-        :key="emergency.id"
-        :lat-lng="[emergency.latitude, emergency.longitude]"
-      >
-      <l-popup>{{emergency.name}}</l-popup>
-      </l-marker>
-   
-    </l-map>
-    <el-collapse
-      v-for="emergency in emergencies"
-      :key="emergency.id"
-      :value="emergency.id"
-      v-model="activeName"
-      accordion
-    >
-      <el-collapse-item v-bind:title="emergency.name">
-        <el-row>
-          <el-col :span="4">
-            <div class="grid-content-image">
-              <img
-                class="grid-content"
-                style="border-radius:5px;   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);"
-                :src="'https://loremflickr.com/160/120/earthquake?lock='+emergency.id"
-              />
-            </div>
-          </el-col>
           <el-col :span="8">
             <div class="grid-content-text">
-              Location: {{emergency.location}}
-              <br />
-              Status:   {{emergency.status}}
-            </div>
-          </el-col>
-          <el-col :span="4">
-            <div class="grid-content bottom">
-              <el-button
-                type="success"
-                icon="el-icon-check"
-                v-on:click="completeEmergency(emergency.id, emergency.name, emergency.location)"
-                circle
-                style="margin-right:3px;"
-              ></el-button>
-              <el-popover trigger="click" ref="popover" placement="top" width="160">
-                <el-button type="primary" icon="el-icon-edit" circle slot="reference"></el-button>
-                <form>
-                  <div class="form-item">
-                    <label class="element-borders" for="name">Emergency name</label>
-                    <el-input
-                      class="element-borders"
-                      id="name"
-                      placeholder="e.g. Thailand Tsunami"
-                      v-model="emergency.name"
-                    ></el-input>
-                    <label class="element-borders" for="location">Location</label>
-                    <el-input
-                      class="element-borders"
-                      id="location"
-                      placeholder="e.g Thailand"
-                      v-model="emergency.location"
-                    ></el-input>
-                    <label for="status">Status</label>
-                    <el-radio v-model="emergency.status" label="Active">Active</el-radio>
-                    <el-radio v-model="emergency.status" label="Inactive">Inactive</el-radio>
-                    <el-radio v-model="emergency.status" label="Complete">Complete</el-radio>
-                  </div>
-                  <div class="button-emergency-wrapper"></div>
-                </form>
-                <div style="text-align: right; margin: 0">
-                  <el-button
-                    type="primary"
-                    icon="el-icon-upload"
-                    circle
-                    v-on:click="updateEmergency(emergency.id, emergency.name, emergency.location, emergency.status)"
-                  ></el-button>
-                </div>
-              </el-popover>
-              <el-button
-                type="danger"
-                icon="el-icon-delete"
-                circle
-                v-on:click="deleteEmergency(emergency.id)"
-                style="margin-left:3px;"
-              ></el-button>
+              <el-row>
+                <el-col :span="16">Name:</el-col>
+                <el-col :span="2">{{loadedEmergency.name}}</el-col>
+              </el-row>
+              <el-row>
+                <el-col :span="16">Status:</el-col>
+                <el-col :span="2">{{loadedEmergency.status}}</el-col>
+              </el-row>
             </div>
           </el-col>
         </el-row>
-      </el-collapse-item>
-    </el-collapse>
-    <el-pagination style="margin-top:5px;" layout="prev, pager, next" :total="1"></el-pagination>
-    -->
+      </div>
+      <div class="grid-content bottom">
+        <el-popover trigger="click" ref="popover" placement="top" width="160">
+          <el-button type="primary" icon="el-icon-edit" circle slot="reference"></el-button>
+          <form>
+            <div class="form-item">
+              <label class="element-borders" for="name">{{loadedEmergency.name}}</label>
+              <el-input
+                class="element-borders"
+                id="name"
+                placeholder="e.g. Thailand Tsunami"
+                v-model="loadedEmergency.name"
+              ></el-input>
+              <label class="element-borders" for="location">Location</label>
+              <el-input
+                class="element-borders"
+                id="location"
+                placeholder="e.g Thailand"
+                v-model="this.loadedEmergency.location"
+              ></el-input>
+              <label for="status">Status</label>
+              <el-radio v-model="this.loadedEmergency.status" label="Active">Active</el-radio>
+              <el-radio v-model="this.loadedEmergency.status" label="Inactive">Inactive</el-radio>
+              <el-radio v-model="this.loadedEmergency.status" label="Complete">Complete</el-radio>
+            </div>
+            <div class="button-this.Emergency-wrapper"></div>
+          </form>
+          <div style="text-align: right; margin: 0">
+            <el-button
+              type="primary"
+              icon="el-icon-upload"
+              circle
+              v-on:click="updateEmergency(loadedEmergency.id, loadedEmergency.name, loadedEmergency.location, loadedEmergency.status)"
+            ></el-button>
+          </div>
+        </el-popover>
+        <el-button
+          type="danger"
+          icon="el-icon-delete"
+          circle
+          v-on:click="deleteEmergency(loadedEmergency.id)"
+          style="margin-left:3px;"
+        ></el-button>
+
+          <el-popover
+    placement="top"
+    title="Get volunteers"
+    width="350"
+    trigger="click"
+    content="this is content, this is content, this is content">
+<el-button
+          type="warning"
+          icon="el-icon-place"
+          circle
+          style="margin-left:3px;"
+          slot="reference"
+        ></el-button> <div class="block">
+    <span class="demonstration">Get volunteers in a determined radius:</span>
+    <el-slider v-model="circle.radius"></el-slider>
+
+    <el-divider content-position="left">Strength </el-divider>
+            <el-rate v-model="strength" style="margin:2px;" :max=10 show-score   text-color="#ff9900" score-template="{value} points"></el-rate>
+    <el-divider content-position="left">Dextery</el-divider>
+        <el-rate v-model="dextery" style="margin:2px;" :max=10 show-score   text-color="#ff9900" score-template="{value} points"></el-rate>
+    <el-divider content-position="left">Knowledge</el-divider>
+        <el-rate v-model="knowledge" style="margin:2px;" :max=10 show-score   text-color="#ff9900" score-template="{value} points"></el-rate>
+    <el-divider content-position="left">Motivation</el-divider>
+        <el-rate v-model="motivation" style="margin:2px;" :max=10 show-score   text-color="#ff9900" score-template="{value} points"></el-rate>
+    <el-divider content-position="left">Leadership</el-divider>
+        <el-rate  v-model="leadership" style="margin:2px;" :max=10 show-score   text-color="#ff9900" score-template="{value} points"></el-rate>
+
+<el-button
+          type="success"
+          icon="el-icon-place"
+          
+          v-on:click="getVolunteersAround(loadedEmergency.id)"
+          style="margin-left:3px; margin-top:15px; width:100%;"
+        >Obtain volunteers</el-button>
+
+
+
+  </div> </el-popover>
+
+
+        
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import { LMap, LTileLayer, LMarker, LPopup } from "vue2-leaflet";
+import { LMap, LTileLayer, LMarker, LPopup, LCircleMarker } from "vue2-leaflet";
 import axios from "axios";
 export default {
-  components: { LMap, LTileLayer, LMarker, LPopup },
+  components: { LMap, LTileLayer, LMarker, LPopup, LCircleMarker },
   data() {
     return {
       value: "Active",
@@ -201,8 +158,20 @@ export default {
       activeName: "1",
       emergencies: [],
       emergencyID: "",
-      loadedEmergency: { name: "Select an emergency", },
-      tempEmergency: { name: "Select an emergency"},
+      loadedEmergency: { name: "Select an emergency",
+      latitude: -33.4489,
+      longitude: -70.6693},
+      tempEmergency: { name: "Select an emergency" },
+      strength: null,
+      dextery: null,
+      knowledge: null,
+      motivation: null,
+      leadership: null,
+    circle: {
+        center: [-33.4489,  -70.6693],
+        radius: 0,
+        color: 'red'
+      },
       url:
         "https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png",
 
@@ -218,7 +187,9 @@ export default {
   methods: {
     loadEmergency(emergency) {
       this.loadedEmergency = emergency;
+      this.circle.center = [emergency.latitude, emergency.longitude];
     },
+    getVolunteersAround(emergencyID) {},
     deleteEmergency(emergencyID) {
       this.$confirm(
         "Are you sure you want to remove this emergency?",
@@ -248,7 +219,7 @@ export default {
                     type: "success"
                   });
                 });
-                this.loadedEmergency = tempEmergency;
+              this.loadedEmergency = tempEmergency;
             })
             .catch(error => {
               this.$notify.error({
@@ -344,7 +315,7 @@ export default {
 <style scoped>
 .container {
   display: grid;
-  position:relative;
+  position: relative;
   grid-template-columns: 45% 55%;
   grid-template-rows: 2fr;
   grid-column-gap: 20px;
@@ -377,7 +348,7 @@ export default {
   height: 600px;
   width: 100%;
 }
-.grid-content{
+.grid-content {
   position: bottom;
 }
 </style>
