@@ -70,6 +70,11 @@ public class VolunteerController implements VolunteerDAO{
         createdVolunteer.setLatitude(volunteer.getLatitude());
         createdVolunteer.setLongitude(volunteer.getLongitude());
         createdVolunteer.setRut(volunteer.getRut());
+        createdVolunteer.setStrength(volunteer.getStrength());
+        createdVolunteer.setDextery(volunteer.getDextery());
+        createdVolunteer.setKnowledge(volunteer.getKnowledge());
+        createdVolunteer.setMotivation(volunteer.getMotivation());
+        createdVolunteer.setLeadership(volunteer.getLeadership());
 
 
         if(createdVolunteer.getName() != null && createdVolunteer.getEmail()!=null){
@@ -88,8 +93,9 @@ public class VolunteerController implements VolunteerDAO{
             return new ResponseEntity<>("El voluntario a editar no se ha podido encontrar. ", HttpStatus.BAD_REQUEST);
         }
         volunteerUpdate.setName(volunteer.getName());
+        volunteerUpdate.setEmail(volunteer.getEmail());
         volunteerUpdate.setSex(volunteer.getSex());
-        volunteerUpdate.setVolunteerDimensions(volunteer.getVolunteerDimensions());
+
 
         if(volunteerUpdate.getName() !=null && volunteerUpdate.getSex()!=null){
             return new ResponseEntity<>(volunteerRepository.save(volunteerUpdate), HttpStatus.CREATED);

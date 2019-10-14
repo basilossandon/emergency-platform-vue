@@ -1,20 +1,21 @@
 package tbd.emergenciapp.dto;
 
-import tbd.emergenciapp.model.Dimension;
-import tbd.emergenciapp.model.VolunteerDimension;
-
 import java.util.Set;
 
 public class VolunteerDTO {
     private String name;
     private Integer age;
     private String sex;
-    private Set<VolunteerDimension> volunteerDimensions;
     private String lastname;
     private Float latitude;
     private Float longitude;
     private String email;
     private String rut;
+    private  Integer strength;
+    private  Integer dextery;
+    private Integer knowledge;
+    private  Integer motivation;
+    private  Integer leadership;
 
     public VolunteerDTO() {
     }
@@ -44,14 +45,6 @@ public class VolunteerDTO {
     }
 
 
-    public Set<VolunteerDimension> getVolunteerDimensions() {
-        return volunteerDimensions;
-    }
-
-    public void setVolunteerDimensions(Set<VolunteerDimension> volunteerDimensions) {
-        this.volunteerDimensions = volunteerDimensions;
-    }
-
     public String getLastName() {
         return this.lastname;
     }
@@ -60,10 +53,7 @@ public class VolunteerDTO {
         return this.lastname;
     }
 
-    public Float getLatitude() {
-        return this.latitude;
-
-    }
+    public Float getLatitude() { return this.latitude; }
 
     public Float getLongitude() {
         return this.longitude;
@@ -95,5 +85,45 @@ public class VolunteerDTO {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Integer getStrength() {
+        return strength;
+    }
+
+    public void setStrength(Integer strength) {
+        this.strength = strength;
+    }
+
+    public Integer getDextery() {
+        return dextery;
+    }
+
+    public void setDextery(Integer dextery) {
+        this.dextery = dextery;
+    }
+
+    public Integer getKnowledge() {
+        return knowledge;
+    }
+
+    public void setKnowledge(Integer knowledge) {
+        this.knowledge = knowledge;
+    }
+
+    public Integer getMotivation() {
+        return motivation;
+    }
+
+    public void setMotivation(Integer motivation) {
+        this.motivation = motivation;
+    }
+
+    public Integer getLeadership() {
+        return leadership;
+    }
+
+    public void setLeadership(Integer leadership) {
+        this.leadership = leadership;
     }
 }
