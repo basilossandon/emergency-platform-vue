@@ -1,13 +1,15 @@
 <template>
   <div>
     <h2>Login</h2>
-    <form v-on:submit="login">
+    <form>
       <h2>Email:</h2>
       <el-input
         class="element-borders"
         id="email"
         placeholder="e.g. pablo.chille@usach.cl"
         prefix-icon="el-icon-user"
+        v-model="appuser.email"
+
       ></el-input>
       <h2>Password:</h2>
       <el-input
@@ -16,6 +18,7 @@
         type="password"
         placeholder="**********"
         prefix-icon="el-icon-lock"
+        v-model="appuser.password"
       ></el-input>
 
       <div>
@@ -44,7 +47,9 @@ export default {
   data() {
     return {
       email: "",
-      password: ""
+      password: "",
+      appuser: {},
+      checked1: 0
     };
   },
   methods: {

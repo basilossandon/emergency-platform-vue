@@ -157,6 +157,7 @@ export default {
   box-sizing: border-box;
   padding: 8px 0 15px;
   position: relative;
+  margin-bottom: 25px;
 }
 .button-volunteer-wrapper {
   align-items: center;
