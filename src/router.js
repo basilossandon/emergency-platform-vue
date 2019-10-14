@@ -48,10 +48,7 @@ var router = new Router({
       path: '/new-task',
       name: 'new-task',
       component: NewTask,
-      meta: {
-        requiresAuth: true,
-        is_admin: true
-      }
+    
     },
     {
       path: '/new-emergency',
