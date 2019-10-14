@@ -34,29 +34,25 @@
           v-model="volunteer.email"
           prefix-icon="el-icon-message"
         ></el-input>
-        <label class="element-borders" for="age">Age</label>
-        <el-input
-          class="element-borders"
-          id="age"
-          type="number"
-          min="18"
-          placeholder="e.g 25"
-          v-model="volunteer.age"
-        ></el-input>
-        <label for="sex">Gender</label>
+        <label for="sex"> Gender</label>
         <el-radio-group style="margin-top:15px;" v-model="volunteer.sex">
           <el-radio v-model="volunteer.sex" label="Male">Male</el-radio>
           <el-radio v-model="volunteer.sex" label="Female">Female</el-radio>
           <el-radio v-model="volunteer.sex" label="Other">Other</el-radio>
         </el-radio-group>
 
-        <el-table :data="tableData" style="width: 100%">
-          <el-table-column prop="dimension" label="Dimension" width="180"></el-table-column>
+        <label class="element-borders" for="name">Dimensions</label>
+        <label class="element-borders">Strength</label>
+        <el-rate v-model="volunteer.strength" style="margin:2px;"></el-rate>
+        <label class="element-borders">Dextery</label>
+        <el-rate v-model="volunteer.dextery" style="margin:2px;"></el-rate>
+        <label class="element-borders">Knowledge</label>
+        <el-rate v-model="volunteer.knowledge" style="margin:2px;"></el-rate>
+        <label class="element-borders">Motivation</label>
+        <el-rate v-model="volunteer.motivation" style="margin:2px;"></el-rate>
+        <label class="element-borders">Leadership</label>
+        <el-rate v-model="volunteer.leadership" style="margin:2px;"></el-rate>
 
-          <el-table-column label="Score">
-            <el-rate style="margin:2px;" v-model="tableData.score"></el-rate>
-          </el-table-column>
-        </el-table>
 
         <div class="map-container">
           <l-map style="height: 350px; width: 100%; margin-top:20px " :zoom="zoom" :center="center">
@@ -97,28 +93,6 @@ export default {
     return {
       volunteer: {},
       message: "",
-      value1: null,
-      value2: null,
-      value3: null,
-      value4: null,
-      value5: null,
-      tableData: [
-        {
-          dimension: "Strength"
-        },
-        {
-          dimension: "Dextery"
-        },
-        {
-          dimension: "Knowledge"
-        },
-        {
-          dimension: "Motivation"
-        },
-        {
-          dimension: "Leadership"
-        }
-      ],
       url: "http://{s}.tile.osm.org/{z}/{x}/{y}.png",
 
       zoom: 8,

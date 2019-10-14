@@ -62,9 +62,6 @@ var router = new Router({
       path: '/new-volunteer',
       name: 'new-volunteer',
       component: NewVolunteer,
-      meta: {
-        requiresAuth: true,
-      }
     },
     {
       path: '/tasks',
