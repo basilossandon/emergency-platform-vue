@@ -52,7 +52,7 @@ export default {
       center: [-33.4489, -70.6693],
       emergencies: [],
       volunteers: [],
-      icon: L.icon({
+      icon: icon({
         iconUrl: 'https://i.imgur.com/fmK9aII.png',
         iconSize: [32, 37],
         iconAnchor: [16, 37]

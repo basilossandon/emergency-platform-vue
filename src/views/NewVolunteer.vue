@@ -40,18 +40,16 @@
           <el-radio v-model="volunteer.sex" label="Female">Female</el-radio>
           <el-radio v-model="volunteer.sex" label="Other">Other</el-radio>
         </el-radio-group>
-
-        <label class="element-borders" for="name">Dimensions</label>
-        <label class="element-borders">Strength</label>
-        <el-rate v-model="volunteer.strength" style="margin:2px;"></el-rate>
-        <label class="element-borders">Dextery</label>
-        <el-rate v-model="volunteer.dextery" style="margin:2px;"></el-rate>
-        <label class="element-borders">Knowledge</label>
-        <el-rate v-model="volunteer.knowledge" style="margin:2px;"></el-rate>
-        <label class="element-borders">Motivation</label>
-        <el-rate v-model="volunteer.motivation" style="margin:2px;"></el-rate>
-        <label class="element-borders">Leadership</label>
-        <el-rate v-model="volunteer.leadership" style="margin:2px;"></el-rate>
+    <el-divider content-position="left">Strength </el-divider>
+            <el-rate v-model="volunteer.strength" style="margin:2px;" :max=10 show-score   text-color="#ff9900" score-template="{value} points"></el-rate>
+    <el-divider content-position="left">Dextery</el-divider>
+        <el-rate v-model="volunteer.dextery" style="margin:2px;" :max=10 show-score   text-color="#ff9900" score-template="{value} points"></el-rate>
+    <el-divider content-position="left">Knowledge</el-divider>
+        <el-rate v-model="volunteer.knowledge" style="margin:2px;" :max=10 show-score   text-color="#ff9900" score-template="{value} points"></el-rate>
+    <el-divider content-position="left">Motivation</el-divider>
+        <el-rate v-model="volunteer.motivation" style="margin:2px;" :max=10 show-score   text-color="#ff9900" score-template="{value} points"></el-rate>
+    <el-divider content-position="left">Leadership</el-divider>
+        <el-rate  v-model="volunteer.leadership" style="margin:2px;" :max=10 show-score   text-color="#ff9900" score-template="{value} points"></el-rate>
 
 
         <div class="map-container">
@@ -94,7 +92,7 @@ export default {
       volunteer: {},
       message: "",
       url: "http://{s}.tile.osm.org/{z}/{x}/{y}.png",
-
+      maxRate: 10,
       zoom: 8,
       center: [-33.4489, -70.6693],
       marker: {
