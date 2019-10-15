@@ -1,16 +1,16 @@
 <template>
   <div class="new-task">
-    <h1>New task</h1>
+    <h1>Create a new task</h1>
     <form>
       <div class="form-item">
-        <label class="element-borders" for="name">Task Name</label>
+            <el-divider content-position="left" direction="horizontal"><h3>Task name:</h3></el-divider>
         <el-input
           class="element-borders"
           id="name"
           placeholder="e.g. Getting med kits"
           v-model="task.name"
         ></el-input>
-        <label class="element-borders" for="capacity">Capacity</label>
+            <el-divider content-position="left" direction="horizontal"><h3>Capacity:</h3></el-divider>
         <el-input
           class="element-borders"
           id="capacity"
@@ -19,7 +19,7 @@
           placeholder="e.g 25"
           v-model="task.capacity"
         ></el-input>
-        <label class="element-borders" for="capacity">Assign to emergency:</label>
+            <el-divider content-position="left" direction="horizontal"><h3>Assign to emergency:</h3></el-divider>
         <el-select
           class="select-size"
           v-model="taskassignations.emergency"
@@ -32,11 +32,8 @@
             :value="emergency.id"
           ></el-option>
         </el-select>
-        <label class="element-borders" for="capacity">Volunteer in charge:</label>
-    <span>Rain</span>
-    <el-divider direction="vertical"></el-divider>
-    <span>Home</span>
-    <el-divider direction="vertical"></el-divider>
+
+    <el-divider content-position="left" direction="horizontal"><h3>Volunteer in charge:</h3></el-divider>
         <el-select class="select-size" v-model="task.volunteer_id" placeholder="e.g Max Steel">
           <el-option
             v-for="volunteer in volunteers"
@@ -46,7 +43,7 @@
           ></el-option>
         </el-select>
 
-        <label for="status">Status</label>
+            <el-divider content-position="left" direction="horizontal"><h3>Status:</h3></el-divider>
         <el-radio-group style="margin-top:15px;" v-model="task.status">
           <el-radio v-model="task.status" label="Active">Active</el-radio>
           <el-radio v-model="task.status" label="Inactive">Inactive</el-radio>

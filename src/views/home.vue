@@ -1,15 +1,27 @@
 <template>
   <div>
-    <div style="margin-top:50px;" class="home-logo">
-      <i class="md-svg-loader logo-vue-material blending">
-        <img src="../assets/images/logo.png" style=";height: 800x;width:320px;" />
-      </i>
+    <div style="margin-top:0px;" class="home-logo">
+ 
     </div>
     <div class="home-call">
       <br />
       <h1 class="home-name"></h1>
-      <h1>Be a volunteer and change the world.</h1>
-      <h3> See live and ongoing emergencies with volunteers below!</h3>
+
+
+      <div class="home-container" style="display:flex;">
+      <div style="eight: 250px; width: 40%; float:left;">
+        <img src="../assets/images/home.png" style=";height: 800x;width:420px;" />
+      </div>
+
+      <div style="height: 250px; width: 60%; float: right; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+             <i class="md-svg-loader logo-vue-material blending">
+        <img src="../assets/images/logo.png" style=";height: 800x;width:320px;" />
+      </i>
+        <h1>Be a volunteer and change the world.</h1>
+        <h3>See live and ongoing emergencies with volunteers below!</h3>
+      </div>
+      </div>
+
       <l-map style="height: 350px; width: 100%:" :zoom="zoom" :center="center">
         <l-tile-layer :url="url"></l-tile-layer>
         <l-marker
@@ -69,9 +81,9 @@ export default {
       });
     }
   },
-  beforeMount(){
+  beforeMount() {
     this.created();
- },
+  }
 };
 </script>
 

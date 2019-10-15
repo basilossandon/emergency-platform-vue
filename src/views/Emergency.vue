@@ -6,7 +6,7 @@
 
     <div class="container">
       <div class="row">
-        <l-map style="height: 450px; margin-top:20px" :zoom="zoom" :center="center">
+        <l-map style="height: 600px; margin-top:20px" :zoom="zoom" :center="center">
           <l-tile-layer :url="url"></l-tile-layer>
           <l-circle-marker
       :lat-lng="circle.center"
@@ -20,8 +20,6 @@
             :lat-lng="[emergency.latitude, emergency.longitude]"
             @click="loadEmergency(emergency)"
           >
-          
-
             <l-popup>
               {{emergency.name}}
               <br />
@@ -30,6 +28,8 @@
         </l-map>
       </div>
       <div class="row">
+
+        <div class="emergencyData">
         <el-divider content-position="left">
           <h2>{{loadedEmergency.name}}</h2>
         </el-divider>
@@ -56,8 +56,48 @@
             </div>
           </el-col>
         </el-row>
+        </div>
+
+        <div class="tasksOfEmergency" style="height: 20%">
+        <el-divider content-position="left">
+          <h2>Tasks</h2>
+        </el-divider>
+
+        </div>
+
+        <div class="volunteersOfEmergency">
+
+        <el-divider content-position="left">
+          <h2>Volunteers</h2>
+        </el-divider>
+        </div>
+
       </div>
+      
+
+
       <div class="grid-content bottom">
+    
+    <el-tooltip class="item" effect="dark" content="Assign task" placement="top-start">
+
+<el-popover
+  placement="top"
+  width="160"
+  v-model="visible">
+  <p>Are you sure to delete this?</p>
+  <div style="text-align: right; margin: 0">
+    <el-button size="mini" type="text" @click="visible = false">cancel</el-button>
+    <el-button type="primary" size="mini" @click="visible = false">confirm</el-button>
+  </div>
+  <el-button slot="reference"  type="success"
+          icon="el-icon-plus"
+          circle
+          style="margin-right:3px;"></el-button>
+</el-popover>
+
+    </el-tooltip>
+
+
         <el-popover trigger="click" ref="popover" placement="top" width="160">
           <el-button type="primary" icon="el-icon-edit" circle slot="reference"></el-button>
           <form>
@@ -177,6 +217,7 @@ export default {
 
       zoom: 6,
       center: [-33.4489, -70.6693],
+      // eslint-disable-next-line
       icon: L.icon({
         iconUrl: "https://i.imgur.com/fmK9aII.png",
         iconSize: [32, 37],
@@ -189,7 +230,9 @@ export default {
       this.loadedEmergency = emergency;
       this.circle.center = [emergency.latitude, emergency.longitude];
     },
-    getVolunteersAround(emergencyID) {},
+    getVolunteersAround(emergency) {
+      console.log(emergency.name)
+    },
     deleteEmergency(emergencyID) {
       this.$confirm(
         "Are you sure you want to remove this emergency?",
@@ -219,7 +262,6 @@ export default {
                     type: "success"
                   });
                 });
-              this.loadedEmergency = tempEmergency;
             })
             .catch(error => {
               this.$notify.error({

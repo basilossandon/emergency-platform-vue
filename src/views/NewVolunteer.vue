@@ -34,23 +34,65 @@
           v-model="volunteer.email"
           prefix-icon="el-icon-message"
         ></el-input>
-        <label for="sex"> Gender</label>
-        <el-radio-group style="margin-top:15px;" v-model="volunteer.sex">
+        <label for="sex">Gender</label>
+        <el-radio-group style="margin-top:25px;margin-bottom:15px" v-model="volunteer.sex">
           <el-radio v-model="volunteer.sex" label="Male">Male</el-radio>
           <el-radio v-model="volunteer.sex" label="Female">Female</el-radio>
           <el-radio v-model="volunteer.sex" label="Other">Other</el-radio>
         </el-radio-group>
-    <el-divider content-position="left">Strength </el-divider>
-            <el-rate v-model="volunteer.strength" style="margin:2px;" :max=10 show-score   text-color="#ff9900" score-template="{value} points"></el-rate>
-    <el-divider content-position="left">Dextery</el-divider>
-        <el-rate v-model="volunteer.dextery" style="margin:2px;" :max=10 show-score   text-color="#ff9900" score-template="{value} points"></el-rate>
-    <el-divider content-position="left">Knowledge</el-divider>
-        <el-rate v-model="volunteer.knowledge" style="margin:2px;" :max=10 show-score   text-color="#ff9900" score-template="{value} points"></el-rate>
-    <el-divider content-position="left">Motivation</el-divider>
-        <el-rate v-model="volunteer.motivation" style="margin:2px;" :max=10 show-score   text-color="#ff9900" score-template="{value} points"></el-rate>
-    <el-divider content-position="left">Leadership</el-divider>
-        <el-rate  v-model="volunteer.leadership" style="margin:2px;" :max=10 show-score   text-color="#ff9900" score-template="{value} points"></el-rate>
+        <br />
+        <div style="width: 50%; float:left">
+          <el-divider content-position="left">Strength</el-divider>
+          <el-rate
+            v-model="volunteer.strength"
+            style="margin:2px;"
+            :max="10"
+            show-score
+            text-color="#ff9900"
+            score-template="{value} points"
+          ></el-rate>
+          <el-divider content-position="left">Dextery</el-divider>
+          <el-rate
+            v-model="volunteer.dextery"
+            style="margin:2px;"
+            :max="10"
+            show-score
+            text-color="#ff9900"
+            score-template="{value} points"
+          ></el-rate>
+          <el-divider content-position="left">Knowledge</el-divider>
+          <el-rate
+            v-model="volunteer.knowledge"
+            style="margin:2px;"
+            :max="10"
+            show-score
+            text-color="#ff9900"
+            score-template="{value} points"
+          ></el-rate>
+          <el-divider content-position="left">Motivation</el-divider>
+          <el-rate
+            v-model="volunteer.motivation"
+            style="margin:2px;"
+            :max="10"
+            show-score
+            text-color="#ff9900"
+            score-template="{value} points"
+          ></el-rate>
+          <el-divider content-position="left">Leadership</el-divider>
+          <el-rate
+            v-model="volunteer.leadership"
+            style="margin:2px;"
+            :max="10"
+            show-score
+            text-color="#ff9900"
+            score-template="{value} points"
+          ></el-rate>
+          <el-divider content-position="left"></el-divider>
+        </div>
 
+        <div style="width: 50%; float:right">
+          <img src="../assets/images/dim.png" style=";height: 800x;width:420px;" />
+        </div>
 
         <div class="map-container">
           <l-map style="height: 350px; width: 100%; margin-top:20px " :zoom="zoom" :center="center">
@@ -91,7 +133,8 @@ export default {
     return {
       volunteer: {},
       message: "",
-      url: "http://{s}.tile.osm.org/{z}/{x}/{y}.png",
+      url:
+        "https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png",
       maxRate: 10,
       zoom: 8,
       center: [-33.4489, -70.6693],
