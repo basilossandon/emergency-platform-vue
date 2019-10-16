@@ -9,7 +9,7 @@
 
 
       <div class="home-container" style="display:flex;">
-      <div style="eight: 250px; width: 40%; float:left;">
+      <div style="width: 40%; float:left;">
         <img src="../assets/images/home.png" style=";height: 800x;width:420px;" />
       </div>
 
