@@ -28,7 +28,9 @@
           <el-divider content-position="left">
             <h2>{{loadedEmergency.name}}</h2>
           </el-divider>
+          
           <el-row :span="4">
+
             <el-col :span="8">
               <div class="grid-content-image">
                 <img
@@ -38,6 +40,7 @@
                 />
               </div>
             </el-col>
+            
             <el-col :span="8">
               <div class="grid-content-text">
                 <el-row>

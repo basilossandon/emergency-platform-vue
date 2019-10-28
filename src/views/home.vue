@@ -10,7 +10,7 @@
 
       <div class="home-container" style="display:flex;">
       <div style="width: 40%; float:left;">
-        <img src="../assets/images/home.png" style=";height: 800x;width:420px;" />
+        <img src="../assets/images/3d.png" style=";height: 800x;width:420px;  margin-left: -30px; margin-top: -60px; border-radius: 20px" />
       </div>
 
       <div style="height: 250px; width: 60%; float: right; display: flex; flex-direction: column; justify-content: center; align-items: center;">
@@ -22,7 +22,7 @@
       </div>
       </div>
 
-      <l-map style="height: 350px; width: 100%:" :zoom="zoom" :center="center">
+      <l-map style="margin-top: 25px;height: 350px; width: 100%:" :zoom="zoom" :center="center">
         <l-tile-layer :url="url"></l-tile-layer>
         <l-marker
           v-for="emergency in emergencies"
@@ -63,18 +63,18 @@ export default {
       center: [-33.4489, -70.6693],
       emergencies: [],
       volunteers: [],
-      icon: L.icon({
+      icon: {
         iconUrl: "https://i.imgur.com/fmK9aII.png",
         iconSize: [32, 37],
         iconAnchor: [16, 37]
-      })
+      }
     };
   },
   methods: {
     created: function() {
       axios.get(`http://localhost:4567/emergencies`).then(response => {
         this.emergencies = response.data;
-        console.log(emergencies);
+        console.log(this.emergencies);
       });
       axios.get(`http://localhost:4567/volunteers`).then(response => {
         this.volunteers = response.data;
