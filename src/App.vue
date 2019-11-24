@@ -40,11 +40,10 @@ body {
   margin-left: auto;
   margin-right: auto;
   min-height: 10vh;
-max-width: 900px;
+  max-width: 1200px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   -webkit-border-radius: 30px;
   border-radius: 15px;
-
   margin-bottom: 25px;
 }
 

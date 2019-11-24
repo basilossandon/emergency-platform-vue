@@ -21,6 +21,7 @@
         <h3>See live and ongoing emergencies with volunteers below!</h3>
       </div>
       </div>
+      
 
       <l-map style="margin-top: 25px;height: 350px; width: 100%:" :zoom="zoom" :center="center">
         <l-tile-layer :url="url"></l-tile-layer>
