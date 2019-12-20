@@ -1,4 +1,24 @@
-# tbd-vue
+# Volunteer management platform made with Vue-SpringBoot-PostgreSQL
+  ![Home](https://i.imgur.com/nXDvo4Y.png)
+
+
+
+
+
+![Emergency view](https://i.imgur.com/C5WiBIg.png)
+
+
+
+
+ 
+
+   
+   
+
+
+
+
+![Obtain volunteer radius component](https://i.imgur.com/p4HQNb3.png)
 
 ## Project setup
 ```
