@@ -2,6 +2,7 @@ package tbd.emergenciapp.model;
 
 
 import org.hibernate.annotations.Type;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import java.awt.*;
@@ -39,9 +40,6 @@ public class Volunteer implements Serializable {
     private  Integer motivation;
     @Column(name = "leadership")
     private  Integer leadership;
-
-    @Column(name = "location", columnDefinition = "geometry(Point,4326)")
-    private Point location;
 
 
 //    @OneToMany(mappedBy = "volunteer")
@@ -170,12 +168,5 @@ public class Volunteer implements Serializable {
         this.leadership = leadership;
     }
 
-    public Point getLocation() {
-        return location;
-    }
-
-    public void setLocation(Point location) {
-        this.location = location;
-    }
 }
 
