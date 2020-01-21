@@ -38,7 +38,7 @@
         </div>
       </div>
       <div class="row">
-        <l-map :zoom="zoom" :center="center">
+        <l-map style="margin-top: 0%;height: 70%; width: 100%" :zoom="zoom" :center="center">
           <l-tile-layer :url="url"></l-tile-layer>
           <l-circle-marker
             :lat-lng="circle.center"

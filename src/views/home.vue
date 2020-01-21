@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div style="margin-top:0px;" class="home-logo">
+    <div style="margin-top:0%;" class="home-logo">
  
     </div>
     <div class="home-call">
@@ -10,7 +10,7 @@
 
       <div class="home-container" style="display:flex;">
       <div style="width: 40%; float:left;">
-        <img src="../assets/images/3d.png" style=";height: 800x;width:420px;  margin-left: -30px; margin-top: -60px; border-radius: 20px" />
+        <img src="../assets/images/3d.png" style=";height: 100%;width:100%;  margin-left: -5%; margin-top: -10%; border-radius: 5%" />
       </div>
 
       <div style="height: 250px; width: 60%; float: right; display: flex; flex-direction: column; justify-content: center; align-items: center;">
@@ -23,14 +23,19 @@
       </div>
       
 
-      <l-map style="margin-top: 25px;height: 350px; width: 100%:" :zoom="zoom" :center="center">
+      <l-map style="margin-top: 0%;height: 350px; width: 100%:" :zoom="zoom" :center="center">
         <l-tile-layer :url="url"></l-tile-layer>
-        <l-marker
-          v-for="emergency in emergencies"
-          :key="emergency.id"
-          :lat-lng="[emergency.latitude, emergency.longitude]"
-          :icon="icon"
-        ></l-marker>
+          <l-marker
+            :icon="icon"
+            v-for="emergency in emergencies"
+            :key="emergency.id"
+            :lat-lng="[emergency.latitude, emergency.longitude]"
+          >
+            <l-popup>
+              {{ emergency.name }}
+              <br />
+            </l-popup>
+          </l-marker>
 
         <l-marker
           v-for="volunteer in volunteers"
@@ -42,7 +47,7 @@
       <div class="home-actions">
         <a :route="{ name: 'register' }">
           <router-link to="/register">
-            <el-button style="margin-top:10px;" type="primary" round>Begin</el-button>
+            <el-button style="margin-top:10px;" type="primary" round>Watch live emergencies</el-button>
           </router-link>
         </a>
       </div>
