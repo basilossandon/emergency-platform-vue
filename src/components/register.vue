@@ -73,7 +73,7 @@ export default {
       email: "",
       password: "",
       passwordConfirm: "",
-      appuser: {},
+      appuser: {}
     };
   },
   methods: {
@@ -92,10 +92,7 @@ export default {
           return;
         }
         console.log(this.appuser);
-        let response = await this.$http.post(
-          "/users/register",
-          this.appuser
-        );
+        let response = await this.$http.post("/users/register", this.appuser);
         localStorage.setItem("user", response.data.user);
         localStorage.setItem("jwt", response.data.token);
         if (localStorage.getItem("jwt") != null) {

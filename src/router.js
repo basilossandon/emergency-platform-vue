@@ -6,6 +6,7 @@ import NewVolunteer from './views/NewVolunteer.vue'
 import Emergency from './views/Emergency.vue'
 import Task from './views/Task.vue'
 import Volunteer from './views/Volunteer.vue'
+import VolunteerSearch from'./views/VolunteerSearch.vue'
 import home from './views/home.vue'
 import Import from './views/Import.vue'
 import Login from './components/login.vue'
@@ -69,6 +70,11 @@ var router = new Router({
       path:'/volunteers',
       name:'volunteer',
       component: Volunteer
+    },
+    {
+      path: '/volunteers/search',
+      name: 'volunteerSearch',
+      component: VolunteerSearch
     },
     {
       path:'/import',

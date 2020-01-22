@@ -30,6 +30,8 @@
                       circle
                       v-on:click="deleteEmergency(emergency.id)"
                     ></el-button>
+
+
                   </div>
                 </div>
               </div>
@@ -38,13 +40,9 @@
         </div>
       </div>
       <div class="row">
-        <l-map style="margin-top: 0%;height: 70%; width: 100%" :zoom="zoom" :center="center">
+        <l-map style="margin-left: 60px; margin-top: 0%;height: 70%; width: 90%" :zoom="zoom" :center="center">
           <l-tile-layer :url="url"></l-tile-layer>
-          <l-circle-marker
-            :lat-lng="circle.center"
-            :radius="circle.radius"
-            :color="circle.color"
-          />
+          <l-circle-marker :lat-lng="circle.center" :radius="circle.radius" :color="circle.color" />
           <l-marker
             :icon="icon"
             v-for="emergency in emergencies"
@@ -59,6 +57,8 @@
           </l-marker>
         </l-map>
       </div>
+      
+
     </div>
   </div>
 </template>
@@ -71,9 +71,6 @@ export default {
   components: { LMap, LTileLayer, LMarker, LPopup, LCircleMarker },
   data() {
     return {
-      value: "Active",
-      visible: false,
-      activeName: "1",
       emergencies: [],
       emergencyID: "",
       loadedEmergency: {

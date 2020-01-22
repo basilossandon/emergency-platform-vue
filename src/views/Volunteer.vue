@@ -241,6 +241,7 @@ export default {
   },
   created: function() {
     axios.get(`http://localhost:4567/volunteers/pages`).then(response => {
+      console.log(response);
       this.volunteers = response.data;
     });
   }

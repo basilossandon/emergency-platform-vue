@@ -1,41 +1,42 @@
 <template>
   <div>
-    <div style="margin-top:0%;" class="home-logo">
- 
-    </div>
+    <div style="margin-top:0%;" class="home-logo"></div>
     <div class="home-call">
       <br />
       <h1 class="home-name"></h1>
 
-
       <div class="home-container" style="display:flex;">
-      <div style="width: 40%; float:left;">
-        <img src="../assets/images/3d.png" style=";height: 100%;width:100%;  margin-left: -5%; margin-top: -10%; border-radius: 5%" />
-      </div>
+        <div style="width: 40%; float:left;">
+          <img
+            src="../assets/images/3d.png"
+            style=";height: 100%;width:100%;  margin-left: -5%; margin-top: -10%; border-radius: 5%"
+          />
+        </div>
 
-      <div style="height: 250px; width: 60%; float: right; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-             <i class="md-svg-loader logo-vue-material blending">
-        <img src="../assets/images/logo.png" style=";height: 800x;width:320px;" />
-      </i>
-        <h1>Be a volunteer and change the world.</h1>
-        <h3>See live and ongoing emergencies with volunteers below!</h3>
+        <div
+          style="height: 250px; width: 60%; float: right; display: flex; flex-direction: column; justify-content: center; align-items: center;"
+        >
+          <i class="md-svg-loader logo-vue-material blending">
+            <img src="../assets/images/logo.png" style=";height: 800x;width:320px;" />
+          </i>
+          <h1>Be a volunteer and change the world.</h1>
+          <h3>See live and ongoing emergencies with volunteers below!</h3>
+        </div>
       </div>
-      </div>
-      
 
       <l-map style="margin-top: 0%;height: 350px; width: 100%:" :zoom="zoom" :center="center">
         <l-tile-layer :url="url"></l-tile-layer>
-          <l-marker
-            :icon="icon"
-            v-for="emergency in emergencies"
-            :key="emergency.id"
-            :lat-lng="[emergency.latitude, emergency.longitude]"
-          >
-            <l-popup>
-              {{ emergency.name }}
-              <br />
-            </l-popup>
-          </l-marker>
+        <l-marker
+          :icon="icon"
+          v-for="emergency in emergencies"
+          :key="emergency.id"
+          :lat-lng="[emergency.latitude, emergency.longitude]"
+        >
+          <l-popup>
+            {{ emergency.name }}
+            <br />
+          </l-popup>
+        </l-marker>
 
         <l-marker
           v-for="volunteer in volunteers"
