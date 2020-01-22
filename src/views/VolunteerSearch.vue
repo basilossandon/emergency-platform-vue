@@ -53,14 +53,15 @@ export default {
     };
   },
   methods: {
-    created: function() {
+    
+  },
+  mounted: function() {
         console.log("WEna loco");
       axios.get(`http://localhost:4567/volunteers`).then(response => {
         console.log(response.data);
         this.volunteers = response.data;
       });
     }
-  }
 };
 
 </script>
