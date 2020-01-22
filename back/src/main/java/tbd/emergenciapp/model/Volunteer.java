@@ -31,22 +31,22 @@ public class Volunteer implements Serializable {
     @Column(name = "rut")
     private String rut;
     @Column(name= "strength")
-    private  Integer strength;
+    private Integer strength;
     @Column(name = "dextery")
-    private  Integer dextery;
+    private Integer dextery;
     @Column(name = "knowledge")
     private Integer knowledge;
     @Column(name = "motivation")
-    private  Integer motivation;
+    private Integer motivation;
     @Column(name = "leadership")
-    private  Integer leadership;
+    private Integer leadership;
 
 
 //    @OneToMany(mappedBy = "volunteer")
 //    private Set<VolunteerDimension> volunteerDimensions;
 
 
-    public Volunteer(Integer id, String name, String sex, String email, String lastname, Float latitude, Float longitude, String rut) {
+    public Volunteer(Integer id, String name, String sex, String email, String lastname, Float latitude, Float longitude, String rut, int dextery, int strength, int knowledge, int motivation, int leadership) {
         this.id = id;
         this.name = name;
         this.lastname = lastname;
@@ -56,7 +56,11 @@ public class Volunteer implements Serializable {
         this.latitude = latitude;
         this.lastname = lastname;
         this.rut = rut;
-
+        this.dextery = dextery;
+        this.strength = strength;
+        this.knowledge = knowledge;
+        this.motivation = motivation;
+        this.leadership = leadership;
     }
 
 

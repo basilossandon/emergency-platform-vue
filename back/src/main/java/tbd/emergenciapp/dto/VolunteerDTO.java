@@ -44,7 +44,6 @@ public class VolunteerDTO {
         this.sex = sex;
     }
 
-
     public String getLastName() {
         return this.lastname;
     }
