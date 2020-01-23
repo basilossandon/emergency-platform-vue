@@ -52,7 +52,6 @@
           >
             <l-popup>
               {{ emergency.name }}
-              <br />
             </l-popup>
           </l-marker>
         </l-map>

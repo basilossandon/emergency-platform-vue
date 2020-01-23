@@ -70,6 +70,7 @@ export default {
       center: [-33.4489, -70.6693],
       emergencies: [],
       volunteers: [],
+      // eslint-disable-next-line
       icon: L.icon({
         iconUrl: "https://i.imgur.com/fmK9aII.png",
         iconSize: [32, 37],
