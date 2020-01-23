@@ -1,8 +1,6 @@
-package tbd.emergenciapp.dto;
+package tbd.emergenciapp.db1.dto;
 
-import java.util.Set;
-
-public class VolunteerDTO {
+public class Db1VolunteerDTO {
     private String name;
     private Integer age;
     private String sex;
@@ -17,7 +15,7 @@ public class VolunteerDTO {
     private  Integer motivation;
     private  Integer leadership;
 
-    public VolunteerDTO() {
+    public Db1VolunteerDTO() {
     }
 
     public  String getName(){

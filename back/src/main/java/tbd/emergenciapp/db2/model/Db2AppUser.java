@@ -1,10 +1,10 @@
-package tbd.emergenciapp.model;
+package tbd.emergenciapp.db2.model;
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 @Table(name="app_user")
-public class AppUser implements Serializable {
+public class Db2AppUser implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -17,11 +17,11 @@ public class AppUser implements Serializable {
     private String email;
     @Column(name = "role")
     private String role;
-    public AppUser(Integer id,
-                   String  name ,
-                   String  password,
-                   String  role,
-                   String email){
+    public Db2AppUser(Integer id,
+                      String  name ,
+                      String  password,
+                      String  role,
+                      String email){
         this.id = id;
         this.password = password;
         this.name = name;
@@ -29,7 +29,7 @@ public class AppUser implements Serializable {
         this.email= email;
     }
 
-    public AppUser(){
+    public Db2AppUser(){
     }
     public Integer getId() {
         return this.id;

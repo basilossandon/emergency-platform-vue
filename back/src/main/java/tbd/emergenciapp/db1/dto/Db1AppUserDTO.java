@@ -1,8 +1,8 @@
-package tbd.emergenciapp.dto;
+package tbd.emergenciapp.db1.dto;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-public class AppUserDTO {
+public class Db1AppUserDTO {
     @NotNull
     @NotEmpty
     private String name;

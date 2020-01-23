@@ -1,17 +1,13 @@
-package tbd.emergenciapp.model;
+package tbd.emergenciapp.db2.model;
 
-
-import org.hibernate.annotations.Type;
-import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
-import java.awt.*;
 import java.io.Serializable;
 
 
 @Entity
 @Table(name="volunteer")
-public class Volunteer implements Serializable {
+public class Db2Volunteer implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -46,7 +42,7 @@ public class Volunteer implements Serializable {
 //    private Set<VolunteerDimension> volunteerDimensions;
 
 
-    public Volunteer(Integer id, String name, String sex, String email, String lastname, Float latitude, Float longitude, String rut, int dextery, int strength, int knowledge, int motivation, int leadership) {
+    public Db2Volunteer(Integer id, String name, String sex, String email, String lastname, Float latitude, Float longitude, String rut, int dextery, int strength, int knowledge, int motivation, int leadership) {
         this.id = id;
         this.name = name;
         this.lastname = lastname;
@@ -65,7 +61,7 @@ public class Volunteer implements Serializable {
 
 
 
-    public Volunteer() {
+    public Db2Volunteer() {
     }
 
     public Integer getId() {

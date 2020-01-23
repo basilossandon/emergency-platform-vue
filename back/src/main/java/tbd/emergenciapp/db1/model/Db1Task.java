@@ -1,14 +1,12 @@
-package tbd.emergenciapp.model;
+package tbd.emergenciapp.db1.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 @Table(name="task")
-public class Task implements Serializable {
+public class Db1Task implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -22,13 +20,13 @@ public class Task implements Serializable {
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "emergency_id", nullable = false)
-    private Emergency emergency;
+    private Db1Emergency emergency;
 
 
-    public Task(Integer id,
-                String name,
-                Integer capacity,
-                String status)
+    public Db1Task(Integer id,
+                   String name,
+                   Integer capacity,
+                   String status)
     {
         this.id = id;
         this.name = name;
@@ -36,7 +34,7 @@ public class Task implements Serializable {
         this.status = status;
     }
 
-    public Task(){
+    public Db1Task(){
     }
 
     public Integer getId() {
@@ -71,11 +69,11 @@ public class Task implements Serializable {
         this.status = status;
     }
 
-    public Emergency getEmergency() {
+    public Db1Emergency getEmergency() {
         return emergency;
     }
 
-    public void setEmergency(Emergency emergency) {
+    public void setEmergency(Db1Emergency emergency) {
         this.emergency = emergency;
     }
 }

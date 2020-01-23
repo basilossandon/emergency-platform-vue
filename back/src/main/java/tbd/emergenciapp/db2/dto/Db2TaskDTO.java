@@ -1,6 +1,6 @@
-package tbd.emergenciapp.dto;
+package tbd.emergenciapp.db2.dto;
 
-public class TaskDTO {
+public class Db2TaskDTO {
     private String name;
     private Integer capacity;
     private String status;

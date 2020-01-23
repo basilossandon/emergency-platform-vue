@@ -1,6 +1,7 @@
-package tbd.emergenciapp.model;
+package tbd.emergenciapp.db1.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+
 
 import java.io.Serializable;
 import java.util.Set;
@@ -8,7 +9,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="emergency")
-public class Emergency implements Serializable{
+public class Db1Emergency implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -27,9 +28,9 @@ public class Emergency implements Serializable{
     private Float latitude;
     @JsonBackReference
     @OneToMany(mappedBy = "emergency", cascade = CascadeType.ALL)
-    private Set<Task> tasks;
+    private Set<Db1Task> tasks;
 
-    public Emergency(Integer id,
+    public Db1Emergency(Integer id,
                      String name,
                      String location,
                      String status,
@@ -44,7 +45,7 @@ public class Emergency implements Serializable{
         this.latitude = latitude;
     }
 
-    public Emergency(){}
+    public Db1Emergency(){}
 
     public Float getLongitude() {        return longitude;    }
 
@@ -94,11 +95,11 @@ public class Emergency implements Serializable{
         this.description = description;
     }
 
-    public Set<Task> getTasks() {
+    public Set<Db1Task> getTasks() {
         return tasks;
     }
 
-    public void setTasks(Set<Task> tasks) {
+    public void setTasks(Set<Db1Task> tasks) {
         this.tasks = tasks;
     }
 
