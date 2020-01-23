@@ -271,11 +271,11 @@ export default {
         this.volunteersFound = [];
         for (var i in this.volunteers) {
           if (
-            this.volunteers[i].strength == strength &&
-            this.volunteers[i].dextery == dextery &&
-            this.volunteers[i].knowledge == knowledge &&
-            this.volunteers[i].motivation == motivation &&
-            this.volunteers[i].leadership == leadership
+            this.volunteers[i].strength >= strength &&
+            this.volunteers[i].dextery >= dextery &&
+            this.volunteers[i].knowledge >= knowledge &&
+            this.volunteers[i].motivation >= motivation &&
+            this.volunteers[i].leadership >= leadership
           ) {
             this.volunteersFound.push(this.volunteers[i]);
           }
