@@ -14,25 +14,24 @@
               <div style="text-align: left; margin: 0">
                 <el-select
                   class="select-emergency"
-                  v-model="selectedEmergency"
+                  v-model="selectedEmergencyId"
                   placeholder="e.g Thailand Tsunami"
                 >
                   <el-option
                     v-for="emergency in emergencies"
                     :key="emergency.id"
                     :label="emergency.name"
-                    :value="emergency"
+                    :value="emergency.id"
                   ></el-option>
                 </el-select>
                 <p>Input Radius</p>
-                <el-input-number
-                  v-model="circle.radius"
-                  @change="handleChange"
-                  :min="1"
-                  :max="1000"
-                ></el-input-number>
+                <el-slider v-model="circle.radius" max="200"></el-slider>
                 <div>
-                  <el-button type="primary" style="margin-top:15px">Search</el-button>
+                  <el-button
+                    type="primary"
+                    style="margin-top:15px"
+                    @click="searchByRadius(selectedEmergencyId)"
+                  >Search</el-button>
                 </div>
               </div>
 
@@ -98,6 +97,14 @@
 
                 <el-button slot="reference">By attributes</el-button>
               </el-popover>
+
+              <div style="margin-top: 5%">
+                <el-button slot="reference" @click="showVolunteers()">Show all volunteers</el-button>
+              </div>
+
+              <div style="margin-top: 5%">
+                <el-button slot="reference" @click="clear()">Clear</el-button>
+              </div>
             </div>
           </div>
           <div style="width: 60%; margin-top: 10%; margin-left: 15%; float:left;">
@@ -113,24 +120,34 @@
           :center="center"
         >
           <l-tile-layer :url="url"></l-tile-layer>
+
           <l-marker
             v-for="volunteer in volunteersFound"
             :key="volunteer.id"
             :lat-lng="[volunteer.latitude, volunteer.longitude]"
-          ><l-popup>{{ volunteer.name }}</l-popup></l-marker>
-          <l-circle
-            :lat-lng="[selectedEmergency.latitude, selectedEmergency.longitude]"
-            :radius="circle.radius"
-          ></l-circle>
+          >
+            <l-popup>
+              <b>Name:</b>
+              {{ volunteer.name }} {{volunteer.lastname}}
+              <b>Sex:</b>
+              {{volunteer.sex}}
+              <el-button type="primary" style="margin-top:15px">Assign Emergency</el-button>
+            </l-popup>
+          </l-marker>
 
           <l-marker
             :icon="icon"
             :key="selectedEmergency.id"
             :label="selectedEmergency.name"
             :lat-lng="[selectedEmergency.latitude, selectedEmergency.longitude]"
+            @click="loadEmergency(selectedEmergency)"
           >
-            <l-popup>{{ selectedEmergency.name }}</l-popup>
+            <l-popup>
+              <b>Emergency name:</b>
+              {{selectedEmergency.name}}
+            </l-popup>
           </l-marker>
+          <l-circle-marker :lat-lng="circle.center" :radius="circle.radius" :color="circle.color" />
         </l-map>
       </div>
     </div>
@@ -138,11 +155,11 @@
 </template>
 
 <script>
-import { LMap, LTileLayer, LMarker, LCircle } from "vue2-leaflet";
+import { LMap, LTileLayer, LMarker, LCircleMarker, LPopup } from "vue2-leaflet";
 import axios from "axios";
 
 export default {
-  components: { LMap, LTileLayer, LMarker, LCircle },
+  components: { LMap, LTileLayer, LMarker, LCircleMarker, LPopup },
   data() {
     return {
       count: 0,
@@ -151,21 +168,20 @@ export default {
       selectedMotivation: 0,
       selectedLeadership: 0,
       selectedKnowledge: 0,
-      filterType: "",
       selectedEmergency: "",
+      selectedEmergencyId: "",
       volunteers: [],
       volunteersFound: [],
       emergencies: [],
       volunteerID: "",
-      distance: "",
       url:
         "https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=t3SMZ47V58YWCHSToO2d",
 
       zoom: 6,
       circle: {
-        center: [],
+        center: [-33.4489, -70.6693],
         radius: 0,
-        color: "blue"
+        color: "red"
       },
       center: [-33.4489, -70.6693],
       // eslint-disable-next-line
@@ -177,6 +193,61 @@ export default {
     };
   },
   methods: {
+    showVolunteers() {
+      if (this.volunteers.length == 0) {
+        this.$notify({
+          title: "There are no volunteers registered",
+          message: "Try creating at least one.",
+          type: "error"
+        });
+      } else {
+        this.volunteersFound = this.volunteers;
+        this.$notify({
+          title: "Success",
+          message: "Showing all volunteers",
+          type: "success"
+        });
+      }
+    },
+    clear() {
+      this.volunteersFound = [];
+      (this.selectedEmergency = ""),
+        (this.selectedEmergencyId = ""),
+        (this.selectedStrength = 0);
+      this.selectedDextery = 0;
+      this.selectedKnowledge = 0;
+      this.selectedMotivation = 0;
+      this.selectedLeadership = 0;
+      this.circle.radius = 0;
+      this.$notify({
+        title: "Cleared",
+        message: "You have cleared the filters",
+        type: "success"
+      });
+    },
+    searchByRadius(id) {
+      for (var i in this.emergencies) {
+        if (this.emergencies[i].id == id) {
+          this.selectedEmergency = this.emergencies[i];
+        }
+      }
+      this.circle.center = [
+        this.selectedEmergency.latitude,
+        this.selectedEmergency.longitude
+      ];
+      if (this.selectedEmergency != "") {
+        this.$notify({
+          title: "Filter applied",
+          type: "success"
+        });
+      } else {
+        this.$notify({
+          title: "Error",
+          message: "Please fill all the fields.",
+          type: "error"
+        });
+      }
+    },
     loadVolunteersAttributes(
       strength,
       dextery,
