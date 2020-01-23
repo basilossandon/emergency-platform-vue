@@ -40,62 +40,65 @@
             </el-popover>
 
             <div style="margin-top: 20px">
-            <el-popover placement="down" width="400">
-              <p>Select the attributes you are looking for</p>
-              <div style="text-align: left; margin: 0">
-                <el-divider content-position="left">Strength</el-divider>
-                <el-rate
-                  v-model="selectedStrength"
-                  style="margin:2px;"
-                  :max="10"
-                  show-score
-                  text-color="#ff9900"
-                  score-template="{value} points"
-                ></el-rate>
-                <el-divider content-position="left">Dextery</el-divider>
-                <el-rate
-                  v-model="selectedDextery"
-                  style="margin:2px;"
-                  :max="10"
-                  show-score
-                  text-color="#ff9900"
-                  score-template="{value} points"
-                ></el-rate>
-                <el-divider content-position="left">Knowledge</el-divider>
-                <el-rate
-                  v-model="selectedKnowledge"
-                  style="margin:2px;"
-                  :max="10"
-                  show-score
-                  text-color="#ff9900"
-                  score-template="{value} points"
-                ></el-rate>
-                <el-divider content-position="left">Motivation</el-divider>
-                <el-rate
-                  v-model="selectedMotivation"
-                  style="margin:2px;"
-                  :max="10"
-                  show-score
-                  text-color="#ff9900"
-                  score-template="{value} points"
-                ></el-rate>
-                <el-divider content-position="left">Leadership</el-divider>
-                <el-rate
-                  v-model="selectedLeadership"
-                  style="margin:2px;"
-                  :max="10"
-                  show-score
-                  text-color="#ff9900"
-                  score-template="{value} points"
-                ></el-rate>
+              <el-popover placement="down" width="400">
+                <p>Select the attributes you are looking for</p>
+                <div style="text-align: left; margin: 0">
+                  <el-divider content-position="left">Strength</el-divider>
+                  <el-rate
+                    v-model="selectedStrength"
+                    style="margin:2px;"
+                    :max="10"
+                    show-score
+                    text-color="#ff9900"
+                    score-template="{value} points"
+                  ></el-rate>
+                  <el-divider content-position="left">Dextery</el-divider>
+                  <el-rate
+                    v-model="selectedDextery"
+                    style="margin:2px;"
+                    :max="10"
+                    show-score
+                    text-color="#ff9900"
+                    score-template="{value} points"
+                  ></el-rate>
+                  <el-divider content-position="left">Knowledge</el-divider>
+                  <el-rate
+                    v-model="selectedKnowledge"
+                    style="margin:2px;"
+                    :max="10"
+                    show-score
+                    text-color="#ff9900"
+                    score-template="{value} points"
+                  ></el-rate>
+                  <el-divider content-position="left">Motivation</el-divider>
+                  <el-rate
+                    v-model="selectedMotivation"
+                    style="margin:2px;"
+                    :max="10"
+                    show-score
+                    text-color="#ff9900"
+                    score-template="{value} points"
+                  ></el-rate>
+                  <el-divider content-position="left">Leadership</el-divider>
+                  <el-rate
+                    v-model="selectedLeadership"
+                    style="margin:2px;"
+                    :max="10"
+                    show-score
+                    text-color="#ff9900"
+                    score-template="{value} points"
+                  ></el-rate>
 
-                <el-button type="primary" style="margin-top:15px">Search</el-button>
-              </div>
+                  <el-button
+                    type="primary"
+                    style="margin-top:15px"
+                    @click="loadVolunteersAttributes(selectedStrength, selectedDextery, selectedKnowledge, selectedMotivation, selectedLeadership)"
+                  >Search</el-button>
+                </div>
 
-              <el-button slot="reference">By attributes</el-button>
-            </el-popover>
+                <el-button slot="reference">By attributes</el-button>
+              </el-popover>
             </div>
-            
           </div>
           <div style="width: 60%; margin-top: 10%; margin-left: 15%; float:left;">
             <img src="../assets/svg/search.svg" style=";height: 300px;width:100%;" />
@@ -111,10 +114,10 @@
         >
           <l-tile-layer :url="url"></l-tile-layer>
           <l-marker
-            v-for="volunteer in volunteersInRadius"
+            v-for="volunteer in volunteersFound"
             :key="volunteer.id"
             :lat-lng="[volunteer.latitude, volunteer.longitude]"
-          ></l-marker>
+          ><l-popup>{{ volunteer.name }}</l-popup></l-marker>
           <l-circle
             :lat-lng="[selectedEmergency.latitude, selectedEmergency.longitude]"
             :radius="circle.radius"
@@ -174,14 +177,52 @@ export default {
     };
   },
   methods: {
-    loadVolunteersAttributes(strength, dextery, knowledge, motivation, leadership){
-      for(var volunteer in this.volunteers){
-        if(volunteer.strength == strength && volunteer.dextery == dextery && volunteer.knowledge == knowledge && volunteer.motivation == motivation && volunteer.leadership == leadership){
-        this.volunteersFound[this.count] = volunteer;
-        this.count = this.count + 1;
+    loadVolunteersAttributes(
+      strength,
+      dextery,
+      knowledge,
+      motivation,
+      leadership
+    ) {
+      if (
+        strength == 0 ||
+        dextery == 0 ||
+        knowledge == 0 ||
+        motivation == 0 ||
+        leadership == 0
+      ) {
+        this.$notify({
+          title: "Search failed",
+          message: "Select all attributes",
+          type: "error"
+        });
+      } else {
+        this.volunteersFound = [];
+        for (var i in this.volunteers) {
+          if (
+            this.volunteers[i].strength == strength &&
+            this.volunteers[i].dextery == dextery &&
+            this.volunteers[i].knowledge == knowledge &&
+            this.volunteers[i].motivation == motivation &&
+            this.volunteers[i].leadership == leadership
+          ) {
+            this.volunteersFound.push(this.volunteers[i]);
+          }
+        }
+        if (this.volunteersFound.length > 0) {
+          this.$notify({
+            title: "Search complete",
+            message: "Search completed successfully.",
+            type: "success"
+          });
+        } else {
+          this.$notify({
+            title: "Search complete",
+            message: "No results.",
+            type: "warning"
+          });
         }
       }
-      this.count = 0;
     },
     loadRadius(radius) {
       this.circle.radius = radius;
