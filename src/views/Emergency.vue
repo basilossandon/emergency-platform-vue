@@ -40,7 +40,7 @@
         </div>
       </div>
       <div class="row">
-        <l-map style="margin-left: 60px; margin-top: 0%;height: 70%; width: 90%" :zoom="zoom" :center="center">
+        <l-map style="margin-left: 60px; margin-top: 0%;height: 100%; width: 90%" :zoom="zoom" :center="center">
           <l-tile-layer :url="url"></l-tile-layer>
           <l-circle-marker :lat-lng="circle.center" :radius="circle.radius" :color="circle.color" />
           <l-marker
